@@ -39,7 +39,7 @@ abstract class BasePpxdPersonXDocument extends CActiveRecord
     {
         return array_merge(
             parent::rules(), array(
-                array('ppxd_pprs_id, ppxd_pdcm_id', 'required'),
+                array('ppxd_pprs_id', 'required'),
                 array('ppxd_number, ppxd_issue_date, ppxd_expire_date, ppxd_notes, ppxd_status', 'default', 'setOnEmpty' => true, 'value' => null),
                 array('ppxd_pprs_id, ppxd_pdcm_id', 'numerical', 'integerOnly' => true),
                 array('ppxd_number', 'length', 'max' => 100),

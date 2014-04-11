@@ -32,7 +32,7 @@ abstract class BasePpcnPersonContact extends CActiveRecord
     {
         return array_merge(
             parent::rules(), array(
-                array('ppcn_pprs_id, ppcn_pcnt_type', 'required'),
+                array('ppcn_pprs_id', 'required'),
                 array('ppcn_value, ppcn_notes, ppcn_modified', 'default', 'setOnEmpty' => true, 'value' => null),
                 array('ppcn_pprs_id, ppcn_pcnt_type', 'numerical', 'integerOnly' => true),
                 array('ppcn_value', 'length', 'max' => 500),

@@ -27,7 +27,7 @@ public function accessRules()
         ),
         array(
             'allow',
-            'actions' => array('create'),
+            'actions' => array('create','ajaxCreate'),
             'roles' => array('D2person.PpxdPersonXDocument.Create'),
         ),
         array(
@@ -127,6 +127,19 @@ public function accessRules()
         Yii::import('EditableSaver'); //or you can add import 'ext.editable.*' to config
         $es = new EditableSaver('PpxdPersonXDocument'); // classname of model to be updated
         $es->update();
+    }
+    
+    public function actionAjaxCreate($field, $value) 
+    {
+        $model = new PpxdPersonXDocument;
+        $model->$field = $value;
+        try {
+            if ($model->save()) {
+                return TRUE;
+            }
+        } catch (Exception $e) {
+            throw new CHttpException(500, $e->getMessage());
+        }
     }
 
     public function actionDelete($ppxd_id)

@@ -1,11 +1,11 @@
 <?php
 $this->setPageTitle(
-    Yii::t('D2personModule.model', 'Pprs People')
+    Yii::t('model', 'Pprs People')
     . ' - '
-    . Yii::t('D2personModule.crud', 'Manage')
+    . Yii::t('crud', 'Manage')
 );
 
-$this->breadcrumbs[] = Yii::t('D2personModule.model', 'Pprs People');
+$this->breadcrumbs[] = Yii::t('model', 'Pprs People');
 Yii::app()->clientScript->registerScript('search', "
     $('.search-button').click(function(){
         $('.search-form').toggle();
@@ -24,8 +24,8 @@ Yii::app()->clientScript->registerScript('search', "
 <?php $this->widget("TbBreadcrumbs", array("links" => $this->breadcrumbs)) ?>
     <h1>
 
-        <?php echo Yii::t('D2personModule.model', 'Pprs People'); ?>
-        <small><?php echo Yii::t('D2personModule.crud', 'Manage'); ?></small>
+        <?php echo Yii::t('model', 'Pprs People'); ?>
+        <small><?php echo Yii::t('crud', 'Manage'); ?></small>
 
     </h1>
 
@@ -35,7 +35,7 @@ Yii::app()->clientScript->registerScript('search', "
 
 
 <?php
-$this->widget('\TbGridView',
+$this->widget('TbGridView',
     array(
         'id' => 'pprs-person-grid',
         'dataProvider' => $model->search(),
@@ -43,7 +43,7 @@ $this->widget('\TbGridView',
         #'responsiveTable' => true,
         'template' => '{summary}{pager}{items}{pager}',
         'pager' => array(
-            'class' => '\TbPager',
+            'class' => 'TbPager',
             'displayFirstAndLast' => true,
         ),
         'columns' => array(
@@ -54,7 +54,8 @@ $this->widget('\TbGridView',
                 'urlExpression' => 'Yii::app()->controller->createUrl("view", array("pprs_id" => $data["pprs_id"]))'
             ),
             array(
-                'class' => 'TbEditableColumn',
+                //smallint(5) unsigned
+                'class' => 'editable.EditableColumn',
                 'name' => 'pprs_id',
                 'editable' => array(
                     'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
@@ -62,7 +63,8 @@ $this->widget('\TbGridView',
                 )
             ),
             array(
-                'class' => 'TbEditableColumn',
+                //varchar(100)
+                'class' => 'editable.EditableColumn',
                 'name' => 'pprs_first_name',
                 'editable' => array(
                     'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
@@ -70,17 +72,35 @@ $this->widget('\TbGridView',
                 )
             ),
             array(
-                'class' => 'TbEditableColumn',
+                //varchar(100)
+                'class' => 'editable.EditableColumn',
                 'name' => 'pprs_second_name',
                 'editable' => array(
                     'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
                     //'placement' => 'right',
                 )
             ),
-            #'pprs_declared_place_of_residence',
-            #'pprs_real_pleace_of_residence',
             array(
-                'class' => 'TbEditableColumn',
+                'class' => 'editable.EditableColumn',
+                'name' => 'pprs_declared_place_of_residence',
+                'editable' => array(
+                    'type' => 'textarea',
+                    'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
+                    //'placement' => 'right',
+                )
+            ),
+            array(
+                'class' => 'editable.EditableColumn',
+                'name' => 'pprs_real_pleace_of_residence',
+                'editable' => array(
+                    'type' => 'textarea',
+                    'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
+                    //'placement' => 'right',
+                )
+            ),
+            array(
+                //smallint(5) unsigned
+                'class' => 'editable.EditableColumn',
                 'name' => 'pprs_salary',
                 'editable' => array(
                     'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
@@ -89,7 +109,7 @@ $this->widget('\TbGridView',
             ),
 
             array(
-                'class' => '\TbButtonColumn',
+                'class' => 'TbButtonColumn',
                 'buttons' => array(
                     'view' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.View")'),
                     'update' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.Update")'),

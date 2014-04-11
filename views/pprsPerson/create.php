@@ -1,17 +1,17 @@
 <?php
 $this->setPageTitle(
-    Yii::t('D2personModule.model', 'Pprs Person')
+    Yii::t('model', 'Pprs Person')
     . ' - '
-    . Yii::t('D2personModule.crud', 'Create')
+    . Yii::t('crud', 'Create')
 );
 
-$this->breadcrumbs[Yii::t('D2personModule.model', 'Pprs People')] = array('admin');
-$this->breadcrumbs[] = Yii::t('D2personModule.crud', 'Create');
+$this->breadcrumbs[Yii::t('model', 'Pprs People')] = array('admin');
+$this->breadcrumbs[] = Yii::t('crud', 'Create');
 ?>
-<?php $this->widget("\TbBreadcrumb", array("links" => $this->breadcrumbs)) ?>
+<?php $this->widget("TbBreadcrumbs", array("links" => $this->breadcrumbs)) ?>
     <h1>
-        <?php echo Yii::t('D2personModule.model', 'Pprs Person'); ?>
-        <small><?php echo Yii::t('D2personModule.crud', 'Create'); ?></small>
+        <?php echo Yii::t('model', 'Pprs Person'); ?>
+        <small><?php echo Yii::t('crud', 'Create'); ?></small>
 
     </h1>
 

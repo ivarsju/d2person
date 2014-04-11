@@ -1,29 +1,41 @@
 <?php
-$this->breadcrumbs[Yii::t('D2personModule.model', 'Pprs People')] = array('admin');
-$this->breadcrumbs[] = $model->pprs_id;
+    $this->setPageTitle(
+        Yii::t('model', 'Pprs Person')
+        . ' - '
+        . Yii::t('crud', 'View')
+        . ': '   
+        . $model->getItemLabel()            
+);    
+$this->breadcrumbs[Yii::t('model','Pprs People')] = array('admin');
+$this->breadcrumbs[$model->{$model->tableSchema->primaryKey}] = array('view','id' => $model->{$model->tableSchema->primaryKey});
+$this->breadcrumbs[] = Yii::t('crud', 'View');
 ?>
-<?php $this->widget("TbBreadcrumbs", array("links" => $this->breadcrumbs)) ?>
-<h1>
-    
-    <?php echo Yii::t('D2personModule.model','Pprs Person'); ?>
-    <small>
-        <?php echo Yii::t('D2personModule.model','View')?> #<?php echo $model->pprs_id ?>
-    </small>
-    
-</h1>
 
-<?php $this->renderPartial("_toolbar", array("model" => $model)); ?>
+<?php $this->widget("TbBreadcrumbs", array("links"=>$this->breadcrumbs)) ?>
+    <h1>
+        <?php echo Yii::t('model','Pprs Person')?>
+        <small>
+            <?php echo $model->itemLabel ?>
+
+        </small>
+
+        </h1>
+
+
+
+<?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>
+
 
 <div class="row">
     <div class="span7">
         <h2>
-            <?php echo Yii::t('D2personModule.model','Data')?>            <small>
-                <?php echo $model->itemLabel?>            </small>
+            <?php echo Yii::t('crud','Data')?>            <small>
+                #<?php echo $model->pprs_id ?>            </small>
         </h2>
 
         <?php
         $this->widget(
-            '\TbDetailView',
+            'TbDetailView',
             array(
                 'data' => $model,
                 'attributes' => array(
@@ -31,7 +43,7 @@ $this->breadcrumbs[] = $model->pprs_id;
                         'name' => 'pprs_id',
                         'type' => 'raw',
                         'value' => $this->widget(
-                            'TbEditableField',
+                            'EditableField',
                             array(
                                 'model' => $model,
                                 'attribute' => 'pprs_id',
@@ -44,7 +56,7 @@ array(
                         'name' => 'pprs_first_name',
                         'type' => 'raw',
                         'value' => $this->widget(
-                            'TbEditableField',
+                            'EditableField',
                             array(
                                 'model' => $model,
                                 'attribute' => 'pprs_first_name',
@@ -57,7 +69,7 @@ array(
                         'name' => 'pprs_second_name',
                         'type' => 'raw',
                         'value' => $this->widget(
-                            'TbEditableField',
+                            'EditableField',
                             array(
                                 'model' => $model,
                                 'attribute' => 'pprs_second_name',
@@ -70,7 +82,7 @@ array(
                         'name' => 'pprs_declared_place_of_residence',
                         'type' => 'raw',
                         'value' => $this->widget(
-                            'TbEditableField',
+                            'EditableField',
                             array(
                                 'model' => $model,
                                 'attribute' => 'pprs_declared_place_of_residence',
@@ -83,7 +95,7 @@ array(
                         'name' => 'pprs_real_pleace_of_residence',
                         'type' => 'raw',
                         'value' => $this->widget(
-                            'TbEditableField',
+                            'EditableField',
                             array(
                                 'model' => $model,
                                 'attribute' => 'pprs_real_pleace_of_residence',
@@ -96,7 +108,7 @@ array(
                         'name' => 'pprs_salary',
                         'type' => 'raw',
                         'value' => $this->widget(
-                            'TbEditableField',
+                            'EditableField',
                             array(
                                 'model' => $model,
                                 'attribute' => 'pprs_salary',
@@ -109,6 +121,13 @@ array(
         )); ?>
     </div>
 
+
     <div class="span5">
-        <?php $this->renderPartial('_view-relations_ext', array('modelMain' => $model)); ?>    </div>
+        <div class="well">
+            <?php $this->renderPartial('_view-relations',array('model' => $model)); ?>        </div>
+        <div class="well">
+            <?php $this->renderPartial('_view-relations_grids',array('modelMain' => $model)); ?>        </div>
+    </div>
 </div>
+
+<?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>

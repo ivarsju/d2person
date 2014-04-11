@@ -27,7 +27,7 @@ public function accessRules()
         ),
         array(
             'allow',
-            'actions' => array('create'),
+            'actions' => array('create','ajaxCreate'),
             'roles' => array('D2person.PpcnPersonContact.Create'),
         ),
         array(
@@ -122,6 +122,15 @@ public function accessRules()
         $this->render('update', array('model' => $model,));
     }
 
+    public function actionAjaxCreate($field,$value){
+
+        $model = new PpcnPersonContact;
+        $model->$field = $value;
+        $model->save();
+        return TRUE;
+        
+    } 
+    
     public function actionEditableSaver()
     {
         Yii::import('EditableSaver'); //or you can add import 'ext.editable.*' to config
