@@ -1,21 +1,32 @@
 <?php
-$this->breadcrumbs[Yii::t('crud','Ptyp Types')] = array('admin');
-$this->breadcrumbs[$model->{$model->tableSchema->primaryKey}] = array('view','id'=>$model->{$model->tableSchema->primaryKey});
-$this->breadcrumbs[] = Yii::t('crud', 'Update');
+$this->setPageTitle(
+        Yii::t('D2personModule.model', 'Ptyp Type')
+        . ' - '
+        . Yii::t('D2personModule.crud_static', 'Update')
+        . ': '   
+        . $model->getItemLabel()
+);    
+$this->breadcrumbs[Yii::t('D2personModule.model','Ptyp Types')] = array('admin');
+$this->breadcrumbs[$model->{$model->tableSchema->primaryKey}] = array('view','id' => $model->{$model->tableSchema->primaryKey});
+$this->breadcrumbs[] = Yii::t('D2personModule.crud_static', 'Update');
 ?>
 
 <?php $this->widget("TbBreadcrumbs", array("links"=>$this->breadcrumbs)) ?>
     <h1>
         
-        <?php echo Yii::t('crud','Ptyp Type'); ?>
+        <?php echo Yii::t('D2personModule.model','Ptyp Type'); ?>
         <small>
-            <?php echo Yii::t('crud','Update')?> #<?php echo $model->ptyp_id ?>
+            <?php echo $model->itemLabel ?>
+
         </small>
+
         
     </h1>
 
 <?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>
 
 <?php
-    $this->renderPartial('_form', array('model'=>$model));
+    $this->renderPartial('_form', array('model' => $model));
 ?>
+
+<?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>

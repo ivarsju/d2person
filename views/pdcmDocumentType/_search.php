@@ -1,37 +1,34 @@
 <div class="wide form">
 
-    
     <?php
-    $form=$this->beginWidget('TbActiveForm', array(
-        'action'=>Yii::app()->createUrl($this->route),
-        'method'=>'get',
+    $form = $this->beginWidget('TbActiveForm', array(
+        'action' => Yii::app()->createUrl($this->route),
+        'method' => 'get',
     )); ?>
 
     
-    
-        <div class="row">
-            <?php echo $form->label($model,'pdcm_id'); ?>
-            <?php ; ?>
+    <div class="row">
+        <?php echo $form->label($model, 'pdcm_id'); ?>
+        <?php ; ?>
+    </div>
 
-        </div>
-
-    
-        <div class="row">
-            <?php echo $form->label($model,'pdcm_name'); ?>
-            <?php echo $form->textField($model,'pdcm_name',array('size'=>50,'maxlength'=>50)); ?>
-
-        </div>
 
     
-        <div class="row">
-            <?php echo $form->label($model,'pdcm_hidded'); ?>
-            <?php echo $form->textField($model,'pdcm_hidded'); ?>
+    <div class="row">
+        <?php echo $form->label($model, 'pdcm_name'); ?>
+        <?php echo $form->textField($model, 'pdcm_name', array('size' => 50, 'maxlength' => 50)); ?>
+    </div>
 
-        </div>
 
     
+    <div class="row">
+        <?php echo $form->label($model, 'pdcm_hidded'); ?>
+        <?php echo $form->textField($model, 'pdcm_hidded'); ?>
+    </div>
+
+
     <div class="row buttons">
-        <?php echo CHtml::submitButton(Yii::t('crud', 'Search')); ?>
+        <?php echo CHtml::submitButton(Yii::t('D2personModule.crud_static', 'Search')); ?>
     </div>
 
     <?php $this->endWidget(); ?>

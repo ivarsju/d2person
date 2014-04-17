@@ -14,8 +14,8 @@
  * @property string $ppxd_status
  *
  * Relations of table "ppxd_person_x_document" available as properties of the model:
- * @property PdcmDocumentType $ppxdPdcm
  * @property PprsPerson $ppxdPprs
+ * @property PdcmDocumentType $ppxdPdcm
  */
 abstract class BasePpxdPersonXDocument extends CActiveRecord
 {
@@ -40,7 +40,7 @@ abstract class BasePpxdPersonXDocument extends CActiveRecord
         return array_merge(
             parent::rules(), array(
                 array('ppxd_pprs_id', 'required'),
-                array('ppxd_number, ppxd_issue_date, ppxd_expire_date, ppxd_notes, ppxd_status', 'default', 'setOnEmpty' => true, 'value' => null),
+                array('ppxd_pdcm_id, ppxd_number, ppxd_issue_date, ppxd_expire_date, ppxd_notes, ppxd_status', 'default', 'setOnEmpty' => true, 'value' => null),
                 array('ppxd_pprs_id, ppxd_pdcm_id', 'numerical', 'integerOnly' => true),
                 array('ppxd_number', 'length', 'max' => 100),
                 array('ppxd_status', 'length', 'max' => 7),
@@ -70,8 +70,8 @@ abstract class BasePpxdPersonXDocument extends CActiveRecord
     {
         return array_merge(
             parent::relations(), array(
-                'ppxdPdcm' => array(self::BELONGS_TO, 'PdcmDocumentType', 'ppxd_pdcm_id'),
                 'ppxdPprs' => array(self::BELONGS_TO, 'PprsPerson', 'ppxd_pprs_id'),
+                'ppxdPdcm' => array(self::BELONGS_TO, 'PdcmDocumentType', 'ppxd_pdcm_id'),
             )
         );
     }

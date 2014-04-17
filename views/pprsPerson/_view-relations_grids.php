@@ -1,14 +1,98 @@
 
 <!--
 <h2>
-    <?php echo Yii::t('crud', 'Relations') ?></h2>
+    <?php echo Yii::t('D2personModule.crud_static', 'Relations') ?></h2>
 -->
 
+
+<?php Yii::beginProfile('ccuc_person_id.view.grid'); ?>
+<h3>
+    <?php 
+    echo Yii::t('D2personModule.model', 'Ccuc User Company') . ' '; 
+    $this->widget(
+        'bootstrap.widgets.TbButton',
+        array(
+            'buttonType' => 'ajaxButton', 
+            'type' => 'primary', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+            'size' => 'mini',
+            'icon' => 'icon-plus',
+            'url' => array(
+                '//d2person/ccucUserCompany/ajaxCreate',
+                'field' => 'ccuc_person_id',
+                'value' => $modelMain->primaryKey,
+            ),
+            'ajaxOptions' => array(
+                'success' => 'function(html) { 
+                    $.fn.yiiGridView.update(\'ccuc-user-company-grid\');
+                    }',
+               ),
+            'htmlOptions' => array(
+                'title' => Yii::t('D2personModule.crud_static', 'Add new record'),
+            ),                 
+        )
+    );        
+    ?>
+</h3> 
+ 
+<?php 
+$model = new CcucUserCompany();
+$model->ccuc_person_id = $modelMain->primaryKey;
+
+// render grid view
+
+$this->widget('TbGridView',
+    array(
+        'id' => 'ccuc-user-company-grid',
+        'dataProvider' => $model->search(),
+        #'responsiveTable' => true,
+        'template' => '{items}',
+        'pager' => array(
+            'class' => 'TbPager',
+            'displayFirstAndLast' => true,
+        ),
+        'columns' => array(
+            array(
+                'class' => 'editable.EditableColumn',
+                'name' => 'ccuc_ccmp_id',
+                'editable' => array(
+                    'type' => 'select',
+                    'url' => $this->createUrl('//d2person/ccucUserCompany/editableSaver'),
+                    'source' => CHtml::listData(CcmpCompany::model()->findAll(array('limit' => 1000)), 'ccmp_id', 'itemLabel'),                        
+                    //'placement' => 'right',
+                )
+            ),
+            array(
+                    'class' => 'editable.EditableColumn',
+                    'name' => 'ccuc_status',
+                    'editable' => array(
+                        'type' => 'select',
+                        'url' => $this->createUrl('//d2person/ccucUserCompany/editableSaver'),
+                        'source' => $model->getEnumFieldLabels('ccuc_status'),
+                        //'placement' => 'right',
+                    ),
+                   'filter' => $model->getEnumFieldLabels('ccuc_status'),
+                ),
+
+            array(
+                'class' => 'TbButtonColumn',
+                'buttons' => array(
+                    'view' => array('visible' => 'FALSE'),
+                    'update' => array('visible' => 'FALSE'),
+                    'delete' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.DeleteccucUserCompanies")'),
+                ),
+                'deleteButtonUrl' => 'Yii::app()->controller->createUrl("/d2person/ccucUserCompany/delete", array("ccuc_id" => $data->ccuc_id))',
+            ),
+        )
+    )
+);
+?>
+
+<?php Yii::endProfile('CcucUserCompany.view.grid'); ?>
 
 <?php Yii::beginProfile('ppcn_pprs_id.view.grid'); ?>
 <h3>
     <?php 
-    echo Yii::t('model', 'Ppcn Person Contact') . ' '; 
+    echo Yii::t('D2personModule.model', 'Ppcn Person Contact') . ' '; 
     $this->widget(
         'bootstrap.widgets.TbButton',
         array(
@@ -27,7 +111,7 @@
                     }',
                ),
             'htmlOptions' => array(
-                'title' => Yii::t('crud', 'Add new record'),
+                'title' => Yii::t('D2personModule.crud_static', 'Add new record'),
             ),                 
         )
     );        
@@ -107,7 +191,7 @@ $this->widget('TbGridView',
 <?php Yii::beginProfile('ppxd_pprs_id.view.grid'); ?>
 <h3>
     <?php 
-    echo Yii::t('model', 'Ppxd Person Xdocument') . ' '; 
+    echo Yii::t('D2personModule.model', 'Ppxd Person Xdocument') . ' '; 
     $this->widget(
         'bootstrap.widgets.TbButton',
         array(
@@ -126,7 +210,7 @@ $this->widget('TbGridView',
                     }',
                ),
             'htmlOptions' => array(
-                'title' => Yii::t('crud', 'Add new record'),
+                'title' => Yii::t('D2personModule.crud_static', 'Add new record'),
             ),                 
         )
     );        
@@ -227,7 +311,7 @@ $this->widget('TbGridView',
 <?php Yii::beginProfile('ppxt_pprs_id.view.grid'); ?>
 <h3>
     <?php 
-    echo Yii::t('model', 'Ppxt Person Xtype') . ' '; 
+    echo Yii::t('D2personModule.model', 'Ppxt Person Xtype') . ' '; 
     $this->widget(
         'bootstrap.widgets.TbButton',
         array(
@@ -246,7 +330,7 @@ $this->widget('TbGridView',
                     }',
                ),
             'htmlOptions' => array(
-                'title' => Yii::t('crud', 'Add new record'),
+                'title' => Yii::t('D2personModule.crud_static', 'Add new record'),
             ),                 
         )
     );        

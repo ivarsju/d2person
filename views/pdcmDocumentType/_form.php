@@ -2,108 +2,115 @@
 
     
     <?php
-        Yii::app()->bootstrap->registerAssetCss('../select2/select2.css');
-        Yii::app()->bootstrap->registerAssetJs('../select2/select2.js');
-        Yii::app()->clientScript->registerScript('crud/variant/update','$(".crud-form select").select2();');
+        Yii::app()->bootstrap->registerPackage('select2');
+        Yii::app()->clientScript->registerScript('crud/variant/update','$("#pdcm-document-type-form select").select2();');
+
 
         $form=$this->beginWidget('TbActiveForm', array(
-            'id'=>'pdcm-document-type-form',
-            'enableAjaxValidation'=>true,
-            'enableClientValidation'=>true,
+            'id' => 'pdcm-document-type-form',
+            'enableAjaxValidation' => true,
+            'enableClientValidation' => true,
+            'htmlOptions' => array(
+                'enctype' => ''
+            )
         ));
 
         echo $form->errorSummary($model);
     ?>
     
     <div class="row">
-        <div class="span7"> <!-- main inputs -->
+        <div class="span7">
             <h2>
-                <?php echo Yii::t('crud','Data')?>                <small>
-                    <?php echo $model->itemLabel ?>
-                </small>
+                <?php echo Yii::t('D2personModule.crud_static','Data')?>                <small>
+                    #<?php echo $model->pdcm_id ?>                </small>
 
             </h2>
 
 
             <div class="form-horizontal">
 
-                
+                                    
+                    <?php  ?>
                     <div class="control-group">
                         <div class='control-label'>
                             <?php  ?>
                         </div>
                         <div class='controls'>
-                            <?php
+                            <span class="tooltip-wrapper" data-toggle='tooltip' data-placement="right"
+                                 title='<?php echo (($t = Yii::t('D2personModule.model', 'tooltip.pdcm_id')) != 'tooltip.pdcm_id')?$t:'' ?>'>
+                                <?php
                             ;
                             echo $form->error($model,'pdcm_id')
-                            ?>
-                            <span class="help-block">
-                                <?php echo ($t = Yii::t('crud', 'PdcmDocumentType.pdcm_id') != 'PdcmDocumentType.pdcm_id')?$t:'' ?>
-                            </span>
+                            ?>                            </span>
                         </div>
                     </div>
-                
+                    <?php  ?>
+                                    
+                    <?php  ?>
                     <div class="control-group">
                         <div class='control-label'>
-                            <?php echo $form->labelEx($model,'pdcm_name') ?>
+                            <?php echo $form->labelEx($model, 'pdcm_name') ?>
                         </div>
                         <div class='controls'>
-                            <?php
-                            echo $form->textField($model,'pdcm_name',array('size'=>50,'maxlength'=>50));
+                            <span class="tooltip-wrapper" data-toggle='tooltip' data-placement="right"
+                                 title='<?php echo (($t = Yii::t('D2personModule.model', 'tooltip.pdcm_name')) != 'tooltip.pdcm_name')?$t:'' ?>'>
+                                <?php
+                            echo $form->textField($model, 'pdcm_name', array('size' => 50, 'maxlength' => 50));
                             echo $form->error($model,'pdcm_name')
-                            ?>
-                            <span class="help-block">
-                                <?php echo ($t = Yii::t('crud', 'PdcmDocumentType.pdcm_name') != 'PdcmDocumentType.pdcm_name')?$t:'' ?>
-                            </span>
+                            ?>                            </span>
                         </div>
                     </div>
-                
+                    <?php  ?>
+                                    
+                    <?php  ?>
                     <div class="control-group">
                         <div class='control-label'>
-                            <?php echo $form->labelEx($model,'pdcm_hidded') ?>
+                            <?php echo $form->labelEx($model, 'pdcm_hidded') ?>
                         </div>
                         <div class='controls'>
-                            <?php
-                            echo $form->textField($model,'pdcm_hidded');
+                            <span class="tooltip-wrapper" data-toggle='tooltip' data-placement="right"
+                                 title='<?php echo (($t = Yii::t('D2personModule.model', 'tooltip.pdcm_hidded')) != 'tooltip.pdcm_hidded')?$t:'' ?>'>
+                                <?php
+                            echo $form->textField($model, 'pdcm_hidded');
                             echo $form->error($model,'pdcm_hidded')
-                            ?>
-                            <span class="help-block">
-                                <?php echo ($t = Yii::t('crud', 'PdcmDocumentType.pdcm_hidded') != 'PdcmDocumentType.pdcm_hidded')?$t:'' ?>
-                            </span>
+                            ?>                            </span>
                         </div>
                     </div>
+                    <?php  ?>
                 
             </div>
         </div>
         <!-- main inputs -->
 
-        <div class="span5"> <!-- sub inputs -->
-            <h2>
-                <?php echo Yii::t('crud','Relations')?>
-            </h2>
+        
+        <div class="span5"><!-- sub inputs -->
+            <div class="well">
+            <!--<h2>
+                <?php echo Yii::t('D2personModule.crud_static','Relations')?>            </h2>-->
                                             
                 <h3>
-                    <?php echo Yii::t('crud', 'PpxdPersonXDocuments'); ?>
+                    <?php echo Yii::t('D2personModule.model', 'relation.PpxdPersonXDocuments'); ?>
                 </h3>
-                <?php echo '<i>Switch to view mode to edit related records.</i>' ?>
-                            
+                <?php echo '<i>'.Yii::t('D2personModule.crud_static','Switch to view mode to edit related records.').'</i>' ?>
+                                        </div>
         </div>
         <!-- sub inputs -->
     </div>
 
     <p class="alert">
-        <?php echo Yii::t('crud','Fields with <span class="required">*</span> are required.');?>
+        <?php echo Yii::t('D2personModule.crud_static','Fields with <span class="required">*</span> are required.');?>
     </p>
 
-    <div class="form-actions">
+    <!-- TODO: We need the buttons inside the form, when a user hits <enter> -->
+    <div class="form-actions" style="visibility: hidden; height: 1px">
         
         <?php
             echo CHtml::Button(
-            Yii::t('crud', 'Cancel'), array(
+            Yii::t('D2personModule.crud_static', 'Cancel'), array(
                 'submit' => (isset($_GET['returnUrl']))?$_GET['returnUrl']:array('pdcmDocumentType/admin'),
                 'class' => 'btn'
             ));
-            echo ' '.CHtml::submitButton(Yii::t('crud', 'Save'), array(
+            echo ' '.CHtml::submitButton(Yii::t('D2personModule.crud_static', 'Save'), array(
                 'class' => 'btn btn-primary'
             ));
         ?>

@@ -1,11 +1,11 @@
 <?php
 $this->setPageTitle(
-    Yii::t('model', 'Pprs People')
+    Yii::t('D2personModule.model', 'Pprs People')
     . ' - '
-    . Yii::t('crud', 'Manage')
+    . Yii::t('D2personModule.crud_static', 'Manage')
 );
 
-$this->breadcrumbs[] = Yii::t('model', 'Pprs People');
+$this->breadcrumbs[] = Yii::t('D2personModule.model', 'Pprs People');
 Yii::app()->clientScript->registerScript('search', "
     $('.search-button').click(function(){
         $('.search-form').toggle();
@@ -24,8 +24,8 @@ Yii::app()->clientScript->registerScript('search', "
 <?php $this->widget("TbBreadcrumbs", array("links" => $this->breadcrumbs)) ?>
     <h1>
 
-        <?php echo Yii::t('model', 'Pprs People'); ?>
-        <small><?php echo Yii::t('crud', 'Manage'); ?></small>
+        <?php echo Yii::t('D2personModule.model', 'Pprs People'); ?>
+        <small><?php echo Yii::t('D2personModule.crud_static', 'Manage'); ?></small>
 
     </h1>
 
@@ -75,33 +75,6 @@ $this->widget('TbGridView',
                 //varchar(100)
                 'class' => 'editable.EditableColumn',
                 'name' => 'pprs_second_name',
-                'editable' => array(
-                    'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
-                    //'placement' => 'right',
-                )
-            ),
-            array(
-                'class' => 'editable.EditableColumn',
-                'name' => 'pprs_declared_place_of_residence',
-                'editable' => array(
-                    'type' => 'textarea',
-                    'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
-                    //'placement' => 'right',
-                )
-            ),
-            array(
-                'class' => 'editable.EditableColumn',
-                'name' => 'pprs_real_pleace_of_residence',
-                'editable' => array(
-                    'type' => 'textarea',
-                    'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
-                    //'placement' => 'right',
-                )
-            ),
-            array(
-                //smallint(5) unsigned
-                'class' => 'editable.EditableColumn',
-                'name' => 'pprs_salary',
                 'editable' => array(
                     'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
                     //'placement' => 'right',

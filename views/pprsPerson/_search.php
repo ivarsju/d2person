@@ -27,29 +27,8 @@
     </div>
 
 
-    
-    <div class="row">
-        <?php echo $form->label($model, 'pprs_declared_place_of_residence'); ?>
-        <?php echo $form->textArea($model, 'pprs_declared_place_of_residence', array('rows' => 6, 'cols' => 50)); ?>
-    </div>
-
-
-    
-    <div class="row">
-        <?php echo $form->label($model, 'pprs_real_pleace_of_residence'); ?>
-        <?php echo $form->textArea($model, 'pprs_real_pleace_of_residence', array('rows' => 6, 'cols' => 50)); ?>
-    </div>
-
-
-    
-    <div class="row">
-        <?php echo $form->label($model, 'pprs_salary'); ?>
-        <?php echo $form->textField($model, 'pprs_salary'); ?>
-    </div>
-
-
     <div class="row buttons">
-        <?php echo CHtml::submitButton(Yii::t('crud', 'Search')); ?>
+        <?php echo CHtml::submitButton(Yii::t('D2personModule.crud_static', 'Search')); ?>
     </div>
 
     <?php $this->endWidget(); ?>

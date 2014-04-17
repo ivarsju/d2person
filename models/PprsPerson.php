@@ -31,6 +31,15 @@ class PprsPerson extends BasePprsPerson
         );
     }
 
+    public function relations()
+    {
+        return array_merge(
+            parent::relations(), array(
+                'profile' => array(self::BELONGS_TO, 'Profile', 'pprs_id'),
+            )
+        );
+    }    
+    
     public function rules()
     {
         return array_merge(

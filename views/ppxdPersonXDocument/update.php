@@ -1,21 +1,32 @@
 <?php
-$this->breadcrumbs[Yii::t('crud','Ppxd Person Xdocuments')] = array('admin');
-$this->breadcrumbs[$model->{$model->tableSchema->primaryKey}] = array('view','id'=>$model->{$model->tableSchema->primaryKey});
-$this->breadcrumbs[] = Yii::t('crud', 'Update');
+$this->setPageTitle(
+        Yii::t('D2personModule.model', 'Ppxd Person Xdocument')
+        . ' - '
+        . Yii::t('D2personModule.crud_static', 'Update')
+        . ': '   
+        . $model->getItemLabel()
+);    
+$this->breadcrumbs[Yii::t('D2personModule.model','Ppxd Person Xdocuments')] = array('admin');
+$this->breadcrumbs[$model->{$model->tableSchema->primaryKey}] = array('view','id' => $model->{$model->tableSchema->primaryKey});
+$this->breadcrumbs[] = Yii::t('D2personModule.crud_static', 'Update');
 ?>
 
 <?php $this->widget("TbBreadcrumbs", array("links"=>$this->breadcrumbs)) ?>
     <h1>
         
-        <?php echo Yii::t('crud','Ppxd Person Xdocument'); ?>
+        <?php echo Yii::t('D2personModule.model','Ppxd Person Xdocument'); ?>
         <small>
-            <?php echo Yii::t('crud','Update')?> #<?php echo $model->ppxd_id ?>
+            <?php echo $model->itemLabel ?>
+
         </small>
+
         
     </h1>
 
 <?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>
 
 <?php
-    $this->renderPartial('_form', array('model'=>$model));
+    $this->renderPartial('_form', array('model' => $model));
 ?>
+
+<?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>

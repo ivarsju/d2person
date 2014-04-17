@@ -22,12 +22,12 @@ public function accessRules()
      return array(
         array(
             'allow',
-            'actions' => array('create', 'admin', 'view', 'update', 'editableSaver', 'delete'),
+            'actions' => array('create', 'admin', 'view', 'update', 'editableSaver', 'delete','ajaxCreate'),
             'roles' => array('D2person.PcntContactType.*'),
         ),
         array(
             'allow',
-            'actions' => array('create'),
+            'actions' => array('create','ajaxCreate'),
             'roles' => array('D2person.PcntContactType.Create'),
         ),
         array(
@@ -124,11 +124,24 @@ public function accessRules()
 
     public function actionEditableSaver()
     {
-        Yii::import('EditableSaver'); //or you can add import 'ext.editable.*' to config
-        $es = new EditableSaver('PcntContactType'); // classname of model to be updated
+        Yii::import('TbEditableSaver');
+        $es = new TbEditableSaver('PcntContactType'); // classname of model to be updated
         $es->update();
     }
 
+    public function actionAjaxCreate($field, $value) 
+    {
+        $model = new PcntContactType;
+        $model->$field = $value;
+        try {
+            if ($model->save()) {
+                return TRUE;
+            }
+        } catch (Exception $e) {
+            throw new CHttpException(500, $e->getMessage());
+        }
+    }
+    
     public function actionDelete($pcnt_id)
     {
         if (Yii::app()->request->isPostRequest) {
@@ -146,7 +159,7 @@ public function accessRules()
                 }
             }
         } else {
-            throw new CHttpException(400, Yii::t('crud', 'Invalid request. Please do not repeat this request again.'));
+            throw new CHttpException(400, Yii::t('D2personModule.crud_static', 'Invalid request. Please do not repeat this request again.'));
         }
     }
 
@@ -176,7 +189,7 @@ public function accessRules()
         }
         $model = $m->findByPk($id);
         if ($model === null) {
-            throw new CHttpException(404, Yii::t('crud', 'The requested page does not exist.'));
+            throw new CHttpException(404, Yii::t('D2personModule.crud_static', 'The requested page does not exist.'));
         }
         return $model;
     }

@@ -40,13 +40,14 @@
                        'size'=>'large',
                        'buttons' => array(
                                array(
-                                #'label'=>Yii::t('crud','Relations'),
+                                #'label'=>Yii::t('D2personModule.crud_static','Relations'),
                                 'icon'=>'icon-random',
                                 'items'=>array(array(
-                    'icon' => 'arrow-right','label' => Yii::t('model','relation.PpcnPersonContacts'), 'url' =>array('/d2person/ppcnPersonContact/admin')),array(
-                    'icon' => 'arrow-right','label' => Yii::t('model','relation.PpxdPersonXDocuments'), 'url' =>array('/d2person/ppxdPersonXDocument/admin')),array(
-                    'icon' => 'arrow-right','label' => Yii::t('model','relation.PpxtPersonXTypes'), 'url' =>array('/d2person/ppxtPersonXType/admin')),array(
-                    'icon' => 'circle-arrow-left','label' => Yii::t('model','relation.Profile'), 'url' =>array('/d2person/profile/admin')),
+                    'icon' => 'arrow-right','label' => Yii::t('D2personModule.model','relation.CcucUserCompanies'), 'url' =>array('/d2person/ccucUserCompany/admin')),array(
+                    'icon' => 'arrow-right','label' => Yii::t('D2personModule.model','relation.PpcnPersonContacts'), 'url' =>array('/d2person/ppcnPersonContact/admin')),array(
+                    'icon' => 'arrow-right','label' => Yii::t('D2personModule.model','relation.PpxdPersonXDocuments'), 'url' =>array('/d2person/ppxdPersonXDocument/admin')),array(
+                    'icon' => 'arrow-right','label' => Yii::t('D2personModule.model','relation.PpxtPersonXTypes'), 'url' =>array('/d2person/ppxtPersonXType/admin')),array(
+                    'icon' => 'circle-arrow-left','label' => Yii::t('D2personModule.model','relation.Profile'), 'url' =>array('/d2person/profile/admin')),
             )
           ),
         ),
@@ -57,7 +58,7 @@
         <div class="btn-group">
             <?php
              $this->widget("bootstrap.widgets.TbButton", array(
-                           "label"=>Yii::t("crud","Manage"),
+                           "label"=>Yii::t("D2personModule.crud_static","Manage"),
                            "icon"=>"icon-list-alt",
                            "size"=>"large",
                            "url"=>array("admin"),
@@ -70,7 +71,7 @@
         <div class="btn-group">
             <?php
                    $this->widget("bootstrap.widgets.TbButton", array(
-                       #"label"=>Yii::t("crud","Cancel"),
+                       #"label"=>Yii::t("D2personModule.crud_static","Cancel"),
                        "icon"=>"chevron-left",
                        "size"=>"large",
                        "url"=>(isset($_GET["returnUrl"]))?$_GET["returnUrl"]:array("{$this->id}/admin"),
@@ -78,11 +79,11 @@
                        "htmlOptions"=>array(
                                        "class"=>"search-button",
                                        "data-toggle"=>"tooltip",
-                                       "title"=>Yii::t("crud","Cancel"),
+                                       "title"=>Yii::t("D2personModule.crud_static","Cancel"),
                                    )
                     ));
                    $this->widget("bootstrap.widgets.TbButton", array(
-                        "label"=>Yii::t("crud","Create"),
+                        "label"=>Yii::t("D2personModule.crud_static","Create"),
                         "icon"=>"icon-plus",
                         "size"=>"large",
                         "type"=>"success",
@@ -90,18 +91,18 @@
                         "visible"=>$showCreateButton && (Yii::app()->user->checkAccess("D2person.PprsPerson.*") || Yii::app()->user->checkAccess("D2person.PprsPerson.Create"))
                    ));
                     $this->widget("bootstrap.widgets.TbButton", array(
-                        "label"=>Yii::t("crud","Delete"),
+                        "label"=>Yii::t("D2personModule.crud_static","Delete"),
                         "type"=>"danger",
                         "icon"=>"icon-trash icon-white",
                         "size"=>"large",
                         "htmlOptions"=> array(
                             "submit"=>array("delete","pprs_id"=>$model->{$model->tableSchema->primaryKey}, "returnUrl"=>(Yii::app()->request->getParam("returnUrl"))?Yii::app()->request->getParam("returnUrl"):$this->createUrl("admin")),
-                            "confirm"=>Yii::t("crud","Do you want to delete this item?")
+                            "confirm"=>Yii::t("D2personModule.crud_static","Do you want to delete this item?")
                         ),
                         "visible"=> $showDeleteButton && (Yii::app()->user->checkAccess("D2person.PprsPerson.*") || Yii::app()->user->checkAccess("D2person.PprsPerson.Delete"))
                     ));
                     $this->widget("bootstrap.widgets.TbButton", array(
-                        #"label"=>Yii::t("crud","Update"),
+                        #"label"=>Yii::t("D2personModule.crud_static","Update"),
                         "icon"=>"icon-edit icon-white",
                         "type"=>"primary",
                         "size"=>"large",
@@ -109,18 +110,18 @@
                         "visible"=> $showUpdateButton &&  (Yii::app()->user->checkAccess("D2person.PprsPerson.*") || Yii::app()->user->checkAccess("D2person.PprsPerson.Update"))
                     ));
                     $this->widget("bootstrap.widgets.TbButton", array(
-                        #"label"=>Yii::t("crud","View"),
+                        #"label"=>Yii::t("D2personModule.crud_static","View"),
                         "icon"=>"icon-eye-open",
                         "size"=>"large",
                         "url"=>array("view","pprs_id"=>$model->{$model->tableSchema->primaryKey}),
                         "visible"=>$showViewButton &&  (Yii::app()->user->checkAccess("D2person.PprsPerson.*") || Yii::app()->user->checkAccess("D2person.PprsPerson.View")),
                         "htmlOptions"=>array(
                                       "data-toggle"=>"tooltip",
-                                      "title"=>Yii::t("crud","View Mode"),
+                                      "title"=>Yii::t("D2personModule.crud_static","View Mode"),
                         )
                     ));
                     $this->widget("bootstrap.widgets.TbButton", array(
-                       "label"=>Yii::t("crud","Save"),
+                       "label"=>Yii::t("D2personModule.crud_static","Save"),
                        "icon"=>"icon-thumbs-up icon-white",
                        "size"=>"large",
                        "type"=>"primary",
@@ -136,13 +137,13 @@
                 $this->widget(
                        "bootstrap.widgets.TbButton",
                        array(
-                           #"label"=>Yii::t("crud","Search"),
+                           #"label"=>Yii::t("D2personModule.crud_static","Search"),
                                    "icon"=>"icon-search",
                                    "size"=>"large",
                                    "htmlOptions"=>array(
                                        "class"=>"search-button",
                                        "data-toggle"=>"tooltip",
-                                       "title"=>Yii::t("crud","Advanced Search"),
+                                       "title"=>Yii::t("D2personModule.crud_static","Advanced Search"),
                                    )
                            )
                        );
@@ -151,13 +152,13 @@
                 $this->widget(
                        "bootstrap.widgets.TbButton",
                        array(
-                           #"label"=>Yii::t("crud","Clear"),
+                           #"label"=>Yii::t("D2personModule.crud_static","Clear"),
                                    "icon"=>"icon-remove-sign",
                                    "size"=>"large",
                                    "url"=>Yii::app()->baseURL."/".Yii::app()->request->getPathInfo(),
                                    "htmlOptions"=>array(
                                       "data-toggle"=>"tooltip",
-                                      "title"=>Yii::t("crud","Clear Search"),
+                                      "title"=>Yii::t("D2personModule.crud_static","Clear Search"),
                                    )
                            )
                        );

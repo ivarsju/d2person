@@ -1,19 +1,19 @@
 <?php
     $this->setPageTitle(
-        Yii::t('model', 'Pprs Person')
+        Yii::t('D2personModule.model', 'Pprs Person')
         . ' - '
-        . Yii::t('crud', 'View')
+        . Yii::t('D2personModule.crud_static', 'View')
         . ': '   
         . $model->getItemLabel()            
 );    
-$this->breadcrumbs[Yii::t('model','Pprs People')] = array('admin');
+$this->breadcrumbs[Yii::t('D2personModule.model','Pprs People')] = array('admin');
 $this->breadcrumbs[$model->{$model->tableSchema->primaryKey}] = array('view','id' => $model->{$model->tableSchema->primaryKey});
-$this->breadcrumbs[] = Yii::t('crud', 'View');
+$this->breadcrumbs[] = Yii::t('D2personModule.crud_static', 'View');
 ?>
 
 <?php $this->widget("TbBreadcrumbs", array("links"=>$this->breadcrumbs)) ?>
     <h1>
-        <?php echo Yii::t('model','Pprs Person')?>
+        <?php echo Yii::t('D2personModule.model','Pprs Person')?>
         <small>
             <?php echo $model->itemLabel ?>
 
@@ -29,7 +29,7 @@ $this->breadcrumbs[] = Yii::t('crud', 'View');
 <div class="row">
     <div class="span7">
         <h2>
-            <?php echo Yii::t('crud','Data')?>            <small>
+            <?php echo Yii::t('D2personModule.crud_static','Data')?>            <small>
                 #<?php echo $model->pprs_id ?>            </small>
         </h2>
 
@@ -73,45 +73,6 @@ array(
                             array(
                                 'model' => $model,
                                 'attribute' => 'pprs_second_name',
-                                'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
-                            ),
-                            true
-                        )
-                    ),
-array(
-                        'name' => 'pprs_declared_place_of_residence',
-                        'type' => 'raw',
-                        'value' => $this->widget(
-                            'EditableField',
-                            array(
-                                'model' => $model,
-                                'attribute' => 'pprs_declared_place_of_residence',
-                                'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
-                            ),
-                            true
-                        )
-                    ),
-array(
-                        'name' => 'pprs_real_pleace_of_residence',
-                        'type' => 'raw',
-                        'value' => $this->widget(
-                            'EditableField',
-                            array(
-                                'model' => $model,
-                                'attribute' => 'pprs_real_pleace_of_residence',
-                                'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
-                            ),
-                            true
-                        )
-                    ),
-array(
-                        'name' => 'pprs_salary',
-                        'type' => 'raw',
-                        'value' => $this->widget(
-                            'EditableField',
-                            array(
-                                'model' => $model,
-                                'attribute' => 'pprs_salary',
                                 'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
                             ),
                             true
