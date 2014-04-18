@@ -9,10 +9,24 @@
 <h3>
     <?php 
     echo Yii::t('D2personModule.model', 'Ccuc User Company') . ' '; 
+        
+    if (empty($modelMain->ccucUserCompanies)) {
+        // if no records, reload page
+        $button_type = 'Button';
+        $no_ajax = 1;
+        $ajaxOptions = array();
+    } else {
+        // ajax button
+        $button_type = 'ajaxButton';
+        $no_ajax = 0;
+        $ajaxOptions = array(
+                'success' => 'function(html) {$.fn.yiiGridView.update(\'ppcn-person-contact-grid\');}'
+            );        
+    }
     $this->widget(
         'bootstrap.widgets.TbButton',
         array(
-            'buttonType' => 'ajaxButton', 
+            'buttonType' => $button_type, 
             'type' => 'primary', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
             'size' => 'mini',
             'icon' => 'icon-plus',
@@ -21,13 +35,10 @@
                 'field' => 'ccuc_person_id',
                 'value' => $modelMain->primaryKey,
             ),
-            'ajaxOptions' => array(
-                'success' => 'function(html) { 
-                    $.fn.yiiGridView.update(\'ccuc-user-company-grid\');
-                    }',
-               ),
+            'ajaxOptions' => $ajaxOptions,
             'htmlOptions' => array(
                 'title' => Yii::t('D2personModule.crud_static', 'Add new record'),
+                'data-toggle' => 'tooltip',
             ),                 
         )
     );        
@@ -81,6 +92,7 @@ $this->widget('TbGridView',
                     'delete' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.DeleteccucUserCompanies")'),
                 ),
                 'deleteButtonUrl' => 'Yii::app()->controller->createUrl("/d2person/ccucUserCompany/delete", array("ccuc_id" => $data->ccuc_id))',
+                'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),                    
             ),
         )
     )
@@ -93,10 +105,24 @@ $this->widget('TbGridView',
 <h3>
     <?php 
     echo Yii::t('D2personModule.model', 'Ppcn Person Contact') . ' '; 
+        
+    if (empty($modelMain->ppcnPersonContacts)) {
+        // if no records, reload page
+        $button_type = 'Button';
+        $no_ajax = 1;
+        $ajaxOptions = array();
+    } else {
+        // ajax button
+        $button_type = 'ajaxButton';
+        $no_ajax = 0;
+        $ajaxOptions = array(
+                'success' => 'function(html) {$.fn.yiiGridView.update(\'ppcn-person-contact-grid\');}'
+            );        
+    }
     $this->widget(
         'bootstrap.widgets.TbButton',
         array(
-            'buttonType' => 'ajaxButton', 
+            'buttonType' => $button_type, 
             'type' => 'primary', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
             'size' => 'mini',
             'icon' => 'icon-plus',
@@ -105,13 +131,10 @@ $this->widget('TbGridView',
                 'field' => 'ppcn_pprs_id',
                 'value' => $modelMain->primaryKey,
             ),
-            'ajaxOptions' => array(
-                'success' => 'function(html) { 
-                    $.fn.yiiGridView.update(\'ppcn-person-contact-grid\');
-                    }',
-               ),
+            'ajaxOptions' => $ajaxOptions,
             'htmlOptions' => array(
                 'title' => Yii::t('D2personModule.crud_static', 'Add new record'),
+                'data-toggle' => 'tooltip',
             ),                 
         )
     );        
@@ -180,6 +203,7 @@ $this->widget('TbGridView',
                     'delete' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.DeleteppcnPersonContacts")'),
                 ),
                 'deleteButtonUrl' => 'Yii::app()->controller->createUrl("/d2person/ppcnPersonContact/delete", array("ppcn_id" => $data->ppcn_id))',
+                'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),                    
             ),
         )
     )
@@ -192,10 +216,24 @@ $this->widget('TbGridView',
 <h3>
     <?php 
     echo Yii::t('D2personModule.model', 'Ppxd Person Xdocument') . ' '; 
+        
+    if (empty($modelMain->ppxdPersonXDocuments)) {
+        // if no records, reload page
+        $button_type = 'Button';
+        $no_ajax = 1;
+        $ajaxOptions = array();
+    } else {
+        // ajax button
+        $button_type = 'ajaxButton';
+        $no_ajax = 0;
+        $ajaxOptions = array(
+                'success' => 'function(html) {$.fn.yiiGridView.update(\'ppcn-person-contact-grid\');}'
+            );        
+    }
     $this->widget(
         'bootstrap.widgets.TbButton',
         array(
-            'buttonType' => 'ajaxButton', 
+            'buttonType' => $button_type, 
             'type' => 'primary', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
             'size' => 'mini',
             'icon' => 'icon-plus',
@@ -204,13 +242,10 @@ $this->widget('TbGridView',
                 'field' => 'ppxd_pprs_id',
                 'value' => $modelMain->primaryKey,
             ),
-            'ajaxOptions' => array(
-                'success' => 'function(html) { 
-                    $.fn.yiiGridView.update(\'ppxd-person-xdocument-grid\');
-                    }',
-               ),
+            'ajaxOptions' => $ajaxOptions,
             'htmlOptions' => array(
                 'title' => Yii::t('D2personModule.crud_static', 'Add new record'),
+                'data-toggle' => 'tooltip',
             ),                 
         )
     );        
@@ -300,6 +335,7 @@ $this->widget('TbGridView',
                     'delete' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.DeleteppxdPersonXDocuments")'),
                 ),
                 'deleteButtonUrl' => 'Yii::app()->controller->createUrl("/d2person/ppxdPersonXDocument/delete", array("ppxd_id" => $data->ppxd_id))',
+                'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),                    
             ),
         )
     )
@@ -312,10 +348,24 @@ $this->widget('TbGridView',
 <h3>
     <?php 
     echo Yii::t('D2personModule.model', 'Ppxt Person Xtype') . ' '; 
+        
+    if (empty($modelMain->ppxtPersonXTypes)) {
+        // if no records, reload page
+        $button_type = 'Button';
+        $no_ajax = 1;
+        $ajaxOptions = array();
+    } else {
+        // ajax button
+        $button_type = 'ajaxButton';
+        $no_ajax = 0;
+        $ajaxOptions = array(
+                'success' => 'function(html) {$.fn.yiiGridView.update(\'ppcn-person-contact-grid\');}'
+            );        
+    }
     $this->widget(
         'bootstrap.widgets.TbButton',
         array(
-            'buttonType' => 'ajaxButton', 
+            'buttonType' => $button_type, 
             'type' => 'primary', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
             'size' => 'mini',
             'icon' => 'icon-plus',
@@ -324,13 +374,10 @@ $this->widget('TbGridView',
                 'field' => 'ppxt_pprs_id',
                 'value' => $modelMain->primaryKey,
             ),
-            'ajaxOptions' => array(
-                'success' => 'function(html) { 
-                    $.fn.yiiGridView.update(\'ppxt-person-xtype-grid\');
-                    }',
-               ),
+            'ajaxOptions' => $ajaxOptions,
             'htmlOptions' => array(
                 'title' => Yii::t('D2personModule.crud_static', 'Add new record'),
+                'data-toggle' => 'tooltip',
             ),                 
         )
     );        
@@ -373,6 +420,7 @@ $this->widget('TbGridView',
                     'delete' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.DeleteppxtPersonXTypes")'),
                 ),
                 'deleteButtonUrl' => 'Yii::app()->controller->createUrl("/d2person/ppxtPersonXType/delete", array("ppxt_id" => $data->ppxt_id))',
+                'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),                    
             ),
         )
     )

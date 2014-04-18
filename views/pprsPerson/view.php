@@ -25,9 +25,8 @@ $this->breadcrumbs[] = Yii::t('D2personModule.crud_static', 'View');
 
 <?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>
 
-
 <div class="row">
-    <div class="span7">
+    <div class="span5">
         <h2>
             <?php echo Yii::t('D2personModule.crud_static','Data')?>            <small>
                 #<?php echo $model->pprs_id ?>            </small>
@@ -83,7 +82,7 @@ array(
     </div>
 
 
-    <div class="span5">
+    <div class="span7">
         <div class="well">
             <?php $this->renderPartial('_view-relations',array('model' => $model)); ?>        </div>
         <div class="well">

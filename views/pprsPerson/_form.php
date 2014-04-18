@@ -19,7 +19,7 @@
     ?>
     
     <div class="row">
-        <div class="span7">
+        <div class="span5">
             <h2>
                 <?php echo Yii::t('D2personModule.crud_static','Data')?>                <small>
                     #<?php echo $model->pprs_id ?>                </small>
@@ -83,7 +83,7 @@
         <!-- main inputs -->
 
         
-        <div class="span5"><!-- sub inputs -->
+        <div class="span7"><!-- sub inputs -->
             <div class="well">
             <!--<h2>
                 <?php echo Yii::t('D2personModule.crud_static','Relations')?>            </h2>-->

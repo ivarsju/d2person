@@ -135,6 +135,9 @@ public function accessRules()
         $model->$field = $value;
         try {
             if ($model->save()) {
+                if($no_ajax){
+                    $this->redirect(Yii::app()->request->urlReferrer);
+                }            
                 return TRUE;
             }
         } catch (Exception $e) {
