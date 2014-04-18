@@ -20,7 +20,7 @@
         $button_type = 'ajaxButton';
         $no_ajax = 0;
         $ajaxOptions = array(
-                'success' => 'function(html) {$.fn.yiiGridView.update(\'ppcn-person-contact-grid\');}'
+                'success' => 'function(html) {$.fn.yiiGridView.update(\'ccuc-user-company-grid\');}'
             );        
     }
     $this->widget(
@@ -229,7 +229,7 @@ $this->widget('TbGridView',
         $button_type = 'ajaxButton';
         $no_ajax = 0;
         $ajaxOptions = array(
-                'success' => 'function(html) {$.fn.yiiGridView.update(\'ppcn-person-contact-grid\');}'
+                'success' => 'function(html) {$.fn.yiiGridView.update(\'ppxd-person-xdocument-grid\');}'
             );        
     }
     $this->widget(
@@ -362,7 +362,7 @@ $this->widget('TbGridView',
         $button_type = 'ajaxButton';
         $no_ajax = 0;
         $ajaxOptions = array(
-                'success' => 'function(html) {$.fn.yiiGridView.update(\'ppcn-person-contact-grid\');}'
+                'success' => 'function(html) {$.fn.yiiGridView.update(\'ppxt-person-xtype-grid\');}'
             );        
     }
     $this->widget(
