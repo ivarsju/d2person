@@ -129,7 +129,7 @@ public function accessRules()
         $es->update();
     }
 
-    public function actionAjaxCreate($field, $value) 
+    public function actionAjaxCreate($field, $value, $no_ajax = 0) 
     {
         $model = new PpxdPersonXDocument;
         $model->$field = $value;
