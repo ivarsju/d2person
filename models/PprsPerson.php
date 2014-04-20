@@ -51,6 +51,17 @@ class PprsPerson extends BasePprsPerson
         );
     }
 
+    public function scopes()
+    {
+        return array(
+            'activeCompanyUsers'=>array(
+                'join'=>' inner join ccuc_user_company on ccuc_person_id = t.pprs_id',
+                'condition'=>'ccuc_ccmp_id = ' . Yii::app()->sysCompany->getActiveCompany(),
+            ),
+        );
+        
+    }       
+    
     public function search($criteria = null)
     {
         if (is_null($criteria)) {
@@ -60,5 +71,5 @@ class PprsPerson extends BasePprsPerson
             'criteria' => $this->searchCriteria($criteria),
         ));
     }
-
+    
 }
