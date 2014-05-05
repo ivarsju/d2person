@@ -153,13 +153,14 @@ $this->widget('TbGridView',
     array(
         'id' => 'ppcn-person-contact-grid',
         'dataProvider' => $model->search(),
+        //'filter' => $model,
         #'responsiveTable' => true,
         'template' => '{items}',
         'pager' => array(
             'class' => 'TbPager',
             'displayFirstAndLast' => true,
         ),
-        'columns' => array(
+          'columns' => array(
             array(
                 'class' => 'editable.EditableColumn',
                 'name' => 'ppcn_pcnt_type',

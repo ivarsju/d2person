@@ -62,6 +62,15 @@ class PprsPerson extends BasePprsPerson
         
     }       
     
+    public function filterGroup($group)
+    {
+        $this->getDbCriteria()->mergeWith(array(
+                'join'=>' inner join ppxt_person_x_type on ppxt_pprs_id = t.pprs_id',
+                'condition'=>'ppxt_ptyp_id = ' . $group,
+        ));
+        return $this;
+    }      
+    
     public function search($criteria = null)
     {
         if (is_null($criteria)) {
@@ -71,5 +80,18 @@ class PprsPerson extends BasePprsPerson
             'criteria' => $this->searchCriteria($criteria),
         ));
     }
+    
+    
+    public function findAll($condition='',$params=array())
+    {
+        $criteria=$this->getCommandBuilder()->createCriteria($condition,$params);
+        
+        //criteria for trucks of SysCompanies
+        if(Yii::app()->sysCompany->getActiveCompany()){
+            $criteria->join .= ' inner join ccuc_user_company on ccuc_person_id = t.pprs_id ';
+            $criteria->compare('ccuc_ccmp_id', Yii::app()->sysCompany->getActiveCompany());            
+        }          
+        return $this->query($criteria,true);
+    }  
     
 }
