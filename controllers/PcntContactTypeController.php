@@ -8,7 +8,7 @@ class PcntContactTypeController extends Controller
     public $defaultAction = "admin";
     public $scenario = "crud";
     public $scope = "crud";
-
+    public $menu_route = "d2Person/PcntContactType";       
 
 public function filters()
 {
@@ -22,7 +22,7 @@ public function accessRules()
      return array(
         array(
             'allow',
-            'actions' => array('create', 'admin', 'view', 'update', 'editableSaver', 'delete','ajaxCreate'),
+            'actions' => array('create', 'admin', 'editableSaver', 'delete','ajaxCreate'),
             'roles' => array('D2person.PcntContactType.*'),
         ),
         array(
@@ -32,12 +32,12 @@ public function accessRules()
         ),
         array(
             'allow',
-            'actions' => array('view', 'admin'), // let the user view the grid
+            'actions' => array( 'admin'), // let the user view the grid
             'roles' => array('D2person.PcntContactType.View'),
         ),
         array(
             'allow',
-            'actions' => array('update', 'editableSaver'),
+            'actions' => array('editableSaver'),
             'roles' => array('D2person.PcntContactType.Update'),
         ),
         array(
@@ -61,12 +61,6 @@ public function accessRules()
         return true;
     }
 
-    public function actionView($pcnt_id)
-    {
-        $model = $this->loadModel($pcnt_id);
-        $this->render('view', array('model' => $model,));
-    }
-
     public function actionCreate()
     {
         $model = new PcntContactType;
@@ -82,7 +76,7 @@ public function accessRules()
                     if (isset($_GET['returnUrl'])) {
                         $this->redirect($_GET['returnUrl']);
                     } else {
-                        $this->redirect(array('view', 'pcnt_id' => $model->pcnt_id));
+                        $this->redirect(array('admin'));
                     }
                 }
             } catch (Exception $e) {
@@ -95,33 +89,6 @@ public function accessRules()
         $this->render('create', array('model' => $model));
     }
 
-    public function actionUpdate($pcnt_id)
-    {
-        $model = $this->loadModel($pcnt_id);
-        $model->scenario = $this->scenario;
-
-        $this->performAjaxValidation($model, 'pcnt-contact-type-form');
-
-        if (isset($_POST['PcntContactType'])) {
-            $model->attributes = $_POST['PcntContactType'];
-
-
-            try {
-                if ($model->save()) {
-                    if (isset($_GET['returnUrl'])) {
-                        $this->redirect($_GET['returnUrl']);
-                    } else {
-                        $this->redirect(array('view', 'pcnt_id' => $model->pcnt_id));
-                    }
-                }
-            } catch (Exception $e) {
-                $model->addError('pcnt_id', $e->getMessage());
-            }
-        }
-
-        $this->render('update', array('model' => $model,));
-    }
-
     public function actionEditableSaver()
     {
         Yii::import('TbEditableSaver');
@@ -129,17 +96,16 @@ public function accessRules()
         $es->update();
     }
 
-    public function actionAjaxCreate($field, $value, $no_ajax = 0) 
+    public function actionAjaxCreate($field, $value) 
     {
         $model = new PcntContactType;
         $model->$field = $value;
         try {
             if ($model->save()) {
-                if($no_ajax){
-                    $this->redirect(Yii::app()->request->urlReferrer);
-                }            
                 return TRUE;
-            }
+            }else{
+                return var_export($model->getErrors());
+            }            
         } catch (Exception $e) {
             throw new CHttpException(500, $e->getMessage());
         }
@@ -179,7 +145,7 @@ public function accessRules()
             $model->attributes = $_GET['PcntContactType'];
         }
 
-        $this->render('admin', array('model' => $model,));
+        $this->render('admin', array('model' => $model));
     }
 
     public function loadModel($id)

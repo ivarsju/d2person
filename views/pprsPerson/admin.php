@@ -1,36 +1,30 @@
 <?php
-$this->setPageTitle(
-    Yii::t('D2personModule.model', 'Pprs People')
-    . ' - '
-    . Yii::t('D2personModule.crud_static', 'Manage')
-);
+$this->setPageTitle(Yii::t('D2personModule.model', 'Persons'));
 
-$this->breadcrumbs[] = Yii::t('D2personModule.model', 'Pprs People');
-Yii::app()->clientScript->registerScript('search', "
-    $('.search-button').click(function(){
-        $('.search-form').toggle();
-        return false;
-    });
-    $('.search-form form').submit(function(){
-        $.fn.yiiGridView.update(
-            'pprs-person-grid',
-            {data: $(this).serialize()}
-        );
-        return false;
-    });
-    ");
 ?>
 
-<?php $this->widget("TbBreadcrumbs", array("links" => $this->breadcrumbs)) ?>
-    <h1>
+<div class="clearfix">
+    <div class="btn-toolbar pull-left">
+        <div class="btn-group">
+        <?php 
+        $this->widget('bootstrap.widgets.TbButton', array(
+             'label'=>Yii::t('D2personModule.crud_static','Create'),
+             'icon'=>'icon-plus',
+             'size'=>'large',
+             'type'=>'success',
+             'url'=>array('create'),
+             'visible'=>(Yii::app()->user->checkAccess('D2person.PprsPerson.*') || Yii::app()->user->checkAccess('D2person.PprsPerson.Create'))
+        ));  
+        ?>
+</div>
+        <div class="btn-group">
+            <h1>
+                <i class=""></i>
+                <?php echo Yii::t('D2personModule.model', 'Persons');?>            </h1>
+        </div>
+    </div>
+</div>
 
-        <?php echo Yii::t('D2personModule.model', 'Pprs People'); ?>
-        <small><?php echo Yii::t('D2personModule.crud_static', 'Manage'); ?></small>
-
-    </h1>
-
-
-<?php $this->renderPartial("_toolbar", array("model" => $model)); ?>
 <?php Yii::beginProfile('PprsPerson.view.grid'); ?>
 
 
@@ -48,33 +42,18 @@ $this->widget('TbGridView',
         ),
         'columns' => array(
             array(
-                'class' => 'CLinkColumn',
-                'header' => '',
-                'labelExpression' => '$data->itemLabel',
-                'urlExpression' => 'Yii::app()->controller->createUrl("view", array("pprs_id" => $data["pprs_id"]))'
-            ),
-            array(
-                //smallint(5) unsigned
+                //varchar(100)
                 'class' => 'editable.EditableColumn',
-                'name' => 'pprs_id',
+                'name' => 'pprs_second_name',
                 'editable' => array(
                     'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
                     //'placement' => 'right',
                 )
-            ),
+            ),            
             array(
                 //varchar(100)
                 'class' => 'editable.EditableColumn',
                 'name' => 'pprs_first_name',
-                'editable' => array(
-                    'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
-                    //'placement' => 'right',
-                )
-            ),
-            array(
-                //varchar(100)
-                'class' => 'editable.EditableColumn',
-                'name' => 'pprs_second_name',
                 'editable' => array(
                     'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
                     //'placement' => 'right',
@@ -85,12 +64,14 @@ $this->widget('TbGridView',
                 'class' => 'TbButtonColumn',
                 'buttons' => array(
                     'view' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.View")'),
-                    'update' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.Update")'),
+                    'update' => array('visible' => 'FALSE'),
                     'delete' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.Delete")'),
                 ),
                 'viewButtonUrl' => 'Yii::app()->controller->createUrl("view", array("pprs_id" => $data->pprs_id))',
-                'updateButtonUrl' => 'Yii::app()->controller->createUrl("update", array("pprs_id" => $data->pprs_id))',
                 'deleteButtonUrl' => 'Yii::app()->controller->createUrl("delete", array("pprs_id" => $data->pprs_id))',
+                'deleteConfirmation'=>Yii::t('D2personModule.crud_static','Do you want to delete this item?'),                    
+                'viewButtonOptions'=>array('data-toggle'=>'tooltip'),   
+                'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),   
             ),
         )
     )

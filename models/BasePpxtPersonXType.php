@@ -29,7 +29,8 @@ abstract class BasePpxtPersonXType extends CActiveRecord
     {
         return array_merge(
             parent::rules(), array(
-                array('ppxt_pprs_id, ppxt_ptyp_id', 'required'),
+                array('ppxt_pprs_id', 'required'),
+                array('ppxt_ptyp_id', 'default', 'setOnEmpty' => true, 'value' => null),
                 array('ppxt_pprs_id, ppxt_ptyp_id', 'numerical', 'integerOnly' => true),
                 array('ppxt_id, ppxt_pprs_id, ppxt_ptyp_id', 'safe', 'on' => 'search'),
             )

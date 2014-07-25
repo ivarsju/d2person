@@ -78,6 +78,10 @@ class PprsPerson extends BasePprsPerson
         }
         return new CActiveDataProvider(get_class($this), array(
             'criteria' => $this->searchCriteria($criteria),
+            'sort'=>array(
+                'defaultOrder'=>'pprs_second_name,pprs_first_name',
+            )
+
         ));
     }
     

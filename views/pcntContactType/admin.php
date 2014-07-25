@@ -1,36 +1,29 @@
 <?php
-$this->setPageTitle(
-    Yii::t('D2personModule.model', 'Pcnt Contact Types')
-    . ' - '
-    . Yii::t('D2personModule.crud_static', 'Manage')
-);
-
-$this->breadcrumbs[] = Yii::t('D2personModule.model', 'Pcnt Contact Types');
-Yii::app()->clientScript->registerScript('search', "
-    $('.search-button').click(function(){
-        $('.search-form').toggle();
-        return false;
-    });
-    $('.search-form form').submit(function(){
-        $.fn.yiiGridView.update(
-            'pcnt-contact-type-grid',
-            {data: $(this).serialize()}
-        );
-        return false;
-    });
-    ");
+$this->setPageTitle(Yii::t('D2personModule.model', 'Contact Types'));
 ?>
 
-<?php $this->widget("TbBreadcrumbs", array("links" => $this->breadcrumbs)) ?>
-    <h1>
+<div class="clearfix">
+    <div class="btn-toolbar pull-left">
+        <div class="btn-group">
+        <?php 
+        $this->widget('bootstrap.widgets.TbButton', array(
+             'label'=>Yii::t('D2personModule.crud_static','Create'),
+             'icon'=>'icon-plus',
+             'size'=>'large',
+             'type'=>'success',
+             'url'=>array('create'),
+             'visible'=>(Yii::app()->user->checkAccess('D2person.PcntContactType.*') || Yii::app()->user->checkAccess('D2person.PcntContactType.Create'))
+        ));  
+        ?>
+</div>
+        <div class="btn-group">
+            <h1>
+                <i class=""></i>
+                <?php echo Yii::t('D2personModule.model', 'Contact Types');?>            </h1>
+        </div>
+    </div>
+</div>
 
-        <?php echo Yii::t('D2personModule.model', 'Pcnt Contact Types'); ?>
-        <small><?php echo Yii::t('D2personModule.crud_static', 'Manage'); ?></small>
-
-    </h1>
-
-
-<?php $this->renderPartial("_toolbar", array("model" => $model)); ?>
 <?php Yii::beginProfile('PcntContactType.view.grid'); ?>
 
 
@@ -48,21 +41,6 @@ $this->widget('TbGridView',
         ),
         'columns' => array(
             array(
-                'class' => 'CLinkColumn',
-                'header' => '',
-                'labelExpression' => '$data->itemLabel',
-                'urlExpression' => 'Yii::app()->controller->createUrl("view", array("pcnt_id" => $data["pcnt_id"]))'
-            ),
-            array(
-                //tinyint(3) unsigned
-                'class' => 'editable.EditableColumn',
-                'name' => 'pcnt_id',
-                'editable' => array(
-                    'url' => $this->createUrl('/d2person/pcntContactType/editableSaver'),
-                    //'placement' => 'right',
-                )
-            ),
-            array(
                 //char(40)
                 'class' => 'editable.EditableColumn',
                 'name' => 'pcnt_name',
@@ -72,17 +50,19 @@ $this->widget('TbGridView',
                 )
             ),
 
-            array(
-                'class' => 'TbButtonColumn',
-                'buttons' => array(
-                    'view' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PcntContactType.View")'),
-                    'update' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PcntContactType.Update")'),
-                    'delete' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PcntContactType.Delete")'),
-                ),
-                'viewButtonUrl' => 'Yii::app()->controller->createUrl("view", array("pcnt_id" => $data->pcnt_id))',
-                'updateButtonUrl' => 'Yii::app()->controller->createUrl("update", array("pcnt_id" => $data->pcnt_id))',
-                'deleteButtonUrl' => 'Yii::app()->controller->createUrl("delete", array("pcnt_id" => $data->pcnt_id))',
-            ),
+//            array(
+//                'class' => 'TbButtonColumn',
+//                'buttons' => array(
+//                    'view' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PcntContactType.View")'),
+//                    'update' => array('visible' => 'FALSE'),
+//                    'delete' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PcntContactType.Delete")'),
+//                ),
+//                'viewButtonUrl' => 'Yii::app()->controller->createUrl("view", array("pcnt_id" => $data->pcnt_id))',
+//                'deleteButtonUrl' => 'Yii::app()->controller->createUrl("delete", array("pcnt_id" => $data->pcnt_id))',
+//                'deleteConfirmation'=>Yii::t('D2personModule.crud_static','Do you want to delete this item?'),                    
+//                'viewButtonOptions'=>array('data-toggle'=>'tooltip'),   
+//                'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),   
+//            ),
         )
     )
 );

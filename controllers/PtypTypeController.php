@@ -8,6 +8,7 @@ class PtypTypeController extends Controller
     public $defaultAction = "admin";
     public $scenario = "crud";
     public $scope = "crud";
+    public $menu_route = "d2Person/PtypType";       
 
 
 public function filters()
@@ -61,10 +62,19 @@ public function accessRules()
         return true;
     }
 
-    public function actionView($ptyp_id)
+    public function actionView($ptyp_id, $ajax = false)
     {
         $model = $this->loadModel($ptyp_id);
-        $this->render('view', array('model' => $model,));
+        if($ajax){
+            $this->renderPartial('_view-relations_grids', 
+                    array(
+                        'modelMain' => $model,
+                        'ajax' => $ajax,
+                        )
+                    );
+        }else{
+            $this->render('view', array('model' => $model,));
+        }
     }
 
     public function actionCreate()
@@ -82,7 +92,7 @@ public function accessRules()
                     if (isset($_GET['returnUrl'])) {
                         $this->redirect($_GET['returnUrl']);
                     } else {
-                        $this->redirect(array('view', 'ptyp_id' => $model->ptyp_id));
+                        $this->redirect(array('admin'));
                     }
                 }
             } catch (Exception $e) {
@@ -119,7 +129,7 @@ public function accessRules()
             }
         }
 
-        $this->render('update', array('model' => $model,));
+        $this->render('update', array('model' => $model));
     }
 
     public function actionEditableSaver()
@@ -129,17 +139,16 @@ public function accessRules()
         $es->update();
     }
 
-    public function actionAjaxCreate($field, $value, $no_ajax = 0) 
+    public function actionAjaxCreate($field, $value) 
     {
         $model = new PtypType;
         $model->$field = $value;
         try {
             if ($model->save()) {
-                if($no_ajax){
-                    $this->redirect(Yii::app()->request->urlReferrer);
-                }            
                 return TRUE;
-            }
+            }else{
+                return var_export($model->getErrors());
+            }            
         } catch (Exception $e) {
             throw new CHttpException(500, $e->getMessage());
         }
@@ -179,7 +188,7 @@ public function accessRules()
             $model->attributes = $_GET['PtypType'];
         }
 
-        $this->render('admin', array('model' => $model,));
+        $this->render('admin', array('model' => $model));
     }
 
     public function loadModel($id)

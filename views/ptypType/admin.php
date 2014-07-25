@@ -1,36 +1,30 @@
 <?php
-$this->setPageTitle(
-    Yii::t('D2personModule.model', 'Ptyp Types')
-    . ' - '
-    . Yii::t('D2personModule.crud_static', 'Manage')
-);
-
-$this->breadcrumbs[] = Yii::t('D2personModule.model', 'Ptyp Types');
-Yii::app()->clientScript->registerScript('search', "
-    $('.search-button').click(function(){
-        $('.search-form').toggle();
-        return false;
-    });
-    $('.search-form form').submit(function(){
-        $.fn.yiiGridView.update(
-            'ptyp-type-grid',
-            {data: $(this).serialize()}
-        );
-        return false;
-    });
-    ");
+$this->setPageTitle(Yii::t('D2personModule.model', 'Person Types'));
 ?>
 
-<?php $this->widget("TbBreadcrumbs", array("links" => $this->breadcrumbs)) ?>
-    <h1>
+<div class="clearfix">
+    <div class="btn-toolbar pull-left">
+        <div class="btn-group">
+        <?php 
+        $this->widget('bootstrap.widgets.TbButton', array(
+             'label'=>Yii::t('D2personModule.crud_static','Create'),
+             'icon'=>'icon-plus',
+             'size'=>'large',
+             'type'=>'success',
+             'url'=>array('create'),
+             'visible'=>(Yii::app()->user->checkAccess('D2person.PtypType.*') || Yii::app()->user->checkAccess('D2person.PtypType.Create'))
+        ));  
+        ?>
+</div>
+        <div class="btn-group">
+            <h1>
+                <i class=""></i>
+                <?php echo Yii::t('D2personModule.model', 'Person Types');?>
+            </h1>
+        </div>
+    </div>
+</div>
 
-        <?php echo Yii::t('D2personModule.model', 'Ptyp Types'); ?>
-        <small><?php echo Yii::t('D2personModule.crud_static', 'Manage'); ?></small>
-
-    </h1>
-
-
-<?php $this->renderPartial("_toolbar", array("model" => $model)); ?>
 <?php Yii::beginProfile('PtypType.view.grid'); ?>
 
 
@@ -47,21 +41,6 @@ $this->widget('TbGridView',
             'displayFirstAndLast' => true,
         ),
         'columns' => array(
-            array(
-                'class' => 'CLinkColumn',
-                'header' => '',
-                'labelExpression' => '$data->itemLabel',
-                'urlExpression' => 'Yii::app()->controller->createUrl("view", array("ptyp_id" => $data["ptyp_id"]))'
-            ),
-            array(
-                //tinyint(3) unsigned
-                'class' => 'editable.EditableColumn',
-                'name' => 'ptyp_id',
-                'editable' => array(
-                    'url' => $this->createUrl('/d2person/ptypType/editableSaver'),
-                    //'placement' => 'right',
-                )
-            ),
             array(
                 //char(50)
                 'class' => 'editable.EditableColumn',
@@ -81,19 +60,20 @@ $this->widget('TbGridView',
                 )
             ),
 
-            array(
-                'class' => 'TbButtonColumn',
-                'buttons' => array(
-                    'view' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PtypType.View")'),
-                    'update' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PtypType.Update")'),
-                    'delete' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PtypType.Delete")'),
-                ),
-                'viewButtonUrl' => 'Yii::app()->controller->createUrl("view", array("ptyp_id" => $data->ptyp_id))',
-                'updateButtonUrl' => 'Yii::app()->controller->createUrl("update", array("ptyp_id" => $data->ptyp_id))',
-                'deleteButtonUrl' => 'Yii::app()->controller->createUrl("delete", array("ptyp_id" => $data->ptyp_id))',
-            ),
+//            array(
+//                'class' => 'TbButtonColumn',
+//                'buttons' => array(
+//                    'view' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PtypType.View")'),
+//                    'update' => array('visible' => 'FALSE'),
+//                    'delete' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PtypType.Delete")'),
+//                ),
+//                'viewButtonUrl' => 'Yii::app()->controller->createUrl("view", array("ptyp_id" => $data->ptyp_id))',
+//                'deleteButtonUrl' => 'Yii::app()->controller->createUrl("delete", array("ptyp_id" => $data->ptyp_id))',
+//                'deleteConfirmation'=>Yii::t('D2personModule.crud_static','Do you want to delete this item?'),                    
+//                'viewButtonOptions'=>array('data-toggle'=>'tooltip'),   
+//                'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),   
+//            ),
         )
     )
 );
-?>
-<?php Yii::endProfile('PtypType.view.grid'); ?>
+Yii::endProfile('PtypType.view.grid');

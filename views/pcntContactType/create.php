@@ -1,20 +1,51 @@
 <?php
-$this->setPageTitle(
-    Yii::t('D2personModule.model', 'Pcnt Contact Type')
-    . ' - '
-    . Yii::t('D2personModule.crud_static', 'Create')
-);
+$this->setPageTitle(Yii::t('D2personModule.model', 'Create Contact Type'));
 
-$this->breadcrumbs[Yii::t('D2personModule.model', 'Pcnt Contact Types')] = array('admin');
-$this->breadcrumbs[] = Yii::t('D2personModule.crud_static', 'Create');
+$cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
+    #"label"=>Yii::t("D2personModule.crud_static","Cancel"),
+    "icon"=>"chevron-left",
+    "size"=>"large",
+    "url"=>(isset($_GET["returnUrl"]))?$_GET["returnUrl"]:array("{$this->id}/admin"),
+    "visible"=>(Yii::app()->user->checkAccess("D2person.PcntContactType.*") || Yii::app()->user->checkAccess("D2person.PcntContactType.View")),
+    "htmlOptions"=>array(
+                    "class"=>"search-button",
+                    "data-toggle"=>"tooltip",
+                    "title"=>Yii::t("D2personModule.crud_static","Cancel"),
+                )
+ ),true);
+    
 ?>
-<?php $this->widget("TbBreadcrumbs", array("links" => $this->breadcrumbs)) ?>
-    <h1>
-        <?php echo Yii::t('D2personModule.model', 'Pcnt Contact Type'); ?>
-        <small><?php echo Yii::t('D2personModule.crud_static', 'Create'); ?></small>
 
-    </h1>
+<div class="clearfix">
+    <div class="btn-toolbar pull-left">
+        <div class="btn-group"><?php echo $cancel_buton;?></div>
+        <div class="btn-group">
+            <h1>
+                <i class=""></i>
+                <?php echo Yii::t('D2personModule.model','Create Contact Type');?>            </h1>
+        </div>
+    </div>
+</div>
 
-<?php $this->renderPartial("_toolbar", array("model" => $model)); ?>
 <?php $this->renderPartial('_form', array('model' => $model, 'buttons' => 'create')); ?>
-<?php $this->renderPartial("_toolbar", array("model" => $model)); ?>
+<div class="clearfix">
+    <div class="btn-toolbar pull-left">
+        <div class="btn-group"><?php echo $cancel_buton;?></div>
+        <div class="btn-group">
+            
+                <?php  
+                    $this->widget("bootstrap.widgets.TbButton", array(
+                       "label"=>Yii::t("D2personModule.crud_static","Save"),
+                       "icon"=>"icon-thumbs-up icon-white",
+                       "size"=>"large",
+                       "type"=>"primary",
+                       "htmlOptions"=> array(
+                            "onclick"=>"$('.crud-form form').submit();",
+                       ),
+                       "visible"=> (Yii::app()->user->checkAccess("D2person.PcntContactType.*") || Yii::app()->user->checkAccess("D2person.PcntContactType.View"))
+                    )); 
+                    ?>
+                  
+        </div>
+    </div>
+</div>

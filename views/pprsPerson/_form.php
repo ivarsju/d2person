@@ -1,6 +1,5 @@
 <div class="crud-form">
-
-    
+    <?php  ?>    
     <?php
         Yii::app()->bootstrap->registerPackage('select2');
         Yii::app()->clientScript->registerScript('crud/variant/update','$("#pprs-person-form select").select2();');
@@ -20,13 +19,6 @@
     
     <div class="row">
         <div class="span5">
-            <h2>
-                <?php echo Yii::t('D2personModule.crud_static','Data')?>                <small>
-                    #<?php echo $model->pprs_id ?>                </small>
-
-            </h2>
-
-
             <div class="form-horizontal">
 
                                     
@@ -83,53 +75,23 @@
         <!-- main inputs -->
 
         
-        <div class="span7"><!-- sub inputs -->
-            <div class="well">
-            <!--<h2>
-                <?php echo Yii::t('D2personModule.crud_static','Relations')?>            </h2>-->
-                                            
-                <h3>
-                    <?php echo Yii::t('D2personModule.model', 'relation.CcucUserCompanies'); ?>
-                </h3>
-                <?php echo '<i>'.Yii::t('D2personModule.crud_static','Switch to view mode to edit related records.').'</i>' ?>
-                                                            
-                <h3>
-                    <?php echo Yii::t('D2personModule.model', 'relation.PpcnPersonContacts'); ?>
-                </h3>
-                <?php echo '<i>'.Yii::t('D2personModule.crud_static','Switch to view mode to edit related records.').'</i>' ?>
-                                                            
-                <h3>
-                    <?php echo Yii::t('D2personModule.model', 'relation.PpxdPersonXDocuments'); ?>
-                </h3>
-                <?php echo '<i>'.Yii::t('D2personModule.crud_static','Switch to view mode to edit related records.').'</i>' ?>
-                                                            
-                <h3>
-                    <?php echo Yii::t('D2personModule.model', 'relation.PpxtPersonXTypes'); ?>
-                </h3>
-                <?php echo '<i>'.Yii::t('D2personModule.crud_static','Switch to view mode to edit related records.').'</i>' ?>
-                                                        </div>
-        </div>
-        <!-- sub inputs -->
     </div>
 
     <p class="alert">
-        <?php echo Yii::t('D2personModule.crud_static','Fields with <span class="required">*</span> are required.');?>
+        
+        <?php 
+            echo Yii::t('D2personModule.crud_static','Fields with <span class="required">*</span> are required.');
+                
+            /**
+             * @todo: We need the buttons inside the form, when a user hits <enter>
+             */                
+            echo ' '.CHtml::submitButton(Yii::t('D2personModule.crud_static', 'Save'), array(
+                'class' => 'btn btn-primary',
+                'style'=>'visibility: hidden;'                
+            ));
+                
+        ?>
     </p>
 
-    <!-- TODO: We need the buttons inside the form, when a user hits <enter> -->
-    <div class="form-actions" style="visibility: hidden; height: 1px">
-        
-        <?php
-            echo CHtml::Button(
-            Yii::t('D2personModule.crud_static', 'Cancel'), array(
-                'submit' => (isset($_GET['returnUrl']))?$_GET['returnUrl']:array('pprsPerson/admin'),
-                'class' => 'btn'
-            ));
-            echo ' '.CHtml::submitButton(Yii::t('D2personModule.crud_static', 'Save'), array(
-                'class' => 'btn btn-primary'
-            ));
-        ?>
-    </div>
 
-    <?php $this->endWidget() ?>
-</div> <!-- form -->
+    <?php $this->endWidget() ?>    <?php  ?></div> <!-- form -->

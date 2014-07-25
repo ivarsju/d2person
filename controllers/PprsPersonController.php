@@ -8,6 +8,7 @@ class PprsPersonController extends Controller
     public $defaultAction = "admin";
     public $scenario = "crud";
     public $scope = "crud";
+    public $menu_route = "d2Person/PprsPerson";   
 
 
 public function filters()
@@ -61,10 +62,19 @@ public function accessRules()
         return true;
     }
 
-    public function actionView($pprs_id)
+    public function actionView($pprs_id, $ajax = false)
     {
         $model = $this->loadModel($pprs_id);
-        $this->render('view', array('model' => $model,));
+        if($ajax){
+            $this->renderPartial('_view-relations_grids', 
+                    array(
+                        'modelMain' => $model,
+                        'ajax' => $ajax,
+                        )
+                    );
+        }else{
+            $this->render('view', array('model' => $model,));
+        }
     }
 
     public function actionCreate()
@@ -119,7 +129,7 @@ public function accessRules()
             }
         }
 
-        $this->render('update', array('model' => $model,));
+        $this->render('update', array('model' => $model));
     }
 
     public function actionEditableSaver()
@@ -129,17 +139,16 @@ public function accessRules()
         $es->update();
     }
 
-    public function actionAjaxCreate($field, $value, $no_ajax = 0) 
+    public function actionAjaxCreate($field, $value) 
     {
         $model = new PprsPerson;
         $model->$field = $value;
         try {
             if ($model->save()) {
-                if($no_ajax){
-                    $this->redirect(Yii::app()->request->urlReferrer);
-                }            
                 return TRUE;
-            }
+            }else{
+                return var_export($model->getErrors());
+            }            
         } catch (Exception $e) {
             throw new CHttpException(500, $e->getMessage());
         }
@@ -179,7 +188,7 @@ public function accessRules()
             $model->attributes = $_GET['PprsPerson'];
         }
 
-        $this->render('admin', array('model' => $model,));
+        $this->render('admin', array('model' => $model));
     }
 
     public function loadModel($id)
