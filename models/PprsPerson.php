@@ -20,7 +20,7 @@ class PprsPerson extends BasePprsPerson
 
     public function getItemLabel()
     {
-        return parent::getItemLabel();
+        return (string) $this->pprs_second_name . ' ' . $this->pprs_first_name;
     }
 
     public function behaviors()

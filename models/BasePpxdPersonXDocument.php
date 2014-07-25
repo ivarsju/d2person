@@ -16,6 +16,7 @@
  * Relations of table "ppxd_person_x_document" available as properties of the model:
  * @property PprsPerson $ppxdPprs
  * @property PdcmDocumentType $ppxdPdcm
+ * @property VfueFuel[] $vfueFuels
  */
 abstract class BasePpxdPersonXDocument extends CActiveRecord
 {
@@ -72,6 +73,7 @@ abstract class BasePpxdPersonXDocument extends CActiveRecord
             parent::relations(), array(
                 'ppxdPprs' => array(self::BELONGS_TO, 'PprsPerson', 'ppxd_pprs_id'),
                 'ppxdPdcm' => array(self::BELONGS_TO, 'PdcmDocumentType', 'ppxd_pdcm_id'),
+                'vfueFuels' => array(self::HAS_MANY, 'VfueFuel', 'vfue_ppxd_id'),
             )
         );
     }

@@ -20,7 +20,14 @@ class PpxdPersonXDocument extends BasePpxdPersonXDocument
 
     public function getItemLabel()
     {
-        return parent::getItemLabel();
+        if (empty($this->ppxd_pdcm_id)) return '';
+        return (string) $this->ppxdPdcm->pdcm_name . ' ' . $this->ppxd_number;
+    }
+
+    public function getItemLabelExtended()
+    {
+        if (empty($this->ppxd_pdcm_id)) return '';
+        return (string) $this->ppxdPprs->itemLabel . ' ' . $this->ppxdPdcm->pdcm_name . ' ' . $this->ppxd_number;
     }
 
     public function behaviors()
@@ -51,5 +58,30 @@ class PpxdPersonXDocument extends BasePpxdPersonXDocument
             'criteria' => $this->searchCriteria($criteria),
         ));
     }
+    
+    public function filterByDocTypeAndPerson($type,$person)
+    {
+        if (is_array($type)){
+            $this->getDbCriteria()->mergeWith(array(
+                    'condition'=>'ppxd_pdcm_id in (' . implode(',',$type).')',
+            ));
+        }else{
+            $this->getDbCriteria()->mergeWith(array(
+                    'condition'=>'ppxd_pdcm_id = ' . $type,
+            ));
+        }
+
+        if (is_array($person)){
+            $this->getDbCriteria()->mergeWith(array(
+                    'condition'=>'ppxd_pprs_id in (' . implode(',',$person).')',
+            ));
+        }else{
+            $this->getDbCriteria()->mergeWith(array(
+                    'condition'=>'ppxd_pprs_id = ' . $person,
+            ));
+        }
+
+        return $this;
+    } 
 
 }
