@@ -53,13 +53,7 @@ class PprsPerson extends BasePprsPerson
 
     public function scopes()
     {
-//        return array(
-//            'activeCompanyUsers'=>array(
-//                'join'=>' inner join ccuc_user_company on ccuc_person_id = t.pprs_id',
-//                'condition'=>'ccuc_ccmp_id = ' . Yii::app()->sysCompany->getActiveCompany(),
-//            ),
-//        );
-        
+       
     }       
     
     public function filterGroup($group)
@@ -85,17 +79,12 @@ class PprsPerson extends BasePprsPerson
         ));
     }
     
-    
-    public function findAll($condition='',$params=array())
-    {
-        $criteria=$this->getCommandBuilder()->createCriteria($condition,$params);
-        
-        //criteria for trucks of SysCompanies
-        if(Yii::app()->sysCompany->getActiveCompany()){
-            $criteria->join .= ' inner join ccuc_user_company on ccuc_person_id = t.pprs_id ';
-            $criteria->compare('ccuc_ccmp_id', Yii::app()->sysCompany->getActiveCompany());            
-        }          
-        return $this->query($criteria,true);
-    }  
-    
+   protected function beforeFind() {
+        $criteria = new CDbCriteria;
+        $criteria->join .= ' inner join ccuc_user_company  on ccuc_person_id = t.pprs_id ';
+        $criteria->compare('ccuc_ccmp_id', Yii::app()->sysCompany->getActiveCompany());            
+
+        $this->dbCriteria->mergeWith($criteria);
+        parent::beforeFind();
+    }        
 }
