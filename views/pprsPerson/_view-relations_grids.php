@@ -449,3 +449,119 @@ if(!$ajax || $ajax == 'ppxt-person-xtype-grid'){
     Yii::endProfile('PpxtPersonXType.view.grid');
 }    
 ?>
+<?php
+if(!$ajax || $ajax == 'ppxs-person-xsetting-grid'){
+    Yii::beginProfile('ppxs_pprs_id.view.grid');
+?>
+
+<div class="table-header">
+    <?=Yii::t('D2personModule.model', 'Ppxs Person Xsetting')?>
+    <?php    
+        
+    $this->widget(
+        'bootstrap.widgets.TbButton',
+        array(
+            'buttonType' => 'ajaxButton', 
+            'type' => 'primary', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+            'size' => 'mini',
+            'icon' => 'icon-plus',
+            'url' => array(
+                '//d2person/ppxsPersonXSetting/ajaxCreate',
+                'field' => 'ppxs_pprs_id',
+                'value' => $modelMain->primaryKey,
+                'ajax' => 'ppxs-person-xsetting-grid',
+            ),
+            'ajaxOptions' => array(
+                    'success' => 'function(html) {$.fn.yiiGridView.update(\'ppxs-person-xsetting-grid\');}'
+                    ),
+            'htmlOptions' => array(
+                'title' => Yii::t('D2personModule.crud', 'Add new record'),
+                'data-toggle' => 'tooltip',
+            ),                 
+        )
+    );        
+    ?>
+</div>
+ 
+<?php 
+
+    if (empty($modelMain->ppxsPersonXSettings)) {
+        $model = new PpxsPersonXSetting;
+        $model->ppxs_pprs_id = $modelMain->primaryKey;
+        $model->save();
+        unset($model);
+    } 
+    
+    $model = new PpxsPersonXSetting();
+    $model->ppxs_pprs_id = $modelMain->primaryKey;
+
+    // render grid view
+
+    $this->widget('TbGridView',
+        array(
+            'id' => 'ppxs-person-xsetting-grid',
+            'dataProvider' => $model->search(),
+            'template' => '{summary}{items}',
+            'summaryText' => '&nbsp;',
+            'htmlOptions' => array(
+                'class' => 'rel-grid-view'
+            ),            
+            'columns' => array(
+                array(
+                'class' => 'editable.EditableColumn',
+                'name' => 'ppxs_psty_id',
+                'editable' => array(
+                    'type' => 'select',
+                    'url' => $this->createUrl('//d2person/ppxsPersonXSetting/editableSaver'),
+                    'source' => CHtml::listData(PstySettingType::model()->findAll(array('limit' => 1000)), 'psty_id', 'itemLabel'),
+                    //'placement' => 'right',
+                )
+            ),
+            array(
+                //varchar(256)
+                'class' => 'editable.EditableColumn',
+                'name' => 'ppxs_value',
+                'editable' => array(
+                    'url' => $this->createUrl('//d2person/ppxsPersonXSetting/editableSaver'),
+                    //'placement' => 'right',
+                )
+            ),
+            array(
+                'class' => 'editable.EditableColumn',
+                'name' => 'ppxs_notes',
+                'editable' => array(
+                    'type' => 'textarea',
+                    'url' => $this->createUrl('//d2person/ppxsPersonXSetting/editableSaver'),
+                    //'placement' => 'right',
+                )
+            ),
+//            array(
+//                //tinyint(3) unsigned
+//                'class' => 'editable.EditableColumn',
+//                'name' => 'ppxs_hidded',
+//                'editable' => array(
+//                    'url' => $this->createUrl('//d2person/ppxsPersonXSetting/editableSaver'),
+//                    //'placement' => 'right',
+//                )
+//            ),
+
+                array(
+                    'class' => 'TbButtonColumn',
+                    'buttons' => array(
+                        'view' => array('visible' => 'FALSE'),
+                        'update' => array('visible' => 'FALSE'),
+                        'delete' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.DeleteppxsPersonXSettings")'),
+                    ),
+                    'deleteButtonUrl' => 'Yii::app()->controller->createUrl("/d2person/ppxsPersonXSetting/delete", array("ppxs_id" => $data->ppxs_id))',
+                    'deleteConfirmation'=>Yii::t('D2personModule.crud','Do you want to delete this item?'),   
+                    'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),                    
+                ),
+            )
+        )
+    );
+    ?>
+
+<?php
+    Yii::endProfile('PpxsPersonXSetting.view.grid');
+}    
+?>

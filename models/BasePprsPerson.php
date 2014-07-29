@@ -12,6 +12,7 @@
  * @property CcucUserCompany[] $ccucUserCompanies
  * @property PpcnPersonContact[] $ppcnPersonContacts
  * @property PpxdPersonXDocument[] $ppxdPersonXDocuments
+ * @property PpxsPersonXSetting[] $ppxsPersonXSettings
  * @property PpxtPersonXType[] $ppxtPersonXTypes
  * @property VxprVoyageXPerson[] $vxprVoyageXPeople
  */
@@ -62,6 +63,7 @@ abstract class BasePprsPerson extends CActiveRecord
                 'ccucUserCompanies' => array(self::HAS_MANY, 'CcucUserCompany', 'ccuc_person_id'),
                 'ppcnPersonContacts' => array(self::HAS_MANY, 'PpcnPersonContact', 'ppcn_pprs_id'),
                 'ppxdPersonXDocuments' => array(self::HAS_MANY, 'PpxdPersonXDocument', 'ppxd_pprs_id'),
+                'ppxsPersonXSettings' => array(self::HAS_MANY, 'PpxsPersonXSetting', 'ppxs_pprs_id'),
                 'ppxtPersonXTypes' => array(self::HAS_MANY, 'PpxtPersonXType', 'ppxt_pprs_id'),
                 'vxprVoyageXPeople' => array(self::HAS_MANY, 'VxprVoyageXPerson', 'vxpr_pprs_id'),
             )
