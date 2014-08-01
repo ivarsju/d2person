@@ -194,7 +194,7 @@ if(!$ajax || $ajax == 'ppcn-person-contact-grid'){
                 )
             ),
             array(
-                'class' => 'TbEditableColumn',
+                'class' => 'editable.EditableColumn',
                 'name' => 'ppcn_modified',
                 'editable' => array(
                     'url' => $this->createUrl('//d2person/ppcnPersonContact/editableSaver'),

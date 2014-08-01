@@ -101,7 +101,7 @@ $this->widget('TbGridView',
                 )
             ),
             array(
-                'class' => 'TbEditableColumn',
+                'class' => 'editable.EditableColumn',
                 'name' => 'ppcn_modified',
                 'editable' => array(
                     'url' => $this->createUrl('/d2person/ppcnPersonContact/editableSaver'),
