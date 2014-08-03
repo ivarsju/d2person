@@ -13,7 +13,7 @@ $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
                     "title"=>Yii::t("D2personModule.crud_static","Cancel"),
                 )
  ),true);
-    
+
 ?>
 
 <div class="clearfix">
@@ -32,8 +32,8 @@ $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
     <div class="btn-toolbar pull-left">
         <div class="btn-group"><?php echo $cancel_buton;?></div>
         <div class="btn-group">
-            
-                <?php  
+
+                <?php
                     $this->widget("bootstrap.widgets.TbButton", array(
                        "label"=>Yii::t("D2personModule.crud_static","Save"),
                        "icon"=>"icon-thumbs-up icon-white",
@@ -43,9 +43,9 @@ $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
                             "onclick"=>"$('.crud-form form').submit();",
                        ),
                        "visible"=> (Yii::app()->user->checkAccess("D2person.PcntContactType.*") || Yii::app()->user->checkAccess("D2person.PcntContactType.View"))
-                    )); 
+                    ));
                     ?>
-                  
+
         </div>
     </div>
 </div>

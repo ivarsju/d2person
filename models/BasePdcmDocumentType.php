@@ -81,7 +81,6 @@ abstract class BasePdcmDocumentType extends CActiveRecord
         $criteria->compare('t.pdcm_name', $this->pdcm_name, true);
         $criteria->compare('t.pdcm_hidded', $this->pdcm_hidded);
 
-
         return $criteria;
 
     }

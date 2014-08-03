@@ -93,7 +93,6 @@ abstract class BasePpcnPersonContact extends CActiveRecord
         $criteria->compare('t.ppcn_notes', $this->ppcn_notes, true);
         $criteria->compare('t.ppcn_modified', $this->ppcn_modified, true);
 
-
         return $criteria;
 
     }

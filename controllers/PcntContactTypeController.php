@@ -1,6 +1,5 @@
 <?php
 
-
 class PcntContactTypeController extends Controller
 {
     #public $layout='//layouts/column2';
@@ -8,7 +7,7 @@ class PcntContactTypeController extends Controller
     public $defaultAction = "admin";
     public $scenario = "crud";
     public $scope = "crud";
-    public $menu_route = "d2Person/PcntContactType";       
+    public $menu_route = "d2Person/PcntContactType";
 
 public function filters()
 {
@@ -58,6 +57,7 @@ public function accessRules()
         if ($this->module !== null) {
             $this->breadcrumbs[$this->module->Id] = array('/' . $this->module->Id);
         }
+
         return true;
     }
 
@@ -95,21 +95,21 @@ public function accessRules()
         $es->update();
     }
 
-    public function actionAjaxCreate($field, $value) 
+    public function actionAjaxCreate($field, $value)
     {
         $model = new PcntContactType;
         $model->$field = $value;
         try {
             if ($model->save()) {
                 return TRUE;
-            }else{
+            } else {
                 return var_export($model->getErrors());
-            }            
+            }
         } catch (Exception $e) {
             throw new CHttpException(500, $e->getMessage());
         }
     }
-    
+
     public function actionDelete($pcnt_id)
     {
         if (Yii::app()->request->isPostRequest) {
@@ -159,6 +159,7 @@ public function accessRules()
         if ($model === null) {
             throw new CHttpException(404, Yii::t('D2personModule.crud_static', 'The requested page does not exist.'));
         }
+
         return $model;
     }
 

@@ -47,35 +47,35 @@ class PpxsPersonXSetting extends BasePpxsPersonXSetting
         if (is_null($criteria)) {
             $criteria = new CDbCriteria;
         }
+
         return new CActiveDataProvider(get_class($this), array(
             'criteria' => $this->searchCriteria($criteria),
         ));
     }
-    
+
     public function filterBySetingAndPerson($type,$person)
     {
-        if (is_array($type)){
+        if (is_array($type)) {
             $this->getDbCriteria()->mergeWith(array(
                     'condition'=>'ppxs_psty_id in (' . implode(',',$type).')',
             ));
-        }else{
+        } else {
             $this->getDbCriteria()->mergeWith(array(
                     'condition'=>'ppxs_psty_id = ' . $type,
             ));
         }
 
-        if (is_array($person)){
+        if (is_array($person)) {
             $this->getDbCriteria()->mergeWith(array(
                     'condition'=>'ppxs_pprs_id in (' . implode(',',$person).')',
             ));
-        }else{
+        } else {
             $this->getDbCriteria()->mergeWith(array(
                     'condition'=>'ppxs_pprs_id = ' . $person,
             ));
         }
 
         return $this;
-    } 
-    
+    }
 
 }

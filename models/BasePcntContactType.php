@@ -76,7 +76,6 @@ abstract class BasePcntContactType extends CActiveRecord
         $criteria->compare('t.pcnt_id', $this->pcnt_id);
         $criteria->compare('t.pcnt_name', $this->pcnt_name, true);
 
-
         return $criteria;
 
     }

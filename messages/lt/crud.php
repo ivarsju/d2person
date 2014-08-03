@@ -19,7 +19,7 @@
 return array (
   'Actual' => 'Aktualus',
   'Add existing person' => 'Pridėti esantį asmenį',
-  'Add new person' => 'Pridėti naują asmenį',    
+  'Add new person' => 'Pridėti naują asmenį',
   'Author' => 'Autorius',
   'BINARY' => '',
   'BLOB' => '',

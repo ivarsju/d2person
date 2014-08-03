@@ -3,9 +3,9 @@
         Yii::t('D2personModule.model', 'Ppxd Person Xdocument')
         . ' - '
         . Yii::t('D2personModule.crud_static', 'View')
-        . ': '   
-        . $model->getItemLabel()            
-);    
+        . ': '
+        . $model->getItemLabel()
+);
 $this->breadcrumbs[Yii::t('D2personModule.model','Ppxd Person Xdocuments')] = array('admin');
 $this->breadcrumbs[$model->{$model->tableSchema->primaryKey}] = array('view','id' => $model->{$model->tableSchema->primaryKey});
 $this->breadcrumbs[] = Yii::t('D2personModule.crud_static', 'View');
@@ -21,10 +21,7 @@ $this->breadcrumbs[] = Yii::t('D2personModule.crud_static', 'View');
 
         </h1>
 
-
-
 <?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>
-
 
 <div class="row">
     <div class="span7">
@@ -142,7 +139,6 @@ array(
            ),
         )); ?>
     </div>
-
 
     <div class="span5">
         <div class="well">

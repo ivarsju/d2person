@@ -5,7 +5,7 @@ $this->setPageTitle(Yii::t('D2personModule.model', 'Persons Document Types'));
 <div class="clearfix">
     <div class="btn-toolbar pull-left">
         <div class="btn-group">
-        <?php 
+        <?php
         $this->widget('bootstrap.widgets.TbButton', array(
              'label'=>Yii::t('D2personModule.crud_static','Create'),
              'icon'=>'icon-plus',
@@ -13,7 +13,7 @@ $this->setPageTitle(Yii::t('D2personModule.model', 'Persons Document Types'));
              'type'=>'success',
              'url'=>array('create'),
              'visible'=>(Yii::app()->user->checkAccess('D2person.PdcmDocumentType.*') || Yii::app()->user->checkAccess('D2person.PdcmDocumentType.Create'))
-        ));  
+        ));
         ?>
 </div>
         <div class="btn-group">
@@ -25,7 +25,6 @@ $this->setPageTitle(Yii::t('D2personModule.model', 'Persons Document Types'));
 </div>
 
 <?php Yii::beginProfile('PdcmDocumentType.view.grid'); ?>
-
 
 <?php
 $this->widget('TbGridView',
@@ -68,9 +67,9 @@ $this->widget('TbGridView',
 //                ),
 //                'viewButtonUrl' => 'Yii::app()->controller->createUrl("view", array("pdcm_id" => $data->pdcm_id))',
 //                'deleteButtonUrl' => 'Yii::app()->controller->createUrl("delete", array("pdcm_id" => $data->pdcm_id))',
-//                'deleteConfirmation'=>Yii::t('D2personModule.crud_static','Do you want to delete this item?'),                    
-//                'viewButtonOptions'=>array('data-toggle'=>'tooltip'),   
-//                'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),   
+//                'deleteConfirmation'=>Yii::t('D2personModule.crud_static','Do you want to delete this item?'),
+//                'viewButtonOptions'=>array('data-toggle'=>'tooltip'),
+//                'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),
 //            ),
         )
     )

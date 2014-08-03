@@ -9,7 +9,7 @@
     $showSaveButton   = true;
     $showViewButton   = true;
 
-    switch($this->action->id){
+    switch ($this->action->id) {
         case "admin":
             $showCancelButton = false;
             $showSaveButton   = false;
@@ -54,7 +54,6 @@
     ));
 ?>            </div>
 
-        
         <div class="btn-group">
             <?php
              $this->widget("bootstrap.widgets.TbButton", array(
@@ -132,7 +131,7 @@
                     ));
              ?>        </div>
         <?php if($this->action->id == 'admin'): ?>        <div class="btn-group">
-            
+
             <?php
                 $this->widget(
                        "bootstrap.widgets.TbButton",
@@ -167,9 +166,7 @@
         <?php endif; ?>
     </div>
 
-
 </div>
-
 
 <?php if($this->action->id == 'admin'): ?><div class="search-form" style="display:none">
     <?php Yii::beginProfile('PprsPerson.view.toolbar.search'); ?>    <?php $this->renderPartial('_search',array('model' => $model,)); ?>

@@ -38,8 +38,8 @@ class PprsPerson extends BasePprsPerson
                 'profile' => array(self::BELONGS_TO, 'Profile', 'pprs_id'),
             )
         );
-    }    
-    
+    }
+
     public function rules()
     {
         return array_merge(
@@ -53,23 +53,25 @@ class PprsPerson extends BasePprsPerson
 
     public function scopes()
     {
-       
-    }       
-    
+
+    }
+
     public function filterGroup($group)
     {
         $this->getDbCriteria()->mergeWith(array(
                 'join'=>' inner join ppxt_person_x_type on ppxt_pprs_id = t.pprs_id',
                 'condition'=>'ppxt_ptyp_id = ' . $group,
         ));
+
         return $this;
-    }      
-    
+    }
+
     public function search($criteria = null)
     {
         if (is_null($criteria)) {
             $criteria = new CDbCriteria;
         }
+
         return new CActiveDataProvider(get_class($this), array(
             'criteria' => $this->searchCriteria($criteria),
             'sort'=>array(
@@ -78,13 +80,14 @@ class PprsPerson extends BasePprsPerson
 
         ));
     }
-    
-   protected function beforeFind() {
+
+   protected function beforeFind()
+   {
         $criteria = new CDbCriteria;
         $criteria->join .= ' inner join ccuc_user_company  on ccuc_person_id = t.pprs_id ';
-        $criteria->compare('ccuc_ccmp_id', Yii::app()->sysCompany->getActiveCompany());            
+        $criteria->compare('ccuc_ccmp_id', Yii::app()->sysCompany->getActiveCompany());
 
         $this->dbCriteria->mergeWith($criteria);
         parent::beforeFind();
-    }        
+    }
 }

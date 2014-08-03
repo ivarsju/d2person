@@ -95,27 +95,27 @@ abstract class BasePstySettingType extends CActiveRecord
             );
     }
 
-    public function getEnumFieldLabels($column){
-
+    public function getEnumFieldLabels($column)
+    {
         $aLabels = $this->enumLabels();
+
         return $aLabels[$column];
     }
 
-    public function getEnumLabel($column,$value){
-
+    public function getEnumLabel($column,$value)
+    {
         $aLabels = $this->enumLabels();
 
-        if(!isset($aLabels[$column])){
+        if (!isset($aLabels[$column])) {
             return $value;
         }
 
-        if(!isset($aLabels[$column][$value])){
+        if (!isset($aLabels[$column][$value])) {
             return $value;
         }
 
         return $aLabels[$column][$value];
     }
-
 
     public function searchCriteria($criteria = null)
     {
@@ -127,7 +127,6 @@ abstract class BasePstySettingType extends CActiveRecord
         $criteria->compare('t.psty_name', $this->psty_name, true);
         $criteria->compare('t.psty_field_type', $this->psty_field_type, true);
         $criteria->compare('t.psty_hidded', $this->psty_hidded);
-
 
         return $criteria;
 

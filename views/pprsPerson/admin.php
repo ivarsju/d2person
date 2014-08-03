@@ -6,7 +6,7 @@ $this->setPageTitle(Yii::t('D2personModule.model', 'Persons'));
 <div class="clearfix">
     <div class="btn-toolbar pull-left">
         <div class="btn-group">
-        <?php 
+        <?php
         $this->widget('bootstrap.widgets.TbButton', array(
              'label'=>Yii::t('D2personModule.crud_static','Create'),
              'icon'=>'icon-plus',
@@ -14,7 +14,7 @@ $this->setPageTitle(Yii::t('D2personModule.model', 'Persons'));
              'type'=>'success',
              'url'=>array('create'),
              'visible'=>(Yii::app()->user->checkAccess('D2person.PprsPerson.*') || Yii::app()->user->checkAccess('D2person.PprsPerson.Create'))
-        ));  
+        ));
         ?>
 </div>
         <div class="btn-group">
@@ -26,7 +26,6 @@ $this->setPageTitle(Yii::t('D2personModule.model', 'Persons'));
 </div>
 
 <?php Yii::beginProfile('PprsPerson.view.grid'); ?>
-
 
 <?php
 $this->widget('TbGridView',
@@ -49,7 +48,7 @@ $this->widget('TbGridView',
                     'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
                     //'placement' => 'right',
                 )
-            ),            
+            ),
             array(
                 //varchar(100)
                 'class' => 'editable.EditableColumn',
@@ -69,9 +68,9 @@ $this->widget('TbGridView',
                 ),
                 'viewButtonUrl' => 'Yii::app()->controller->createUrl("view", array("pprs_id" => $data->pprs_id))',
                 'deleteButtonUrl' => 'Yii::app()->controller->createUrl("delete", array("pprs_id" => $data->pprs_id))',
-                'deleteConfirmation'=>Yii::t('D2personModule.crud_static','Do you want to delete this item?'),                    
-                'viewButtonOptions'=>array('data-toggle'=>'tooltip'),   
-                'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),   
+                'deleteConfirmation'=>Yii::t('D2personModule.crud_static','Do you want to delete this item?'),
+                'viewButtonOptions'=>array('data-toggle'=>'tooltip'),
+                'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),
             ),
         )
     )

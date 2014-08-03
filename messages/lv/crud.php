@@ -18,7 +18,7 @@
  */
 return array (
   'Actual' => 'Aktuāls',
-  'Add new person' => 'Pievienot jaunu personu',    
+  'Add new person' => 'Pievienot jaunu personu',
   'Add existing person' => 'Pievienot eksistējošu personu',
   'BLOB' => '',
   'BOOL' => '',

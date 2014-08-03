@@ -82,7 +82,6 @@ abstract class BasePpxtPersonXType extends CActiveRecord
         $criteria->compare('t.ppxt_pprs_id', $this->ppxt_pprs_id);
         $criteria->compare('t.ppxt_ptyp_id', $this->ppxt_ptyp_id);
 
-
         return $criteria;
 
     }

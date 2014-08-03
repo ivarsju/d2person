@@ -4,8 +4,7 @@
     <?php echo Yii::t('D2personModule.crud_static', 'Relations') ?></h2>
 -->
 
-
-<?php 
+<?php
         echo '<h3>';
             echo Yii::t('D2personModule.model','relation.CcucUserCompanies').' ';
             $this->widget(
@@ -25,7 +24,7 @@
                     'CcucUserCompany' => array('ccuc_person_id' => $model->{$model->tableSchema->primaryKey})
                 )
             ),
-            
+
                     )
                 )
             );
@@ -51,8 +50,7 @@
     ?>
 </ul>
 
-
-<?php 
+<?php
         echo '<h3>';
             echo Yii::t('D2personModule.model','relation.PpcnPersonContacts').' ';
             $this->widget(
@@ -72,7 +70,7 @@
                     'PpcnPersonContact' => array('ppcn_pprs_id' => $model->{$model->tableSchema->primaryKey})
                 )
             ),
-            
+
                     )
                 )
             );
@@ -98,8 +96,7 @@
     ?>
 </ul>
 
-
-<?php 
+<?php
         echo '<h3>';
             echo Yii::t('D2personModule.model','relation.PpxdPersonXDocuments').' ';
             $this->widget(
@@ -119,7 +116,7 @@
                     'PpxdPersonXDocument' => array('ppxd_pprs_id' => $model->{$model->tableSchema->primaryKey})
                 )
             ),
-            
+
                     )
                 )
             );
@@ -145,8 +142,7 @@
     ?>
 </ul>
 
-
-<?php 
+<?php
         echo '<h3>';
             echo Yii::t('D2personModule.model','relation.PpxtPersonXTypes').' ';
             $this->widget(
@@ -166,7 +162,7 @@
                     'PpxtPersonXType' => array('ppxt_pprs_id' => $model->{$model->tableSchema->primaryKey})
                 )
             ),
-            
+
                     )
                 )
             );
@@ -191,4 +187,3 @@
     }
     ?>
 </ul>
-
