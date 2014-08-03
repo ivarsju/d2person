@@ -1,12 +1,12 @@
 <?php
 /**
  * Message translations.
- * 
+ *
  */
 return array (
   'Add' => 'Pridėti',
   'Create' => 'Sukurti',
-  'Empty' => 'Tuščia',    
+  'Empty' => 'Tuščia',
   'Export' => 'Eksportas',
   'Invalid request. Please do not repeat this request again.' => 'Neteisinga užklausa. Prašome nekartoti to dar kartą.',
   'The requested page does not exist.' => 'Ieškomas puslapis neegzistuoja.',

@@ -19,7 +19,7 @@
 return array (
   'Actual' => 'Актуальный',
   'Add existing person' => 'Добавить существующий персону',
-  'Add new person' => 'Добавить новую персону',    
+  'Add new person' => 'Добавить новую персону',
   'Author' => 'автор',
   'BINARY' => '',
   'BLOB' => '',

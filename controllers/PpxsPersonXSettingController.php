@@ -1,6 +1,5 @@
 <?php
 
-
 class PpxsPersonXSettingController extends Controller
 {
     #public $layout='//layouts/column2';
@@ -8,7 +7,6 @@ class PpxsPersonXSettingController extends Controller
     public $defaultAction = "admin";
     public $scenario = "crud";
     public $scope = "crud";
-
 
 public function filters()
 {
@@ -58,20 +56,21 @@ public function accessRules()
         if ($this->module !== null) {
             $this->breadcrumbs[$this->module->Id] = array('/' . $this->module->Id);
         }
+
         return true;
     }
 
     public function actionView($ppxs_id, $ajax = false)
     {
         $model = $this->loadModel($ppxs_id);
-        if($ajax){
-            $this->renderPartial('_view-relations_grids', 
+        if ($ajax) {
+            $this->renderPartial('_view-relations_grids',
                     array(
                         'modelMain' => $model,
                         'ajax' => $ajax,
                         )
                     );
-        }else{
+        } else {
             $this->render('view', array('model' => $model,));
         }
     }
@@ -114,7 +113,6 @@ public function accessRules()
         if (isset($_POST['PpxsPersonXSetting'])) {
             $model->attributes = $_POST['PpxsPersonXSetting'];
 
-
             try {
                 if ($model->save()) {
                     if (isset($_GET['returnUrl'])) {
@@ -137,21 +135,21 @@ public function accessRules()
         $es->update();
     }
 
-    public function actionAjaxCreate($field, $value) 
+    public function actionAjaxCreate($field, $value)
     {
         $model = new PpxsPersonXSetting;
         $model->$field = $value;
         try {
             if ($model->save()) {
                 return TRUE;
-            }else{
+            } else {
                 return var_export($model->getErrors());
-            }            
+            }
         } catch (Exception $e) {
             throw new CHttpException(500, $e->getMessage());
         }
     }
-    
+
     public function actionDelete($ppxs_id)
     {
         if (Yii::app()->request->isPostRequest) {
@@ -201,6 +199,7 @@ public function accessRules()
         if ($model === null) {
             throw new CHttpException(404, Yii::t('D2personModule.crud', 'The requested page does not exist.'));
         }
+
         return $model;
     }
 

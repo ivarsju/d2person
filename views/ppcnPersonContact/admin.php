@@ -7,15 +7,17 @@ $this->setPageTitle(
 
 $this->breadcrumbs[] = Yii::t('D2personModule.model', 'Ppcn Person Contacts');
 Yii::app()->clientScript->registerScript('search', "
-    $('.search-button').click(function(){
+    $('.search-button').click(function () {
         $('.search-form').toggle();
+
         return false;
     });
-    $('.search-form form').submit(function(){
+    $('.search-form form').submit(function () {
         $.fn.yiiGridView.update(
             'ppcn-person-contact-grid',
             {data: $(this).serialize()}
         );
+
         return false;
     });
     ");
@@ -29,10 +31,8 @@ Yii::app()->clientScript->registerScript('search', "
 
     </h1>
 
-
 <?php $this->renderPartial("_toolbar", array("model" => $model)); ?>
 <?php Yii::beginProfile('PpcnPersonContact.view.grid'); ?>
-
 
 <?php
 $this->widget('TbGridView',
@@ -68,7 +68,7 @@ $this->widget('TbGridView',
                 'editable' => array(
                     'type' => 'select',
                     'url' => $this->createUrl('/d2person/ppcnPersonContact/editableSaver'),
-                    'source' => CHtml::listData(PprsPerson::model()->findAll(array('limit' => 1000)), 'pprs_id', 'itemLabel'),                        
+                    'source' => CHtml::listData(PprsPerson::model()->findAll(array('limit' => 1000)), 'pprs_id', 'itemLabel'),
                     //'placement' => 'right',
                 )
             ),
@@ -78,7 +78,7 @@ $this->widget('TbGridView',
                 'editable' => array(
                     'type' => 'select',
                     'url' => $this->createUrl('/d2person/ppcnPersonContact/editableSaver'),
-                    'source' => CHtml::listData(PcntContactType::model()->findAll(array('limit' => 1000)), 'pcnt_id', 'itemLabel'),                        
+                    'source' => CHtml::listData(PcntContactType::model()->findAll(array('limit' => 1000)), 'pcnt_id', 'itemLabel'),
                     //'placement' => 'right',
                 )
             ),

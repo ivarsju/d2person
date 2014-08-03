@@ -93,7 +93,6 @@ abstract class BasePpxsPersonXSetting extends CActiveRecord
         $criteria->compare('t.ppxs_notes', $this->ppxs_notes, true);
         $criteria->compare('t.ppxs_hidded', $this->ppxs_hidded);
 
-
         return $criteria;
 
     }

@@ -14,7 +14,6 @@ $form = $this->beginWidget('\TbActiveForm', array(
 ));
 ?>
 
-
     <div class="modal-header">
         <button type="button" class="close" data-toggle="modal" data-target="#<?php echo $formId; ?>-modal">×</button>
         <h3><?php echo Yii::t('D2personModule.model', 'Create {model}', array('{model}' => Yii::t('D2personModule.model', 'Pprs Person'))); ?></h3>
@@ -35,7 +34,7 @@ $form = $this->beginWidget('\TbActiveForm', array(
         echo CHtml::ajaxSubmitButton('Save', CHtml::normalizeUrl(array('d2person/pprsPerson/editableCreator', 'render' => true)), array(
             'dataType' => 'json',
             'type' => 'post',
-            'success' => 'function(data, config) {
+            'success' => 'function (data, config) {
                 //$("#loader").show();
                 if (data && data.' . $pk . ') {
                     $("#' . $form->id . '").trigger("reset");
@@ -46,19 +45,19 @@ $form = $this->beginWidget('\TbActiveForm', array(
                     config.error.call(this, data && data.errors ? data.errors : "Unknown error");
                 }
             }',
-            'error' => 'function(errors) {
+            'error' => 'function (errors) {
                 //$("#loader").show();
                 var msg = "";
                 if (errors && errors.responseText) {
                     msg = errors.responseText;
                 } else {
-                    $.each(errors, function(k, v) {
+                    $.each(errors, function (k, v) {
                         msg += v + "<br>";
                     });
                 }
                 alert(msg);
             }',
-            'beforeSend' => 'function() {
+            'beforeSend' => 'function () {
                 //$("#loader").show();
             }',
         ), array('class' => 'btn btn-primary'));

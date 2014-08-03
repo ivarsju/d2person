@@ -1,6 +1,5 @@
 <?php
 
-
 class PpxdPersonXDocumentController extends Controller
 {
     #public $layout='//layouts/column2';
@@ -8,7 +7,6 @@ class PpxdPersonXDocumentController extends Controller
     public $defaultAction = "admin";
     public $scenario = "crud";
     public $scope = "crud";
-
 
 public function filters()
 {
@@ -58,6 +56,7 @@ public function accessRules()
         if ($this->module !== null) {
             $this->breadcrumbs[$this->module->Id] = array('/' . $this->module->Id);
         }
+
         return true;
     }
 
@@ -105,7 +104,6 @@ public function accessRules()
         if (isset($_POST['PpxdPersonXDocument'])) {
             $model->attributes = $_POST['PpxdPersonXDocument'];
 
-
             try {
                 if ($model->save()) {
                     if (isset($_GET['returnUrl'])) {
@@ -128,22 +126,23 @@ public function accessRules()
         $es->update();
     }
 
-    public function actionAjaxCreate($field, $value, $no_ajax = 0) 
+    public function actionAjaxCreate($field, $value, $no_ajax = 0)
     {
         $model = new PpxdPersonXDocument;
         $model->$field = $value;
         try {
             if ($model->save()) {
-                if($no_ajax){
+                if ($no_ajax) {
                     $this->redirect(Yii::app()->request->urlReferrer);
-                }            
+                }
+
                 return TRUE;
             }
         } catch (Exception $e) {
             throw new CHttpException(500, $e->getMessage());
         }
     }
-    
+
     public function actionDelete($ppxd_id)
     {
         if (Yii::app()->request->isPostRequest) {
@@ -193,6 +192,7 @@ public function accessRules()
         if ($model === null) {
             throw new CHttpException(404, Yii::t('D2personModule.crud_static', 'The requested page does not exist.'));
         }
+
         return $model;
     }
 

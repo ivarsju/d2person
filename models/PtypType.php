@@ -47,6 +47,7 @@ class PtypType extends BasePtypType
         if (is_null($criteria)) {
             $criteria = new CDbCriteria;
         }
+
         return new CActiveDataProvider(get_class($this), array(
             'criteria' => $this->searchCriteria($criteria),
         ));

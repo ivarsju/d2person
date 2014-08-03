@@ -1,24 +1,24 @@
 <?php
-if(!$ajax){
-    Yii::app()->clientScript->registerCss('rel_grid',' 
+if (!$ajax) {
+    Yii::app()->clientScript->registerCss('rel_grid','
             .rel-grid-view {margin-top:-60px;}
             .rel-grid-view div.summary {height: 60px;}
-            ');     
+            ');
 }
 ?>
 <?php
-if(FALSE &&  (!$ajax || $ajax == 'ccuc-user-company-grid')){
+if (FALSE &&  (!$ajax || $ajax == 'ccuc-user-company-grid')) {
     Yii::beginProfile('ccuc_person_id.view.grid');
 ?>
 
 <div class="table-header">
     <?=Yii::t('D2personModule.model', 'Ccuc User Company')?>
-    <?php    
-        
+    <?php
+
     $this->widget(
         'bootstrap.widgets.TbButton',
         array(
-            'buttonType' => 'ajaxButton', 
+            'buttonType' => 'ajaxButton',
             'type' => 'primary', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
             'size' => 'mini',
             'icon' => 'icon-plus',
@@ -29,26 +29,26 @@ if(FALSE &&  (!$ajax || $ajax == 'ccuc-user-company-grid')){
                 'ajax' => 'ccuc-user-company-grid',
             ),
             'ajaxOptions' => array(
-                    'success' => 'function(html) {$.fn.yiiGridView.update(\'ccuc-user-company-grid\');}'
+                    'success' => 'function (html) {$.fn.yiiGridView.update(\'ccuc-user-company-grid\');}'
                     ),
             'htmlOptions' => array(
                 'title' => Yii::t('D2personModule.crud_static', 'Add new record'),
                 'data-toggle' => 'tooltip',
-            ),                 
+            ),
         )
-    );        
+    );
     ?>
 </div>
- 
-<?php 
+
+<?php
 
     if (empty($modelMain->ccucUserCompanies)) {
         $model = new CcucUserCompany;
         $model->ccuc_person_id = $modelMain->primaryKey;
         $model->save();
         unset($model);
-    } 
-    
+    }
+
     $model = new CcucUserCompany();
     $model->ccuc_person_id = $modelMain->primaryKey;
 
@@ -62,7 +62,7 @@ if(FALSE &&  (!$ajax || $ajax == 'ccuc-user-company-grid')){
             'summaryText' => '&nbsp;',
             'htmlOptions' => array(
                 'class' => 'rel-grid-view'
-            ),            
+            ),
             'columns' => array(
                 array(
                 'class' => 'editable.EditableColumn',
@@ -94,8 +94,8 @@ if(FALSE &&  (!$ajax || $ajax == 'ccuc-user-company-grid')){
                         'delete' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.DeleteccucUserCompanies")'),
                     ),
                     'deleteButtonUrl' => 'Yii::app()->controller->createUrl("/d2person/ccucUserCompany/delete", array("ccuc_id" => $data->ccuc_id))',
-                    'deleteConfirmation'=>Yii::t('D2personModule.crud_static','Do you want to delete this item?'),   
-                    'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),                    
+                    'deleteConfirmation'=>Yii::t('D2personModule.crud_static','Do you want to delete this item?'),
+                    'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),
                 ),
             )
         )
@@ -104,22 +104,22 @@ if(FALSE &&  (!$ajax || $ajax == 'ccuc-user-company-grid')){
 
 <?php
     Yii::endProfile('CcucUserCompany.view.grid');
-}    
+}
 ?>
 
 <?php
-if(!$ajax || $ajax == 'ppcn-person-contact-grid'){
+if (!$ajax || $ajax == 'ppcn-person-contact-grid') {
     Yii::beginProfile('ppcn_pprs_id.view.grid');
 ?>
 
 <div class="table-header">
     <?=Yii::t('D2personModule.model', 'Ppcn Person Contact')?>
-    <?php    
-        
+    <?php
+
     $this->widget(
         'bootstrap.widgets.TbButton',
         array(
-            'buttonType' => 'ajaxButton', 
+            'buttonType' => 'ajaxButton',
             'type' => 'primary', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
             'size' => 'mini',
             'icon' => 'icon-plus',
@@ -130,26 +130,26 @@ if(!$ajax || $ajax == 'ppcn-person-contact-grid'){
                 'ajax' => 'ppcn-person-contact-grid',
             ),
             'ajaxOptions' => array(
-                    'success' => 'function(html) {$.fn.yiiGridView.update(\'ppcn-person-contact-grid\');}'
+                    'success' => 'function (html) {$.fn.yiiGridView.update(\'ppcn-person-contact-grid\');}'
                     ),
             'htmlOptions' => array(
                 'title' => Yii::t('D2personModule.crud_static', 'Add new record'),
                 'data-toggle' => 'tooltip',
-            ),                 
+            ),
         )
-    );        
+    );
     ?>
 </div>
- 
-<?php 
+
+<?php
 
     if (empty($modelMain->ppcnPersonContacts)) {
         $model = new PpcnPersonContact;
         $model->ppcn_pprs_id = $modelMain->primaryKey;
         $model->save();
         unset($model);
-    } 
-    
+    }
+
     $model = new PpcnPersonContact();
     $model->ppcn_pprs_id = $modelMain->primaryKey;
 
@@ -163,7 +163,7 @@ if(!$ajax || $ajax == 'ppcn-person-contact-grid'){
             'summaryText' => '&nbsp;',
             'htmlOptions' => array(
                 'class' => 'rel-grid-view'
-            ),            
+            ),
             'columns' => array(
                 array(
                 'class' => 'editable.EditableColumn',
@@ -210,8 +210,8 @@ if(!$ajax || $ajax == 'ppcn-person-contact-grid'){
                         'delete' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.DeleteppcnPersonContacts")'),
                     ),
                     'deleteButtonUrl' => 'Yii::app()->controller->createUrl("/d2person/ppcnPersonContact/delete", array("ppcn_id" => $data->ppcn_id))',
-                    'deleteConfirmation'=>Yii::t('D2personModule.crud_static','Do you want to delete this item?'),   
-                    'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),                    
+                    'deleteConfirmation'=>Yii::t('D2personModule.crud_static','Do you want to delete this item?'),
+                    'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),
                 ),
             )
         )
@@ -220,22 +220,22 @@ if(!$ajax || $ajax == 'ppcn-person-contact-grid'){
 
 <?php
     Yii::endProfile('PpcnPersonContact.view.grid');
-}    
+}
 ?>
 
 <?php
-if(!$ajax || $ajax == 'ppxd-person-xdocument-grid'){
+if (!$ajax || $ajax == 'ppxd-person-xdocument-grid') {
     Yii::beginProfile('ppxd_pprs_id.view.grid');
 ?>
 
 <div class="table-header">
     <?=Yii::t('D2personModule.model', 'Ppxd Person Xdocument')?>
-    <?php    
-        
+    <?php
+
     $this->widget(
         'bootstrap.widgets.TbButton',
         array(
-            'buttonType' => 'ajaxButton', 
+            'buttonType' => 'ajaxButton',
             'type' => 'primary', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
             'size' => 'mini',
             'icon' => 'icon-plus',
@@ -246,26 +246,26 @@ if(!$ajax || $ajax == 'ppxd-person-xdocument-grid'){
                 'ajax' => 'ppxd-person-xdocument-grid',
             ),
             'ajaxOptions' => array(
-                    'success' => 'function(html) {$.fn.yiiGridView.update(\'ppxd-person-xdocument-grid\');}'
+                    'success' => 'function (html) {$.fn.yiiGridView.update(\'ppxd-person-xdocument-grid\');}'
                     ),
             'htmlOptions' => array(
                 'title' => Yii::t('D2personModule.crud_static', 'Add new record'),
                 'data-toggle' => 'tooltip',
-            ),                 
+            ),
         )
-    );        
+    );
     ?>
 </div>
- 
-<?php 
+
+<?php
 
     if (empty($modelMain->ppxdPersonXDocuments)) {
         $model = new PpxdPersonXDocument;
         $model->ppxd_pprs_id = $modelMain->primaryKey;
         $model->save();
         unset($model);
-    } 
-    
+    }
+
     $model = new PpxdPersonXDocument();
     $model->ppxd_pprs_id = $modelMain->primaryKey;
 
@@ -279,7 +279,7 @@ if(!$ajax || $ajax == 'ppxd-person-xdocument-grid'){
             'summaryText' => '&nbsp;',
             'htmlOptions' => array(
                 'class' => 'rel-grid-view'
-            ),            
+            ),
             'columns' => array(
                 array(
                 'class' => 'editable.EditableColumn',
@@ -347,8 +347,8 @@ if(!$ajax || $ajax == 'ppxd-person-xdocument-grid'){
                         'delete' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.DeleteppxdPersonXDocuments")'),
                     ),
                     'deleteButtonUrl' => 'Yii::app()->controller->createUrl("/d2person/ppxdPersonXDocument/delete", array("ppxd_id" => $data->ppxd_id))',
-                    'deleteConfirmation'=>Yii::t('D2personModule.crud_static','Do you want to delete this item?'),   
-                    'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),                    
+                    'deleteConfirmation'=>Yii::t('D2personModule.crud_static','Do you want to delete this item?'),
+                    'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),
                 ),
             )
         )
@@ -357,22 +357,22 @@ if(!$ajax || $ajax == 'ppxd-person-xdocument-grid'){
 
 <?php
     Yii::endProfile('PpxdPersonXDocument.view.grid');
-}    
+}
 ?>
 
 <?php
-if(!$ajax || $ajax == 'ppxt-person-xtype-grid'){
+if (!$ajax || $ajax == 'ppxt-person-xtype-grid') {
     Yii::beginProfile('ppxt_pprs_id.view.grid');
 ?>
 
 <div class="table-header">
     <?=Yii::t('D2personModule.model', 'Ppxt Person Xtype')?>
-    <?php    
-        
+    <?php
+
     $this->widget(
         'bootstrap.widgets.TbButton',
         array(
-            'buttonType' => 'ajaxButton', 
+            'buttonType' => 'ajaxButton',
             'type' => 'primary', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
             'size' => 'mini',
             'icon' => 'icon-plus',
@@ -383,26 +383,26 @@ if(!$ajax || $ajax == 'ppxt-person-xtype-grid'){
                 'ajax' => 'ppxt-person-xtype-grid',
             ),
             'ajaxOptions' => array(
-                    'success' => 'function(html) {$.fn.yiiGridView.update(\'ppxt-person-xtype-grid\');}'
+                    'success' => 'function (html) {$.fn.yiiGridView.update(\'ppxt-person-xtype-grid\');}'
                     ),
             'htmlOptions' => array(
                 'title' => Yii::t('D2personModule.crud_static', 'Add new record'),
                 'data-toggle' => 'tooltip',
-            ),                 
+            ),
         )
-    );        
+    );
     ?>
 </div>
- 
-<?php 
+
+<?php
 
     if (empty($modelMain->ppxtPersonXTypes)) {
         $model = new PpxtPersonXType;
         $model->ppxt_pprs_id = $modelMain->primaryKey;
         $model->save();
         unset($model);
-    } 
-    
+    }
+
     $model = new PpxtPersonXType();
     $model->ppxt_pprs_id = $modelMain->primaryKey;
 
@@ -416,7 +416,7 @@ if(!$ajax || $ajax == 'ppxt-person-xtype-grid'){
             'summaryText' => '&nbsp;',
             'htmlOptions' => array(
                 'class' => 'rel-grid-view'
-            ),            
+            ),
             'columns' => array(
                 array(
                 'class' => 'editable.EditableColumn',
@@ -437,8 +437,8 @@ if(!$ajax || $ajax == 'ppxt-person-xtype-grid'){
                         'delete' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.DeleteppxtPersonXTypes")'),
                     ),
                     'deleteButtonUrl' => 'Yii::app()->controller->createUrl("/d2person/ppxtPersonXType/delete", array("ppxt_id" => $data->ppxt_id))',
-                    'deleteConfirmation'=>Yii::t('D2personModule.crud_static','Do you want to delete this item?'),   
-                    'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),                    
+                    'deleteConfirmation'=>Yii::t('D2personModule.crud_static','Do you want to delete this item?'),
+                    'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),
                 ),
             )
         )
@@ -447,21 +447,21 @@ if(!$ajax || $ajax == 'ppxt-person-xtype-grid'){
 
 <?php
     Yii::endProfile('PpxtPersonXType.view.grid');
-}    
+}
 ?>
 <?php
-if(!$ajax || $ajax == 'ppxs-person-xsetting-grid'){
+if (!$ajax || $ajax == 'ppxs-person-xsetting-grid') {
     Yii::beginProfile('ppxs_pprs_id.view.grid');
 ?>
 
 <div class="table-header">
     <?=Yii::t('D2personModule.model', 'Ppxs Person Xsetting')?>
-    <?php    
-        
+    <?php
+
     $this->widget(
         'bootstrap.widgets.TbButton',
         array(
-            'buttonType' => 'ajaxButton', 
+            'buttonType' => 'ajaxButton',
             'type' => 'primary', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
             'size' => 'mini',
             'icon' => 'icon-plus',
@@ -472,26 +472,26 @@ if(!$ajax || $ajax == 'ppxs-person-xsetting-grid'){
                 'ajax' => 'ppxs-person-xsetting-grid',
             ),
             'ajaxOptions' => array(
-                    'success' => 'function(html) {$.fn.yiiGridView.update(\'ppxs-person-xsetting-grid\');}'
+                    'success' => 'function (html) {$.fn.yiiGridView.update(\'ppxs-person-xsetting-grid\');}'
                     ),
             'htmlOptions' => array(
                 'title' => Yii::t('D2personModule.crud', 'Add new record'),
                 'data-toggle' => 'tooltip',
-            ),                 
+            ),
         )
-    );        
+    );
     ?>
 </div>
- 
-<?php 
+
+<?php
 
     if (empty($modelMain->ppxsPersonXSettings)) {
         $model = new PpxsPersonXSetting;
         $model->ppxs_pprs_id = $modelMain->primaryKey;
         $model->save();
         unset($model);
-    } 
-    
+    }
+
     $model = new PpxsPersonXSetting();
     $model->ppxs_pprs_id = $modelMain->primaryKey;
 
@@ -505,7 +505,7 @@ if(!$ajax || $ajax == 'ppxs-person-xsetting-grid'){
             'summaryText' => '&nbsp;',
             'htmlOptions' => array(
                 'class' => 'rel-grid-view'
-            ),            
+            ),
             'columns' => array(
                 array(
                 'class' => 'editable.EditableColumn',
@@ -553,8 +553,8 @@ if(!$ajax || $ajax == 'ppxs-person-xsetting-grid'){
                         'delete' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.DeleteppxsPersonXSettings")'),
                     ),
                     'deleteButtonUrl' => 'Yii::app()->controller->createUrl("/d2person/ppxsPersonXSetting/delete", array("ppxs_id" => $data->ppxs_id))',
-                    'deleteConfirmation'=>Yii::t('D2personModule.crud','Do you want to delete this item?'),   
-                    'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),                    
+                    'deleteConfirmation'=>Yii::t('D2personModule.crud','Do you want to delete this item?'),
+                    'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),
                 ),
             )
         )
@@ -563,5 +563,5 @@ if(!$ajax || $ajax == 'ppxs-person-xsetting-grid'){
 
 <?php
     Yii::endProfile('PpxsPersonXSetting.view.grid');
-}    
+}
 ?>

@@ -24,7 +24,7 @@ $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
         </div>
         <div class="btn-group">
             <?php
-            
+
             $this->widget("bootstrap.widgets.TbButton", array(
                 "label"=>Yii::t("D2personModule.crud_static","Delete"),
                 "type"=>"danger",
@@ -41,8 +41,6 @@ $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
     </div>
 </div>
 
-
-
 <div class="row">
     <div class="span5">
         <?php
@@ -51,7 +49,6 @@ $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
             array(
                 'data' => $model,
                 'attributes' => array(
-                
 
                 array(
                     'name' => 'pprs_first_name',
@@ -83,7 +80,6 @@ $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
            ),
         )); ?>
     </div>
-
 
     <div class="span7">
         <?php $this->renderPartial('_view-relations_grids',array('modelMain' => $model, 'ajax' => false,)); ?>    </div>

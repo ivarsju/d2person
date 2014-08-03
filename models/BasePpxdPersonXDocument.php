@@ -102,27 +102,27 @@ abstract class BasePpxdPersonXDocument extends CActiveRecord
             );
     }
 
-    public function getEnumFieldLabels($column){
-
+    public function getEnumFieldLabels($column)
+    {
         $aLabels = $this->enumLabels();
+
         return $aLabels[$column];
     }
 
-    public function getEnumLabel($column,$value){
-
+    public function getEnumLabel($column,$value)
+    {
         $aLabels = $this->enumLabels();
 
-        if(!isset($aLabels[$column])){
+        if (!isset($aLabels[$column])) {
             return $value;
         }
 
-        if(!isset($aLabels[$column][$value])){
+        if (!isset($aLabels[$column][$value])) {
             return $value;
         }
 
         return $aLabels[$column][$value];
     }
-
 
     public function searchCriteria($criteria = null)
     {
@@ -138,7 +138,6 @@ abstract class BasePpxdPersonXDocument extends CActiveRecord
         $criteria->compare('t.ppxd_expire_date', $this->ppxd_expire_date, true);
         $criteria->compare('t.ppxd_notes', $this->ppxd_notes, true);
         $criteria->compare('t.ppxd_status', $this->ppxd_status, true);
-
 
         return $criteria;
 

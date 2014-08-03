@@ -89,7 +89,6 @@ abstract class BasePprsPerson extends CActiveRecord
         $criteria->compare('t.pprs_first_name', $this->pprs_first_name, true);
         $criteria->compare('t.pprs_second_name', $this->pprs_second_name, true);
 
-
         return $criteria;
 
     }

@@ -81,7 +81,6 @@ abstract class BasePtypType extends CActiveRecord
         $criteria->compare('t.ptyp_name', $this->ptyp_name, true);
         $criteria->compare('t.ptyp_hidden', $this->ptyp_hidden);
 
-
         return $criteria;
 
     }

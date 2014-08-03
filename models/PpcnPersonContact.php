@@ -47,6 +47,7 @@ class PpcnPersonContact extends BasePpcnPersonContact
         if (is_null($criteria)) {
             $criteria = new CDbCriteria;
         }
+
         return new CActiveDataProvider(get_class($this), array(
             'criteria' => $this->searchCriteria($criteria),
         ));

@@ -1,10 +1,8 @@
 <div class="crud-form">
 
-    
     <?php
         Yii::app()->bootstrap->registerPackage('select2');
         Yii::app()->clientScript->registerScript('crud/variant/update','$("#ppcn-person-contact-form select").select2();');
-
 
         $form=$this->beginWidget('TbActiveForm', array(
             'id' => 'ppcn-person-contact-form',
@@ -17,7 +15,7 @@
 
         echo $form->errorSummary($model);
     ?>
-    
+
     <div class="row">
         <div class="span7">
             <h2>
@@ -26,10 +24,8 @@
 
             </h2>
 
-
             <div class="form-horizontal">
 
-                                    
                     <?php  ?>
                     <div class="control-group">
                         <div class='control-label'>
@@ -45,7 +41,7 @@
                         </div>
                     </div>
                     <?php  ?>
-                                    
+
                     <?php  ?>
                     <div class="control-group">
                         <div class='control-label'>
@@ -73,7 +69,7 @@
                         </div>
                     </div>
                     <?php  ?>
-                                    
+
                     <?php  ?>
                     <div class="control-group">
                         <div class='control-label'>
@@ -101,7 +97,7 @@
                         </div>
                     </div>
                     <?php  ?>
-                                    
+
                     <?php  ?>
                     <div class="control-group">
                         <div class='control-label'>
@@ -117,7 +113,7 @@
                         </div>
                     </div>
                     <?php  ?>
-                                    
+
                     <?php  ?>
                     <div class="control-group">
                         <div class='control-label'>
@@ -133,7 +129,7 @@
                         </div>
                     </div>
                     <?php  ?>
-                                    
+
                     <?php  ?>
                     <div class="control-group">
                         <div class='control-label'>
@@ -149,12 +145,11 @@
                         </div>
                     </div>
                     <?php  ?>
-                
+
             </div>
         </div>
         <!-- main inputs -->
 
-        
         <div class="span5"><!-- sub inputs -->
             <div class="well">
             <!--<h2>
@@ -170,7 +165,7 @@
 
     <!-- TODO: We need the buttons inside the form, when a user hits <enter> -->
     <div class="form-actions" style="visibility: hidden; height: 1px">
-        
+
         <?php
             echo CHtml::Button(
             Yii::t('D2personModule.crud_static', 'Cancel'), array(

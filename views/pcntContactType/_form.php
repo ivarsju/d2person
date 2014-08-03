@@ -1,9 +1,8 @@
 <div class="crud-form">
-    <?php  ?>    
+    <?php  ?>
     <?php
         Yii::app()->bootstrap->registerPackage('select2');
         Yii::app()->clientScript->registerScript('crud/variant/update','$("#pcnt-contact-type-form select").select2();');
-
 
         $form=$this->beginWidget('TbActiveForm', array(
             'id' => 'pcnt-contact-type-form',
@@ -16,12 +15,11 @@
 
         echo $form->errorSummary($model);
     ?>
-    
+
     <div class="row">
         <div class="span5">
             <div class="form-horizontal">
 
-                                    
                     <?php  ?>
                     <div class="control-group">
                         <div class='control-label'>
@@ -37,7 +35,7 @@
                         </div>
                     </div>
                     <?php  ?>
-                                    
+
                     <?php  ?>
                     <div class="control-group">
                         <div class='control-label'>
@@ -53,29 +51,27 @@
                         </div>
                     </div>
                     <?php  ?>
-                
+
             </div>
         </div>
         <!-- main inputs -->
 
-        
     </div>
 
     <p class="alert">
-        
-        <?php 
+
+        <?php
             echo Yii::t('D2personModule.crud_static','Fields with <span class="required">*</span> are required.');
-                
+
             /**
              * @todo: We need the buttons inside the form, when a user hits <enter>
-             */                
+             */
             echo ' '.CHtml::submitButton(Yii::t('D2personModule.crud_static', 'Save'), array(
                 'class' => 'btn btn-primary',
-                'style'=>'visibility: hidden;'                
+                'style'=>'visibility: hidden;'
             ));
-                
+
         ?>
     </p>
-
 
     <?php $this->endWidget() ?>    <?php  ?></div> <!-- form -->
