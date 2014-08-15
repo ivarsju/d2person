@@ -151,6 +151,32 @@ public function accessRules()
         }
     }
 
+    /**
+     * crreate person for company
+     * @param int $ccmp_id company id
+     * @return type
+     * @throws CHttpException
+     */
+    public function actionAjaxCreateSpec($ccmp_id)
+    {
+        $model = new PprsPerson;
+        $model->$field = $value;
+        try {
+            if (!$model->save()) {
+                return var_export($model->getErrors());
+            }
+        } catch (Exception $e) {
+            throw new CHttpException(500, $e->getMessage());
+        }
+        
+        $ccuc = new CcucUserCompany;
+        $ccuc->ccuc_ccmp_id = $ccmp_id;
+        $ccuc->ccuc_person_id = $model->pprs_id;
+        $ccuc->ccuc_status = CcucUserCompany::CCUC_STATUS_PERSON;
+        $ccuc->save();
+        
+    }
+
     public function actionDelete($pprs_id)
     {
         if (Yii::app()->request->isPostRequest) {

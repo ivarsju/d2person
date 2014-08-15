@@ -7,7 +7,7 @@ if (!$ajax) {
 }
 ?>
 <?php
-if (FALSE &&  (!$ajax || $ajax == 'ccuc-user-company-grid')) {
+if ((!$ajax || $ajax == 'ccuc-user-company-grid')) {
     Yii::beginProfile('ccuc_person_id.view.grid');
 ?>
 
@@ -23,7 +23,7 @@ if (FALSE &&  (!$ajax || $ajax == 'ccuc-user-company-grid')) {
             'size' => 'mini',
             'icon' => 'icon-plus',
             'url' => array(
-                '//d2person/ccucUserCompany/ajaxCreate',
+                '//d2company/ccucUserCompany/ajaxCreate',
                 'field' => 'ccuc_person_id',
                 'value' => $modelMain->primaryKey,
                 'ajax' => 'ccuc-user-company-grid',
@@ -41,16 +41,21 @@ if (FALSE &&  (!$ajax || $ajax == 'ccuc-user-company-grid')) {
 </div>
 
 <?php
-
-    if (empty($modelMain->ccucUserCompanies)) {
+    $criteria = new CDbCriteria;
+    $criteria->compare('ccuc_person_id',$modelMain->primaryKey);
+    $criteria->compare('ccuc_status',CcucUserCompany::CCUC_STATUS_PERSON);
+    $m = CcucUserCompany::model()->find($criteria);
+    if (empty($m)) {
         $model = new CcucUserCompany;
         $model->ccuc_person_id = $modelMain->primaryKey;
+        $model->ccuc_status = CcucUserCompany::CCUC_STATUS_PERSON;            
         $model->save();
         unset($model);
     }
 
     $model = new CcucUserCompany();
     $model->ccuc_person_id = $modelMain->primaryKey;
+    $model->ccuc_status = CcucUserCompany::CCUC_STATUS_PERSON;    
 
     // render grid view
 
@@ -69,22 +74,22 @@ if (FALSE &&  (!$ajax || $ajax == 'ccuc-user-company-grid')) {
                 'name' => 'ccuc_ccmp_id',
                 'editable' => array(
                     'type' => 'select',
-                    'url' => $this->createUrl('//d2person/ccucUserCompany/editableSaver'),
-                    'source' => CHtml::listData(CcmpCompany::model()->findAll(array('limit' => 1000)), 'ccmp_id', 'itemLabel'),
+                    'url' => $this->createUrl('//d2company/ccucUserCompany/editableSaver'),
+                    'source' => CHtml::listData(CcmpCompany::model()->findAll(array('limit' => 1000,'order'=>'ccmp_name')), 'ccmp_id', 'itemLabel'),
                     //'placement' => 'right',
                 )
             ),
-            array(
-                    'class' => 'editable.EditableColumn',
-                    'name' => 'ccuc_status',
-                    'editable' => array(
-                        'type' => 'select',
-                        'url' => $this->createUrl('//d2person/ccucUserCompany/editableSaver'),
-                        'source' => $model->getEnumFieldLabels('ccuc_status'),
-                        //'placement' => 'right',
-                    ),
-                   'filter' => $model->getEnumFieldLabels('ccuc_status'),
-                ),
+//            array(
+//                    'class' => 'editable.EditableColumn',
+//                    'name' => 'ccuc_status',
+//                    'editable' => array(
+//                        'type' => 'select',
+//                        'url' => $this->createUrl('//d2person/ccucUserCompany/editableSaver'),
+//                        'source' => $model->getEnumFieldLabels('ccuc_status'),
+//                        //'placement' => 'right',
+//                    ),
+//                   'filter' => $model->getEnumFieldLabels('ccuc_status'),
+//                ),
 
                 array(
                     'class' => 'TbButtonColumn',
@@ -93,7 +98,7 @@ if (FALSE &&  (!$ajax || $ajax == 'ccuc-user-company-grid')) {
                         'update' => array('visible' => 'FALSE'),
                         'delete' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.DeleteccucUserCompanies")'),
                     ),
-                    'deleteButtonUrl' => 'Yii::app()->controller->createUrl("/d2person/ccucUserCompany/delete", array("ccuc_id" => $data->ccuc_id))',
+                    'deleteButtonUrl' => 'Yii::app()->controller->createUrl("/d2company/ccucUserCompany/delete", array("ccuc_id" => $data->ccuc_id))',
                     'deleteConfirmation'=>Yii::t('D2personModule.crud_static','Do you want to delete this item?'),
                     'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),
                 ),

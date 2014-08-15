@@ -35,7 +35,7 @@ class PprsPerson extends BasePprsPerson
     {
         return array_merge(
             parent::relations(), array(
-                'profile' => array(self::BELONGS_TO, 'Profile', 'pprs_id'),
+                //'profile' => array(self::BELONGS_TO, 'Profile', 'pprs_id'),
             )
         );
     }
@@ -84,10 +84,42 @@ class PprsPerson extends BasePprsPerson
    protected function beforeFind()
    {
         $criteria = new CDbCriteria;
-        $criteria->join .= ' inner join ccuc_user_company  on ccuc_person_id = t.pprs_id ';
-        $criteria->compare('ccuc_ccmp_id', Yii::app()->sysCompany->getActiveCompany());
-
+        $criteria->join .= ' inner join ccuc_user_company bf1 on bf1.ccuc_person_id = pprs_id ';
+        $criteria->join .= ' inner join ccmp_company bf2 on bf1.ccuc_ccmp_id = bf2.ccmp_id ';
+        $criteria->compare('bf2.ccmp_sys_ccmp_id', Yii::app()->sysCompany->getActiveCompany());
+//        $criteria->compare('bf1.ccuc_status', CcucUserCompany::CCUC_STATUS_SYS);        
         $this->dbCriteria->mergeWith($criteria);
         parent::beforeFind();
     }
+    
+    public function afterSave() {
+        
+        $ccuc = new CcucUserCompany;
+        $ccuc->ccuc_person_id = $this->pprs_id;
+        $ccuc->ccuc_ccmp_id = Yii::app()->sysCompany->getActiveCompany();
+        $ccuc->ccuc_status = CcucUserCompany::CCUC_STATUS_SYS;
+        $ccuc->save();
+        parent::afterSave();
+    }
+    
+    public function getCompanyPersons($ccmp_id,$ccuc_status = CcucUserCompany::CCUC_STATUS_PERSON){
+    
+        $criteria = new CDbCriteria;    
+        $criteria->compare('ccuc_ccmp_id', $ccmp_id);
+        $criteria->compare('ccuc_status', $ccuc_status);
+        $criteria->order = 'pprs_second_name,pprs_first_name';  
+        
+        return $this->findAll($criteria);
+    }
+    
+    public  function getSysCompanyPersons(){
+        $ccuc_status = array(
+            CcucUserCompany::CCUC_STATUS_PERSON,
+            CcucUserCompany::CCUC_STATUS_USER,
+            CcucUserCompany::CCUC_STATUS_SYS,
+            );
+        
+        return $this->getCompanyPersons(Yii::app()->sysCompany->getActiveCompany(),$ccuc_status);
+    }    
+    
 }

@@ -65,7 +65,7 @@ abstract class BasePprsPerson extends CActiveRecord
                 'ppxdPersonXDocuments' => array(self::HAS_MANY, 'PpxdPersonXDocument', 'ppxd_pprs_id'),
                 'ppxsPersonXSettings' => array(self::HAS_MANY, 'PpxsPersonXSetting', 'ppxs_pprs_id'),
                 'ppxtPersonXTypes' => array(self::HAS_MANY, 'PpxtPersonXType', 'ppxt_pprs_id'),
-                'vxprVoyageXPeople' => array(self::HAS_MANY, 'VxprVoyageXPerson', 'vxpr_pprs_id'),
+                //'vxprVoyageXPeople' => array(self::HAS_MANY, 'VxprVoyageXPerson', 'vxpr_pprs_id'),
             )
         );
     }
