@@ -48,7 +48,7 @@ class PprsPerson extends BasePprsPerson
         return array_merge(
             parent::attributeLabels(),
             array(
-                'pprs_ccmp_id' => Yii::t('D2tasksModule.model', 'Company'),
+                'pprs_ccmp_id' => Yii::t('D2personModule.model', 'Company'),
                 )
         );
     }     
@@ -96,9 +96,17 @@ class PprsPerson extends BasePprsPerson
    {
         $criteria = new CDbCriteria;
         $criteria->join .= ' inner join ccuc_user_company bf1 on bf1.ccuc_person_id = pprs_id ';
-        $criteria->join .= ' inner join ccmp_company bf2 on bf1.ccuc_ccmp_id = bf2.ccmp_id ';
-        $criteria->compare('bf2.ccmp_sys_ccmp_id', Yii::app()->sysCompany->getActiveCompany());
-//        $criteria->compare('bf1.ccuc_status', CcucUserCompany::CCUC_STATUS_SYS);        
+        $criteria->compare('bf1.ccuc_status', CcucUserCompany::CCUC_STATUS_PERSON);
+        $sql_sys_persons = '
+                SELECT 
+                    ccuc_person_id 
+                FROM 
+                    ccuc_user_company 
+                WHERE 
+                    ccuc_status = \'' . CcucUserCompany::CCUC_STATUS_SYS .'\'
+                    and ccuc_ccmp_id = '.Yii::app()->sysCompany->getActiveCompany();
+        $criteria->addCondition('pprs_id in ('.$sql_sys_persons.')');
+
         $this->dbCriteria->mergeWith($criteria);
         parent::beforeFind();
     }

@@ -73,7 +73,7 @@
                         </div>
                         <div class='controls'>
                             <span class="tooltip-wrapper" data-toggle='tooltip' data-placement="right"
-                                 title='<?php echo (($t = Yii::t('D2tasksModule.model', 'tooltip.ttsk_ccmp_id')) != 'tooltip.ttsk_ccmp_id')?$t:'' ?>'>
+                                 title='<?php echo (($t = Yii::t('D2personModule.model', 'tooltip.ttsk_ccmp_id')) != 'tooltip.ttsk_ccmp_id')?$t:'' ?>'>
                                 <?php
                                 echo $form->dropDownList(
                                           $model,

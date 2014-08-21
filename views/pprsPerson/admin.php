@@ -31,7 +31,7 @@ $this->setPageTitle(Yii::t('D2personModule.model', 'Persons'));
 $this->widget('TbGridView',
     array(
         'id' => 'ccuc-user-company-grid',
-        'dataProvider' => $model->search(),
+        'dataProvider' => $model->searchPersons(),
         'filter' => $model,
         'template' => '{pager}{summary}{items}{pager}',
         'pager' => array(
@@ -41,7 +41,7 @@ $this->widget('TbGridView',
         'columns' => array(
             array(
                 'name' => 'ccuc_person_id',
-                'value' => '$data->ccucPerson->itemlabel',
+                'value' => 'CHtml::value($data, \'ccucPerson.itemLabel\')',
                 'filter' => CHtml::listData(PprsPerson::model()->findAll(array('order'=>'pprs_second_name,pprs_first_name')), 'pprs_id', 'itemLabel'),                
             ),            
             array(
