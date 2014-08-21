@@ -2,7 +2,7 @@
 /**
 * generate translation files
 * in app directory start:
-* yiic message ../vendor/dbrisinajumi/d2person/translation.php
+* yiic message ../../dbrisinajumi/d2person/translation.php
 */
 return array(
     'sourcePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR ,  //root dir of all source

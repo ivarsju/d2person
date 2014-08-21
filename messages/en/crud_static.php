@@ -19,6 +19,7 @@
 return array (
   'Add new record' => '',
   'Advanced Search' => '',
+  'Back' => '',
   'Cancel' => '',
   'Clear' => '',
   'Clear Search' => '',
@@ -32,9 +33,9 @@ return array (
   'Relations' => '',
   'Save' => '',
   'Search' => '',
-  'Switch to view mode to edit related records.' => '',
   'The requested page does not exist.' => '',
   'Update' => '',
   'View' => '',
   'View Mode' => '',
+  'Switch to view mode to edit related records.' => '@@@@',
 );

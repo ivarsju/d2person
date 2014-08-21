@@ -199,12 +199,7 @@ if (!$ajax || $ajax == 'ppcn-person-contact-grid') {
                 )
             ),
             array(
-                'class' => 'editable.EditableColumn',
                 'name' => 'ppcn_modified',
-                'editable' => array(
-                    'url' => $this->createUrl('//d2person/ppcnPersonContact/editableSaver'),
-                    //'placement' => 'right',
-                )
             ),
 
                 array(
@@ -480,7 +475,7 @@ if (!$ajax || $ajax == 'ppxs-person-xsetting-grid') {
                     'success' => 'function (html) {$.fn.yiiGridView.update(\'ppxs-person-xsetting-grid\');}'
                     ),
             'htmlOptions' => array(
-                'title' => Yii::t('D2personModule.crud', 'Add new record'),
+                'title' => Yii::t('D2personModule.crud_static', 'Add new record'),
                 'data-toggle' => 'tooltip',
             ),
         )
@@ -558,7 +553,7 @@ if (!$ajax || $ajax == 'ppxs-person-xsetting-grid') {
                         'delete' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.DeleteppxsPersonXSettings")'),
                     ),
                     'deleteButtonUrl' => 'Yii::app()->controller->createUrl("/d2person/ppxsPersonXSetting/delete", array("ppxs_id" => $data->ppxs_id))',
-                    'deleteConfirmation'=>Yii::t('D2personModule.crud','Do you want to delete this item?'),
+                    'deleteConfirmation'=>Yii::t('D2personModule.crud_static','Do you want to delete this item?'),
                     'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),
                 ),
             )

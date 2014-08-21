@@ -30,47 +30,34 @@ $this->setPageTitle(Yii::t('D2personModule.model', 'Persons'));
 <?php
 $this->widget('TbGridView',
     array(
-        'id' => 'pprs-person-grid',
+        'id' => 'ccuc-user-company-grid',
         'dataProvider' => $model->search(),
         'filter' => $model,
-        #'responsiveTable' => true,
-        'template' => '{summary}{pager}{items}{pager}',
+        'template' => '{pager}{summary}{items}{pager}',
         'pager' => array(
             'class' => 'TbPager',
             'displayFirstAndLast' => true,
         ),
         'columns' => array(
             array(
-                //varchar(100)
-                'class' => 'editable.EditableColumn',
-                'name' => 'pprs_second_name',
-                'editable' => array(
-                    'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
-                    //'placement' => 'right',
-                )
-            ),
+                'name' => 'ccuc_person_id',
+                'value' => '$data->ccucPerson->itemlabel',
+                'filter' => CHtml::listData(PprsPerson::model()->findAll(array('order'=>'pprs_second_name,pprs_first_name')), 'pprs_id', 'itemLabel'),                
+            ),            
             array(
-                //varchar(100)
-                'class' => 'editable.EditableColumn',
-                'name' => 'pprs_first_name',
-                'editable' => array(
-                    'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
-                    //'placement' => 'right',
-                )
+                'name' => 'ccuc_ccmp_id',
+                'value' => 'CHtml::value($data, \'ccucCcmp.itemLabel\')',
+                'filter' => CHtml::listData(CcmpCompany::model()->findAll(array('order'=>'ccmp_name')), 'ccmp_id', 'itemLabel'),
             ),
-
             array(
                 'class' => 'TbButtonColumn',
                 'buttons' => array(
-                    'view' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.View")'),
+                    'view' => array('visible' => 'Yii::app()->user->checkAccess("D2company.CcucUserCompany.View")'),
                     'update' => array('visible' => 'FALSE'),
-                    'delete' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.Delete")'),
+                    'delete' => array('visible' => 'FALSE'),
                 ),
-                'viewButtonUrl' => 'Yii::app()->controller->createUrl("view", array("pprs_id" => $data->pprs_id))',
-                'deleteButtonUrl' => 'Yii::app()->controller->createUrl("delete", array("pprs_id" => $data->pprs_id))',
-                'deleteConfirmation'=>Yii::t('D2personModule.crud_static','Do you want to delete this item?'),
-                'viewButtonOptions'=>array('data-toggle'=>'tooltip'),
-                'deleteButtonOptions'=>array('data-toggle'=>'tooltip'),
+                'viewButtonUrl' => 'Yii::app()->controller->createUrl("view", array("ccuc_id" => $data->ccuc_id))',
+
             ),
         )
     )

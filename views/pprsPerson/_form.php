@@ -67,6 +67,27 @@
                         </div>
                     </div>
                     <?php  ?>
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'pprs_ccmp_id') ?>
+                        </div>
+                        <div class='controls'>
+                            <span class="tooltip-wrapper" data-toggle='tooltip' data-placement="right"
+                                 title='<?php echo (($t = Yii::t('D2tasksModule.model', 'tooltip.ttsk_ccmp_id')) != 'tooltip.ttsk_ccmp_id')?$t:'' ?>'>
+                                <?php
+                                echo $form->dropDownList(
+                                          $model,
+                                          'pprs_ccmp_id',
+                                          CHtml::listData(CcmpCompany::model()->findAll(array('order'=>'ccmp_name')), 'ccmp_id', 'itemLabel')
+//                                          ,array(
+//                                              'class' => 'span3'
+//                                          )
+                                      );
+                            echo $form->error($model,'pprs_ccmp_id')
+                            ?>                            </span>
+                        </div>
+                    </div>
+                    <?php  ?>
 
             </div>
         </div>

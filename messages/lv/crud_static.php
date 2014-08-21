@@ -17,9 +17,10 @@
  * NOTE, this file must be saved in UTF-8 encoding.
  */
 return array (
-  'Back' => 'Atpakaļ',
+  'Switch to view mode to edit related records.' => '@@Iet uz "Apskates" režīmu, lai labotu saistītos ierakstus@@',
   'Add new record' => 'Pievienot jaunu ierakstu',
   'Advanced Search' => 'Izvērsta meklēsana',
+  'Back' => 'Atpakaļ',
   'Cancel' => 'Atcelt',
   'Clear' => 'Notīrīt',
   'Clear Search' => 'Notīrīt meklēsanas parametrus',
@@ -33,7 +34,6 @@ return array (
   'Relations' => 'Relācijas',
   'Save' => 'Saglabāt',
   'Search' => 'Meklēt',
-  'Switch to view mode to edit related records.' => 'Iet uz "Apskates" režīmu, lai labotu saistītos ierakstus',
   'The requested page does not exist.' => 'Pieprasītā lapa neeksistē',
   'Update' => 'Labot',
   'View' => 'Skatīt',

@@ -82,10 +82,15 @@ public function accessRules()
         $model->scenario = $this->scenario;
 
         $this->performAjaxValidation($model, 'pprs-person-form');
+        $post_atributes = Yii::app()->request->getPost('PprsPerson');
+        if (!empty($post_atributes)) {
+            $model->attributes = $post_atributes;
+            if(isset($post_atributes['pprs_ccmp_id'])){
+                $model->pprs_ccmp_id = $post_atributes['pprs_ccmp_id'];
+            }
 
-        if (isset($_POST['PprsPerson'])) {
-            $model->attributes = $_POST['PprsPerson'];
-
+            
+            
             try {
                 if ($model->save()) {
                     if (isset($_GET['returnUrl'])) {
@@ -200,18 +205,30 @@ public function accessRules()
 
     public function actionAdmin()
     {
-        $model = new PprsPerson('search');
+//        $model = new PprsPerson('search');
+//        $scopes = $model->scopes();
+//        if (isset($scopes[$this->scope])) {
+//            $model->{$this->scope}();
+//        }
+//        $model->unsetAttributes();
+//
+//        if (isset($_GET['PprsPerson'])) {
+//            $model->attributes = $_GET['PprsPerson'];
+//        }
+//
+//        $this->render('admin', array('model' => $model));
+        $model = new CcucUserCompany('search');
         $scopes = $model->scopes();
         if (isset($scopes[$this->scope])) {
             $model->{$this->scope}();
         }
         $model->unsetAttributes();
 
-        if (isset($_GET['PprsPerson'])) {
-            $model->attributes = $_GET['PprsPerson'];
+        if (isset($_GET['CcucUserCompany'])) {
+            $model->attributes = $_GET['CcucUserCompany'];
         }
 
-        $this->render('admin', array('model' => $model));
+        $this->render('admin', array('model' => $model,));        
     }
 
     public function loadModel($id)

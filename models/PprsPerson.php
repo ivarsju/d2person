@@ -6,7 +6,9 @@ Yii::import('PprsPerson.*');
 
 class PprsPerson extends BasePprsPerson
 {
-
+    
+    public $pprs_ccmp_id;
+    
     // Add your model-specific methods here. This file will not be overriden by gtc except you force it.
     public static function model($className = __CLASS__)
     {
@@ -30,24 +32,33 @@ class PprsPerson extends BasePprsPerson
             array()
         );
     }
+    
+    public function rules()
+    {
+        return array_merge(
+                parent::rules(),
+                array(
+                    array('pprs_ccmp_id, pprs_second_name, pprs_first_name', 'required'),                    
+                )    
+        );
+    }    
 
+    public function attributeLabels()
+    {
+        return array_merge(
+            parent::attributeLabels(),
+            array(
+                'pprs_ccmp_id' => Yii::t('D2tasksModule.model', 'Company'),
+                )
+        );
+    }     
+    
     public function relations()
     {
         return array_merge(
             parent::relations(), array(
                 //'profile' => array(self::BELONGS_TO, 'Profile', 'pprs_id'),
             )
-        );
-    }
-
-    public function rules()
-    {
-        return array_merge(
-            parent::rules()
-        /* , array(
-          array('column1, column2', 'rule1'),
-          array('column3', 'rule2'),
-          ) */
         );
     }
 
@@ -65,7 +76,7 @@ class PprsPerson extends BasePprsPerson
 
         return $this;
     }
-
+    
     public function search($criteria = null)
     {
         if (is_null($criteria)) {
@@ -94,11 +105,21 @@ class PprsPerson extends BasePprsPerson
     
     public function afterSave() {
         
+        //set syscompany
         $ccuc = new CcucUserCompany;
         $ccuc->ccuc_person_id = $this->pprs_id;
         $ccuc->ccuc_ccmp_id = Yii::app()->sysCompany->getActiveCompany();
         $ccuc->ccuc_status = CcucUserCompany::CCUC_STATUS_SYS;
         $ccuc->save();
+        
+        //person company
+        if(!empty($this->pprs_ccmp_id)){
+            $ccuc = new CcucUserCompany;
+            $ccuc->ccuc_person_id = $this->pprs_id;
+            $ccuc->ccuc_ccmp_id = $this->pprs_ccmp_id;
+            $ccuc->ccuc_status = CcucUserCompany::CCUC_STATUS_PERSON;
+            $ccuc->save();
+        }
         parent::afterSave();
     }
     

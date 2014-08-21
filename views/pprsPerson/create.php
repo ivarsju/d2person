@@ -21,7 +21,7 @@ $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
         <div class="btn-group">
             <h1>
                 <i class=""></i>
-                <?php echo Yii::t('D2personModule.model','Create Pprs Person');?>            </h1>
+                <?php echo Yii::t('D2personModule.model','Create Person');?>            </h1>
         </div>
     </div>
 </div>
