@@ -52,11 +52,11 @@ $this->widget('TbGridView',
             array(
                 'class' => 'TbButtonColumn',
                 'buttons' => array(
-                    'view' => array('visible' => 'Yii::app()->user->checkAccess("D2company.CcucUserCompany.View")'),
+                    'view' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.View")'),
                     'update' => array('visible' => 'FALSE'),
                     'delete' => array('visible' => 'FALSE'),
                 ),
-                'viewButtonUrl' => 'Yii::app()->controller->createUrl("view", array("ccuc_id" => $data->ccuc_id))',
+                'viewButtonUrl' => 'Yii::app()->controller->createUrl("view", array("pprs_id" => $data->ccuc_person_id))',
 
             ),
         )
