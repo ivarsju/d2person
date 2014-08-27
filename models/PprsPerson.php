@@ -113,20 +113,22 @@ class PprsPerson extends BasePprsPerson
     
     public function afterSave() {
         
-        //set syscompany
-        $ccuc = new CcucUserCompany;
-        $ccuc->ccuc_person_id = $this->pprs_id;
-        $ccuc->ccuc_ccmp_id = Yii::app()->sysCompany->getActiveCompany();
-        $ccuc->ccuc_status = CcucUserCompany::CCUC_STATUS_SYS;
-        $ccuc->save();
-        
-        //person company
-        if(!empty($this->pprs_ccmp_id)){
+        //for new records set syscompany
+        if(!$this->ccucUserCompanies){
             $ccuc = new CcucUserCompany;
             $ccuc->ccuc_person_id = $this->pprs_id;
-            $ccuc->ccuc_ccmp_id = $this->pprs_ccmp_id;
-            $ccuc->ccuc_status = CcucUserCompany::CCUC_STATUS_PERSON;
+            $ccuc->ccuc_ccmp_id = Yii::app()->sysCompany->getActiveCompany();
+            $ccuc->ccuc_status = CcucUserCompany::CCUC_STATUS_SYS;
             $ccuc->save();
+
+            //person company
+            if(!empty($this->pprs_ccmp_id)){
+                $ccuc = new CcucUserCompany;
+                $ccuc->ccuc_person_id = $this->pprs_id;
+                $ccuc->ccuc_ccmp_id = $this->pprs_ccmp_id;
+                $ccuc->ccuc_status = CcucUserCompany::CCUC_STATUS_PERSON;
+                $ccuc->save();
+            }
         }
         parent::afterSave();
     }
