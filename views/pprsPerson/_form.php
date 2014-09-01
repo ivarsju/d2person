@@ -79,9 +79,9 @@
                                           $model,
                                           'pprs_ccmp_id',
                                           CHtml::listData(CcmpCompany::model()->findAll(array('order'=>'ccmp_name')), 'ccmp_id', 'itemLabel')
-//                                          ,array(
-//                                              'class' => 'span3'
-//                                          )
+                                          ,array(
+                                              'class' => 'span10'
+                                          )
                                       );
                             echo $form->error($model,'pprs_ccmp_id')
                             ?>                            </span>
