@@ -12,7 +12,6 @@ $this->setPageTitle(Yii::t('D2personModule.model', 'Contact Types'));
              'size'=>'large',
              'type'=>'success',
              'url'=>array('create'),
-             'visible'=>(Yii::app()->user->checkAccess('D2person.PcntContactType.*') || Yii::app()->user->checkAccess('D2person.PcntContactType.Create'))
         ));
         ?>
 </div>

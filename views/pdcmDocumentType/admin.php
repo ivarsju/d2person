@@ -12,7 +12,6 @@ $this->setPageTitle(Yii::t('D2personModule.model', 'Persons Document Types'));
              'size'=>'large',
              'type'=>'success',
              'url'=>array('create'),
-             'visible'=>(Yii::app()->user->checkAccess('D2person.PdcmDocumentType.*') || Yii::app()->user->checkAccess('D2person.PdcmDocumentType.Create'))
         ));
         ?>
 </div>

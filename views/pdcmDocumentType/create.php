@@ -6,7 +6,6 @@ $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
     "icon"=>"chevron-left",
     "size"=>"large",
     "url"=>(isset($_GET["returnUrl"]))?$_GET["returnUrl"]:array("{$this->id}/admin"),
-    "visible"=>(Yii::app()->user->checkAccess("D2person.PdcmDocumentType.*") || Yii::app()->user->checkAccess("D2person.PdcmDocumentType.View")),
     "htmlOptions"=>array(
                     "class"=>"search-button",
                     "data-toggle"=>"tooltip",
@@ -41,7 +40,6 @@ $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
                        "htmlOptions"=> array(
                             "onclick"=>"$('.crud-form form').submit();",
                        ),
-                       "visible"=> (Yii::app()->user->checkAccess("D2person.PdcmDocumentType.*") || Yii::app()->user->checkAccess("D2person.PdcmDocumentType.View"))
                     ));
                     ?>
 

@@ -22,27 +22,27 @@ public function accessRules()
         array(
             'allow',
             'actions' => array('create', 'admin', 'editableSaver', 'delete','ajaxCreate'),
-            'roles' => array('D2person.PcntContactType.*'),
+            'roles' => array('Administrator'),
         ),
         array(
             'allow',
             'actions' => array('create','ajaxCreate'),
-            'roles' => array('D2person.PcntContactType.Create'),
+            'roles' => array('Administrator'),
         ),
         array(
             'allow',
             'actions' => array( 'admin'), // let the user view the grid
-            'roles' => array('D2person.PcntContactType.View'),
+            'roles' => array('Administrator'),
         ),
         array(
             'allow',
             'actions' => array('editableSaver'),
-            'roles' => array('D2person.PcntContactType.Update'),
+            'roles' => array('Administrator'),
         ),
         array(
             'allow',
             'actions' => array('delete'),
-            'roles' => array('D2person.PcntContactType.Delete'),
+            'roles' => array('Administrator'),
         ),
         array(
             'deny',

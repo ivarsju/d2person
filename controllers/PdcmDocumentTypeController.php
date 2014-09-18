@@ -22,27 +22,27 @@ public function accessRules()
         array(
             'allow',
             'actions' => array('create', 'admin', 'view', 'update', 'editableSaver', 'delete','ajaxCreate'),
-            'roles' => array('D2person.PdcmDocumentType.*'),
+            'roles' => array('Administrator'),
         ),
         array(
             'allow',
             'actions' => array('create','ajaxCreate'),
-            'roles' => array('D2person.PdcmDocumentType.Create'),
+            'roles' => array('Administrator'),
         ),
         array(
             'allow',
             'actions' => array('view', 'admin'), // let the user view the grid
-            'roles' => array('D2person.PdcmDocumentType.View'),
+            'roles' => array('Administrator'),
         ),
         array(
             'allow',
             'actions' => array('update', 'editableSaver'),
-            'roles' => array('D2person.PdcmDocumentType.Update'),
+            'roles' => array('Administrator'),
         ),
         array(
             'allow',
             'actions' => array('delete'),
-            'roles' => array('D2person.PdcmDocumentType.Delete'),
+            'roles' => array('Administrator'),
         ),
         array(
             'deny',
