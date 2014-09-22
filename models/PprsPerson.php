@@ -153,4 +153,31 @@ class PprsPerson extends BasePprsPerson
         return $this->getCompanyPersons(Yii::app()->sysCompany->getActiveCompany(),$ccuc_status);
     }    
     
+    public static function getPersonsByRole($role){
+        $ccuc_status = CcucUserCompany::CCUC_STATUS_SYS;
+        $sys_ccmp_id = Yii::app()->sysCompany->getActiveCompany();
+        $sql = " 
+            SELECT 
+              pprs_id,
+              CONCAT(
+                pprs_second_name,
+                ' ',
+                pprs_first_name
+              ) full_name 
+            FROM
+              authassignment aa 
+              INNER JOIN `profiles` p 
+                ON aa.userid = p.user_id 
+              INNER JOIN pprs_person 
+                ON p.person_id = pprs_id 
+              INNER JOIN ccuc_user_company 
+                ON pprs_id = ccuc_person_id 
+                AND ccuc_ccmp_id = {$sys_ccmp_id} 
+                AND ccuc_status = '{$ccuc_status}' 
+            WHERE itemname = '{$role}' 
+                   "
+            ;
+            return Yii::app()->db->createCommand($sql)->queryAll();
+    
+    }
 }
