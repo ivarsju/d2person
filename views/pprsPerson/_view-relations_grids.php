@@ -79,6 +79,16 @@ if ((!$ajax || $ajax == 'ccuc-user-company-grid')) {
                     //'placement' => 'right',
                 )
             ),
+            array(
+                'class' => 'editable.EditableColumn',
+                'name' => 'ccuc_cucp_id',
+                'editable' => array(
+                    'type' => 'select',
+                    'url' => $this->createUrl('//d2person/ccucUserCompany/editableSaver'),
+                    'source' => CHtml::listData(CucpUserCompanyPosition::model()->findAll(array('limit' => 1000)), 'cucp_id', 'itemLabel'),
+                    //'placement' => 'right',
+                )
+            ),                
 //            array(
 //                    'class' => 'editable.EditableColumn',
 //                    'name' => 'ccuc_status',
