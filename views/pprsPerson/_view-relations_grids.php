@@ -84,7 +84,7 @@ if ((!$ajax || $ajax == 'ccuc-user-company-grid')) {
                 'name' => 'ccuc_cucp_id',
                 'editable' => array(
                     'type' => 'select',
-                    'url' => $this->createUrl('//d2person/ccucUserCompany/editableSaver'),
+                    'url' => $this->createUrl('//d2company/ccucUserCompany/editableSaver'),
                     'source' => CHtml::listData(CucpUserCompanyPosition::model()->findAll(array('limit' => 1000)), 'cucp_id', 'itemLabel'),
                     //'placement' => 'right',
                 )
