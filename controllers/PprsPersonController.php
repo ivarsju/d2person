@@ -227,7 +227,7 @@ public function accessRules()
         if (isset($_GET['CcucUserCompany'])) {
             $model->attributes = $_GET['CcucUserCompany'];
         }
-
+        $model->ccuc_status = CcucUserCompany::CCUC_STATUS_PERSON;
         $this->render('admin', array('model' => $model,));        
     }
 
