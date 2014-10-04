@@ -17,6 +17,7 @@
  * NOTE, this file must be saved in UTF-8 encoding.
  */
 return array (
+  'Audit Trail' => 'Auditpieraksti',  
   'Switch to view mode to edit related records.' => '@@Iet uz "Apskates" režīmu, lai labotu saistītos ierakstus@@',
   'Add new record' => 'Pievienot jaunu ierakstu',
   'Advanced Search' => 'Izvērsta meklēsana',

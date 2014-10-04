@@ -23,12 +23,23 @@ class PpcnPersonContact extends BasePpcnPersonContact
         return parent::getItemLabel();
     }
 
-    public function behaviors()
-    {
-        return array_merge(
-            parent::behaviors(),
-            array()
-        );
+    public function behaviors() {
+        
+        $behaviors = parent::behaviors();
+        
+        //auditrail  
+        if(isset(Yii::app()->getModule('d2person')->options['audittrail']) 
+            && Yii::app()->getModule('d2person')->options['audittrail'])
+        { 
+            $behaviors = array_merge(
+                $behaviors, array(
+            'LoggableBehavior' => array(
+                'class' => 'LoggableBehavior'
+            ),
+        ));            
+        }
+        
+        return $behaviors;
     }
 
     public function rules()
