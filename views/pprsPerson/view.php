@@ -1,10 +1,13 @@
 <?php
+$can_edit = Yii::app()->user->checkAccess("D2person.PprsPerson.*") 
+        || Yii::app()->user->checkAccess("D2person.PprsPerson.Update") ;
+
 $this->setPageTitle(Yii::t('D2personModule.model', 'Person Data'));
 $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
     "icon" => "chevron-left",
     "size" => "large",
     "url" => (isset($_GET["returnUrl"])) ? $_GET["returnUrl"] : array("{$this->id}/admin"),
-    "visible" => (Yii::app()->user->checkAccess("D2person.PprsPerson.*") || Yii::app()->user->checkAccess("D2person.PprsPerson.View")),
+    //"visible" => (Yii::app()->user->checkAccess("D2person.PprsPerson.*") || Yii::app()->user->checkAccess("D2person.PprsPerson.View")),
     "htmlOptions" => array(
         "class" => "search-button",
         "data-toggle" => "tooltip",
@@ -25,7 +28,8 @@ $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
         <div class="btn-group">
             <?php
             $module_name = $this->module->id;
-            if(isset($this->module->options['audittrail']) 
+            if(Yii::app()->user->checkAccess("audittrail") 
+                    && isset($this->module->options['audittrail']) 
                     && $this->module->options['audittrail']){        
                 Yii::import('audittrail.*');
                 $this->widget('EFancyboxWidget',array(
@@ -79,6 +83,7 @@ $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
                             'model' => $model,
                             'attribute' => 'pprs_first_name',
                             'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
+                            'apply' => $can_edit,
                         ),
                         true
                     )
@@ -93,6 +98,7 @@ $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
                             'model' => $model,
                             'attribute' => 'pprs_second_name',
                             'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
+                            'apply' => $can_edit,
                         ),
                         true
                     )
@@ -107,7 +113,21 @@ $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
     </div>
 
     <div class="span7">
-        <?php $this->renderPartial('_view-relations_grids',array('modelMain' => $model, 'ajax' => false,)); ?>    </div>
+        <?php $this->renderPartial('_view-relations_grids',array('modelMain' => $model, 'ajax' => false,)); ?>    
+    </div>
 </div>
 
-<?php echo $cancel_buton; ?>
+<?php 
+$cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
+    "icon" => "chevron-left",
+    "size" => "large",
+    "url" => (isset($_GET["returnUrl"])) ? $_GET["returnUrl"] : array("{$this->id}/admin"),
+    //"visible" => (Yii::app()->user->checkAccess("D2person.PprsPerson.*") || Yii::app()->user->checkAccess("D2person.PprsPerson.View")),
+    "htmlOptions" => array(
+        "class" => "search-button",
+        "data-toggle" => "tooltip",
+        "title" => Yii::t("D2personModule.crud_static", "Back"),
+    )
+        ), true);
+    
+echo $cancel_buton;

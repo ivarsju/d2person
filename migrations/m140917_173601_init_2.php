@@ -123,6 +123,7 @@ class m140917_173601_init_2 extends CDbMigration
             INSERT INTO `authitem` VALUES('D2person.PprsPersonView', 2, 'D2person.PprsPerson view', NULL, 'N;');
             
             INSERT INTO `authitemchild` VALUES('D2person.PprsPersonCreate', 'D2person.PprsPerson.Create');
+            INSERT INTO `authitemchild` VALUES('D2person.PprsPersonUpdate', 'D2person.PprsPerson.View');
             INSERT INTO `authitemchild` VALUES('D2person.PprsPersonUpdate', 'D2person.PprsPerson.Update');
             INSERT INTO `authitemchild` VALUES('D2person.PprsPersonDelete', 'D2person.PprsPerson.Delete');
             INSERT INTO `authitemchild` VALUES('D2person.PprsPersonView', 'D2person.PprsPerson.View'); 

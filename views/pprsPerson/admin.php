@@ -7,14 +7,18 @@ $this->setPageTitle(Yii::t('D2personModule.model', 'Persons'));
     <div class="btn-toolbar pull-left">
         <div class="btn-group">
         <?php
-        $this->widget('bootstrap.widgets.TbButton', array(
-             'label'=>Yii::t('D2personModule.crud_static','Create'),
-             'icon'=>'icon-plus',
-             'size'=>'large',
-             'type'=>'success',
-             'url'=>array('create'),
-             'visible'=>(Yii::app()->user->checkAccess('D2person.PprsPerson.*') || Yii::app()->user->checkAccess('D2person.PprsPerson.Create'))
-        ));
+        if(Yii::app()->user->checkAccess("D2tasks.TprsPersons.Create")
+                || Yii::app()->user->checkAccess('D2person.PprsPerson.*') 
+                || Yii::app()->user->checkAccess('D2person.PprsPerson.Create')
+        ){        
+            $this->widget('bootstrap.widgets.TbButton', array(
+                 'label'=>Yii::t('D2personModule.crud_static','Create'),
+                 'icon'=>'icon-plus',
+                 'size'=>'large',
+                 'type'=>'success',
+                 'url'=>array('create'),
+            ));
+        }
         ?>
 </div>
         <div class="btn-group">
@@ -52,7 +56,9 @@ $this->widget('TbGridView',
             array(
                 'class' => 'TbButtonColumn',
                 'buttons' => array(
-                    'view' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.View")'),
+                    'view' => array('visible' => 'Yii::app()->user->checkAccess("D2person.PprsPerson.View")'
+                                              . ' || Yii::app()->user->checkAccess("D2person.PprsPerson.*")'
+                                              . ' || Yii::app()->user->checkAccess("D2person.PprsPerson.Update")'),
                     'update' => array('visible' => 'FALSE'),
                     'delete' => array('visible' => 'FALSE'),
                 ),
