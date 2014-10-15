@@ -106,8 +106,11 @@ class PprsPerson extends BasePprsPerson
    protected function beforeFind()
    {
         $criteria = new CDbCriteria;
-        $criteria->join .= ' inner join ccuc_user_company bf1 on bf1.ccuc_person_id = pprs_id ';
-        $criteria->compare('bf1.ccuc_status', CcucUserCompany::CCUC_STATUS_PERSON);
+        $criteria->join .= " 
+                inner join ccuc_user_company bf1 
+                    on bf1.ccuc_person_id = pprs_id 
+                        and bf1.ccuc_status = '".CcucUserCompany::CCUC_STATUS_PERSON."'";
+        //$criteria->compare('bf1.ccuc_status', CcucUserCompany::CCUC_STATUS_PERSON);
         $sql_sys_persons = '
                 SELECT 
                     ccuc_person_id 
