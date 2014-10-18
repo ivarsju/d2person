@@ -166,12 +166,32 @@ class PprsPerson extends BasePprsPerson
         
         return $this->getCompanyPersons(Yii::app()->sysCompany->getActiveCompany(),$ccuc_status);
     }    
+
+/**
+     * get all user list
+     * @return array(
+     *           array(pprs_id=>'1','full_name' => 'Andris Berzins',  
+     *           array(pprs_id=>'2','full_name' => 'Karlis Berzins',  
+     *              )
+     */    
+    public static function getPersonsUsers(){
+        return self::getPersonsByRole();
+    }
     
-    public static function getPersonsByRole($role){
+    /**
+     * get users list by role, roles or all
+     * @param string/array/boolean $role
+     * @return array(
+     *           array(pprs_id=>'1','full_name' => 'Andris Berzins',  
+     *           array(pprs_id=>'2','full_name' => 'Karlis Berzins',  
+     *              )
+     */
+    public static function getPersonsByRole($role = false){
         $ccuc_status = CcucUserCompany::CCUC_STATUS_SYS;
         $sys_ccmp_id = Yii::app()->sysCompany->getActiveCompany();
         $sql = " 
-            SELECT 
+            SELECT DISTINCT
+                
               pprs_id,
               CONCAT(
                 pprs_second_name,
@@ -188,10 +208,52 @@ class PprsPerson extends BasePprsPerson
                 ON pprs_id = ccuc_person_id 
                 AND ccuc_ccmp_id = {$sys_ccmp_id} 
                 AND ccuc_status = '{$ccuc_status}' 
-            WHERE itemname = '{$role}' 
+
                    "
             ;
+            
+            $where = '';
+            if($role && !is_array($role)){
+                $where = " WHERE itemname = '{$role}' ";
+            }
+
+            if($role && is_array($role)){
+                $where = " WHERE itemname in ('".implode("','",$role)."') ";
+            }
+            
+            $sql .= $where . " ORDER BY pprs_second_name,pprs_first_name ";
+
             return Yii::app()->db->createCommand($sql)->queryAll();
+    
+    }
+
+    public static function getPersonsByFullName($full_name){
+        $ccuc_status = CcucUserCompany::CCUC_STATUS_SYS;
+        $sys_ccmp_id = Yii::app()->sysCompany->getActiveCompany();
+        $sql = " 
+            SELECT 
+              pprs_id
+            FROM
+              authassignment aa 
+              INNER JOIN `profiles` p 
+                ON aa.userid = p.user_id 
+              INNER JOIN pprs_person 
+                ON p.person_id = pprs_id 
+              INNER JOIN ccuc_user_company 
+                ON pprs_id = ccuc_person_id 
+                AND ccuc_ccmp_id = :sys_ccmp_id 
+                AND ccuc_status = :ccuc_status
+              WHERE CONCAT(pprs_second_name,' ',pprs_first_name) = :full_name
+                   "
+            ;
+            
+            $command = Yii::app()->db->createCommand($sql);
+            
+            $command->bindValue(':sys_ccmp_id',$sys_ccmp_id);
+            $command->bindValue(':ccuc_status',$ccuc_status);
+            $command->bindValue(':full_name',$full_name);
+            
+            return $command->queryScalar();
     
     }
 }
