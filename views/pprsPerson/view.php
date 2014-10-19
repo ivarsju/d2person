@@ -38,7 +38,6 @@ $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
                     ),
                 ));        
                 $this->widget("bootstrap.widgets.TbButton", array(
-                    "label"=>Yii::t("D2tasksModule.crud_static","Audit Trail"),
                     'type'=>'info',
                     "size"=>"large",
                     "url"=>array(
@@ -47,19 +46,14 @@ $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
                         'model_id' => $model->getPrimaryKey(),
                     ),
                     "icon"=>"icon-info-sign",
+                    "htmlOptions" => array(
+                        "class" => "search-button",
+                        "data-toggle" => "tooltip",
+                        "title" => Yii::t("D2personModule.crud_static", "Audit Trail"),
+                    )                    
                 ));                        
             }
-            $this->widget("bootstrap.widgets.TbButton", array(
-                "label"=>Yii::t("D2personModule.crud_static","Delete"),
-                "type"=>"danger",
-                "icon"=>"icon-trash icon-white",
-                "size"=>"large",
-                "htmlOptions"=> array(
-                    "submit"=>array("delete","pprs_id"=>$model->{$model->tableSchema->primaryKey}, "returnUrl"=>(Yii::app()->request->getParam("returnUrl"))?Yii::app()->request->getParam("returnUrl"):$this->createUrl("admin")),
-                    "confirm"=>Yii::t("D2personModule.crud_static","Do you want to delete this item?")
-                ),
-                "visible"=> (Yii::app()->request->getParam("pprs_id")) && (Yii::app()->user->checkAccess("D2person.PprsPerson.*") || Yii::app()->user->checkAccess("D2person.PprsPerson.Delete"))
-            ));
+
             ?>
         </div>
     </div>
@@ -103,6 +97,22 @@ $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
                         true
                     )
                 ),
+                array(
+                    'name' => 'pprs_status',
+                    'type' => 'raw',
+                    'value' => $this->widget(
+                        'EditableField',
+                        array(
+                            'model' => $model,
+                            'type' => 'select',
+                            'url' => $this->createUrl('/d2person/pprsPerson/editableSaver'),
+                            'source' => $model->getEnumFieldLabels('pprs_status'),
+                            'attribute' => 'pprs_status',
+                            //'placement' => 'right',
+                        ),
+                        true
+                    )
+                ),                    
            ),
         )); 
         

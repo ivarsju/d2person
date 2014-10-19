@@ -205,18 +205,7 @@ public function accessRules()
 
     public function actionAdmin()
     {
-//        $model = new PprsPerson('search');
-//        $scopes = $model->scopes();
-//        if (isset($scopes[$this->scope])) {
-//            $model->{$this->scope}();
-//        }
-//        $model->unsetAttributes();
-//
-//        if (isset($_GET['PprsPerson'])) {
-//            $model->attributes = $_GET['PprsPerson'];
-//        }
-//
-//        $this->render('admin', array('model' => $model));
+
         $model = new CcucUserCompany('search');
         $scopes = $model->scopes();
         if (isset($scopes[$this->scope])) {

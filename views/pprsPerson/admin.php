@@ -1,6 +1,7 @@
 <?php
 $this->setPageTitle(Yii::t('D2personModule.model', 'Persons'));
-
+//$a = $model->searchPersons()->getData();
+//var_dump($a[0]);exit;
 ?>
 
 <div class="clearfix">
@@ -29,9 +30,13 @@ $this->setPageTitle(Yii::t('D2personModule.model', 'Persons'));
     </div>
 </div>
 
-<?php Yii::beginProfile('PprsPerson.view.grid'); ?>
+<?php Yii::beginProfile('PprsPerson.view.grid'); 
+$roles = Yii::app()->getModule('user')->UserAdminRoles;
+$itemname_filter =[];
+foreach($roles as $role){
+    $itemname_filter[$role] = $role;
+}        
 
-<?php
 $this->widget('TbGridView',
     array(
         'id' => 'ccuc-user-company-grid',
@@ -44,14 +49,21 @@ $this->widget('TbGridView',
         ),
         'columns' => array(
             array(
-                'name' => 'ccuc_person_id',
-                'value' => 'CHtml::value($data, \'ccucPerson.itemLabel\')',
-                'filter' => CHtml::listData(PprsPerson::model()->findAll(array('order'=>'pprs_second_name,pprs_first_name')), 'pprs_id', 'itemLabel'),                
+                'name' => 'pprs_second_name',
+                'value' => '$data["pprs_second_name"]',
             ),            
             array(
-                'name' => 'ccuc_ccmp_id',
-                'value' => 'CHtml::value($data, \'ccucCcmp.itemLabel\')',
-                'filter' => CHtml::listData(CcmpCompany::model()->findAll(array('order'=>'ccmp_name')), 'ccmp_id', 'itemLabel'),
+                'name' => 'pprs_first_name',
+                'value' => '$data["pprs_first_name"]',
+            ),            
+            array(
+                'name' => 'ccmp_name',
+                'value' => '$data["ccmp_name"]',
+            ),
+            array(
+                'name' => 'itemname',
+                'value' => '$data["itemname"]',
+                'filter' => $itemname_filter,
             ),
             array(
                 'class' => 'TbButtonColumn',
