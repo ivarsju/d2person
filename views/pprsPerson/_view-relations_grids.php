@@ -330,7 +330,8 @@ if ((!$ajax || $ajax == 'ppxd-person-xdocument-grid')
                 'class' => 'editable.EditableColumn',
                 'name' => 'ppxd_issue_date',
                 'editable' => array(
-                    'type' => 'date',
+                    'type' => 'text',
+                    'title'     => Yii::t('D2personModule.model', 'Enter issue date in format YYYY-MM-DD.'),
                     'url' => $this->createUrl('//d2person/ppxdPersonXDocument/editableSaver'),
                     'apply' => $can_edit_ppxd,
                     //'placement' => 'right',
@@ -340,7 +341,8 @@ if ((!$ajax || $ajax == 'ppxd-person-xdocument-grid')
                 'class' => 'editable.EditableColumn',
                 'name' => 'ppxd_expire_date',
                 'editable' => array(
-                    'type' => 'date',
+                    'type' => 'text',
+                    'title'     => Yii::t('D2personModule.model', 'Enter expire date in format YYYY-MM-DD.'),
                     'url' => $this->createUrl('//d2person/ppxdPersonXDocument/editableSaver'),
                     'apply' => $can_edit_ppxd,
                     //'placement' => 'right',

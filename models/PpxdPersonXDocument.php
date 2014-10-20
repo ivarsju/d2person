@@ -49,14 +49,23 @@ class PpxdPersonXDocument extends BasePpxdPersonXDocument
         return $behaviors;
     }
 
-    public function rules()
-    {
+    public function rules() {
         return array_merge(
-            parent::rules()
-        /* , array(
-          array('column1, column2', 'rule1'),
-          array('column3', 'rule2'),
-          ) */
+                parent::rules()
+                , array(
+            array(
+                'ppxd_issue_date',
+                'date',
+                'format' => 'yyyy-MM-dd',
+                'message' => Yii::t('D2personModule.model', 'Invalid date format. Valid: YYYY-MM-DD!'),
+            ),
+            array(
+                'ppxd_expire_date',
+                'date',
+                'format' => 'yyyy-MM-dd',
+                'message' => Yii::t('D2personModule.model', 'Invalid date format. Valid: YYYY-MM-DD!'),
+            ),
+                )
         );
     }
 
