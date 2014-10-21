@@ -8,48 +8,104 @@ class PpcnPersonContactController extends Controller
     public $scenario = "crud";
     public $scope = "crud";
 
-public function filters()
-{
-    return array(
-        'accessControl',
-    );
-}
+    public function filters()
+    {
+        return array(
+            'accessControl',
+        );
+    }
 
-public function accessRules()
-{
-     return array(
-        array(
-            'allow',
-            'actions' => array('create', 'admin', 'view', 'update', 'editableSaver', 'delete','ajaxCreate'),
-            'roles' => array('D2person.PpcnPersonContact.*'),
-        ),
-        array(
-            'allow',
-            'actions' => array('create','ajaxCreate'),
-            'roles' => array('D2person.PpcnPersonContact.Create'),
-        ),
-        array(
-            'allow',
-            'actions' => array('view', 'admin'), // let the user view the grid
-            'roles' => array('D2person.PpcnPersonContact.View'),
-        ),
-        array(
-            'allow',
-            'actions' => array('update', 'editableSaver'),
-            'roles' => array('D2person.PpcnPersonContact.Update'),
-        ),
-        array(
-            'allow',
-            'actions' => array('delete'),
-            'roles' => array('D2person.PpcnPersonContact.Delete'),
-        ),
-        array(
-            'deny',
-            'users' => array('*'),
-        ),
-    );
-}
+    public function accessRules()
+    {
+         return array(
+            array(
+                'allow',
+                'actions' => array('create', 'admin', 'view', 'update', 'editableSaver', 'delete','ajaxCreate'),
+                'roles' => array('D2person.PpcnPersonContact.*'),
+            ),
+            array(
+                'allow',
+                'actions' => array('create','ajaxCreate'),
+                'roles' => array('D2person.PpcnPersonContact.Create'),
+            ),
+            array(
+                'allow',
+                'actions' => array('view', 'admin'), // let the user view the grid
+                'roles' => array('D2person.PpcnPersonContact.View'),
+            ),
+            array(
+                'allow',
+                'actions' => array('update', 'editableSaver'),
+                'roles' => array('D2person.PpcnPersonContact.Update'),
+            ),
+            array(
+                'allow',
+                'actions' => array('delete'),
+                'roles' => array('D2person.PpcnPersonContact.Delete'),
+            ),
+            //user can edit self contacts 
+            array(
+                'allow',
+                'actions' => array('editableSaver','ajaxCreate','delete'),
+                'expression' => 'PpcnPersonContactController::isItSelfContact()',
+            ),
 
+            array(
+                'deny',
+                'users' => array('*'),
+            ),
+        );
+    }
+
+    /**
+     * validate, if its actual user contacts sor actions:
+     *  - editableSaver
+     *  - ajaxCreate
+     *  - delete
+     * @return boolean
+     */
+    public static function isItSelfContact(){
+
+        $ppcn_id = false;
+        $action = Yii::app()->controller->action->id;
+        switch (Yii::app()->controller->action->id) {
+            
+            //update
+            case 'editableSaver':
+                $ppcn_id = yii::app()->request->getParam('pk');
+            //delete
+            case 'delete':                
+                if(!$ppcn_id){
+                    $ppcn_id = yii::app()->request->getParam('ppcn_id');
+                }
+                if(!$ppcn_id){
+                    return false;
+                }
+                
+                $ppcn = PpcnPersonContact::model()->findByPk($ppcn_id);
+                if(!$ppcn || $ppcn->ppcnPprs->pprs_id != Yii::app()->getModule('user')->user()->profile->person_id){
+                    return false;            
+                }
+                
+                break;
+
+            //create
+            case 'ajaxCreate':
+                if(yii::app()->request->getParam('value') != Yii::app()->getModule('user')->user()->profile->person_id){
+                    return false;            
+                }
+
+                break;
+
+            default:
+                return false;
+                break;
+        }
+
+        return true;
+        
+    }
+    
     public function beforeAction($action)
     {
         parent::beforeAction($action);
@@ -120,7 +176,7 @@ public function accessRules()
         $this->render('update', array('model' => $model,));
     }
 
-    public function actionEditableSaver()
+    public function actionEditableSaver($pprs_id = false)
     {
         $es = new EditableSaver('PpcnPersonContact'); // classname of model to be updated
         $es->update();

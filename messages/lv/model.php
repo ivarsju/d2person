@@ -102,7 +102,7 @@ return array (
   'Ppcn Modified' => 'Labots',
   'Ppcn Notes' => 'Piezīmes',
   'Ppcn Pcnt Type' => 'Tips',
-  'Ppcn Person Contact' => 'Kontakts',
+  'Ppcn Person Contact' => 'Kontakti',
   'Ppcn Person Contacts' => 'Kontakti',
   'Ppcn Value' => 'Vērtība',
   'Pprs First Name' => 'Vārds',
