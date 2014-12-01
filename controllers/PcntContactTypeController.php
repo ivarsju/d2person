@@ -22,7 +22,7 @@ public function accessRules()
         array(
             'allow',
             'actions' => array('create', 'admin', 'editableSaver', 'delete','ajaxCreate'),
-            'roles' => array('Administrator'),
+            'roles' => array('Administrator','D2person.PcntContactType.*'),
         ),
         array(
             'allow',

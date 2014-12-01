@@ -125,7 +125,7 @@ if ((!$ajax || $ajax == 'ccuc-user-company-grid')
         )
     );
 
-    Yii::endProfile('CcucUserCompany.view.grid');
+    Yii::endProfile('ccuc_person_id.view.grid');
 }
 
 if ((!$ajax || $ajax == 'ppcn-person-contact-grid')
@@ -241,7 +241,7 @@ if ((!$ajax || $ajax == 'ppcn-person-contact-grid')
         )
     );
 
-    Yii::endProfile('PpcnPersonContact.view.grid');
+    Yii::endProfile('ppcn_pprs_id.view.grid');
 }
 
 if ((!$ajax || $ajax == 'ppxd-person-xdocument-grid')
@@ -386,7 +386,7 @@ if ((!$ajax || $ajax == 'ppxd-person-xdocument-grid')
         )
     );
 
-    Yii::endProfile('PpxdPersonXDocument.view.grid');
+    Yii::endProfile('ppxd_pprs_id.view.grid');
 }
 
 if ((!$ajax || $ajax == 'ppxt-person-xtype-grid')
@@ -480,7 +480,7 @@ if ((!$ajax || $ajax == 'ppxt-person-xtype-grid')
         )
     );
 
-    Yii::endProfile('PpxtPersonXType.view.grid');
+    Yii::endProfile('ppxt_pprs_id.view.grid');
 }
 
 if ((!$ajax || $ajax == 'ppxs-person-xsetting-grid')
@@ -601,5 +601,5 @@ if ((!$ajax || $ajax == 'ppxs-person-xsetting-grid')
         )
     );
 
-    Yii::endProfile('PpxsPersonXSetting.view.grid');
+    Yii::endProfile('ppxs_pprs_id.view.grid');
 }

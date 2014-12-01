@@ -116,6 +116,7 @@ class m140917_173601_init_2 extends CDbMigration
             INSERT INTO `authitem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES('D2person.PprsPerson.View','0','D2person.PprsPerson module view',NULL,'N;');
             INSERT INTO `authitem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES('D2person.PprsPerson.Update','0','D2person.PprsPerson module update',NULL,'N;');
             INSERT INTO `authitem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES('D2person.PprsPerson.Delete','0','D2person.PprsPerson module delete',NULL,'N;');
+            INSERT INTO `authitem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES('D2person.PprsPerson.Menu','0','D2person.PprsPerson menu',NULL,'N;');            
                 
             INSERT INTO `authitem` VALUES('D2person.PprsPersonCreate', 2, 'D2person.PprsPerson create', NULL, 'N;');
             INSERT INTO `authitem` VALUES('D2person.PprsPersonUpdate', 2, 'D2person.PprsPerson update', NULL, 'N;');
