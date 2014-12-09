@@ -66,7 +66,7 @@ if ((!$ajax || $ajax == 'ccuc-user-company-grid')
     $this->widget('TbGridView',
         array(
             'id' => 'ccuc-user-company-grid',
-            'dataProvider' => $model->search(),
+            'dataProvider' => $model->searchPersonsForRel(),
             'template' => '{summary}{items}',
             'summaryText' => '&nbsp;',
             'htmlOptions' => array(
@@ -76,11 +76,12 @@ if ((!$ajax || $ajax == 'ccuc-user-company-grid')
                 array(
                 'class' => 'editable.EditableColumn',
                 'name' => 'ccuc_ccmp_id',
-                'value' => '(!'.$bft.' && !empty($data->ccuc_ccmp_id))?$data->ccucCcmp->itemLabel:""',
+                'value' => '$data->ccmp_name',
                 'editable' => array(
                     'type' => 'select',
                     'url' => $this->createUrl('//d2company/ccucUserCompany/editableSaver'),
-                    'source' => CHtml::listData(CcmpCompany::model()->findAll(array('limit' => 1000,'order'=>'ccmp_name')), 'ccmp_id', 'itemLabel'),
+                    //'source' => CHtml::listData(CcmpCompany::model()->findAll(array('limit' => 1000,'order'=>'ccmp_name')), 'ccmp_id', 'itemLabel'),
+                    'source' => CHtml::listData(Yii::app()->sysCompany->getClientCompanies(), 'ccmp_id', 'ccmp_name'),
                     'apply' => $can_edit_ccuc,                    
                     //'placement' => 'right',
                 )
