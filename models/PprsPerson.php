@@ -112,13 +112,13 @@ class PprsPerson extends BasePprsPerson
                         and bf1.ccuc_status = '".CcucUserCompany::CCUC_STATUS_PERSON."'";
         //$criteria->compare('bf1.ccuc_status', CcucUserCompany::CCUC_STATUS_PERSON);
         $sql_sys_persons = '
-                SELECT 
+                  SELECT DISTINCT 
                     ccuc_person_id 
-                FROM 
+                  FROM
                     ccuc_user_company 
-                WHERE 
-                    ccuc_status = \'' . CcucUserCompany::CCUC_STATUS_SYS .'\'
-                    and ccuc_ccmp_id = '.Yii::app()->sysCompany->getActiveCompany();
+                    INNER JOIN ccmp_company 
+                      ON ccuc_ccmp_id = ccmp_id 
+                  WHERE ccmp_sys_ccmp_id = '.Yii::app()->sysCompany->getActiveCompany();
         $criteria->addCondition('pprs_id in ('.$sql_sys_persons.')');
 
         $this->dbCriteria->mergeWith($criteria);
