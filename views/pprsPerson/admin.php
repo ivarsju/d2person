@@ -24,7 +24,7 @@ $this->setPageTitle(Yii::t('D2personModule.model', 'Persons'));
 </div>
         <div class="btn-group">
             <h1>
-                <i class=""></i>
+                <i class="icon-user"></i>
                 <?php echo Yii::t('D2personModule.model', 'Persons');?>            </h1>
         </div>
     </div>
@@ -42,7 +42,7 @@ $this->widget('TbGridView',
         'id' => 'ccuc-user-company-grid',
         'dataProvider' => $model->searchPersons(),
         'filter' => $model,
-        'template' => '{pager}{summary}{items}{pager}',
+        'template' => '{items}{pager}',
         'pager' => array(
             'class' => 'TbPager',
             'displayFirstAndLast' => true,
