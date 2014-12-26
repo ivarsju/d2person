@@ -44,7 +44,7 @@ $this->widget('TbGridView',
                 'name' => 'pcnt_name',
                 'editable' => array(
                     'url' => $this->createUrl('/d2person/pcntContactType/editableSaver'),
-                    //'placement' => 'right',
+                    'placement' => 'right',
                 )
             ),
 
@@ -64,5 +64,5 @@ $this->widget('TbGridView',
         )
     )
 );
-?>
-<?php Yii::endProfile('PcntContactType.view.grid'); ?>
+
+Yii::endProfile('PcntContactType.view.grid');

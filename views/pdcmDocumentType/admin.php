@@ -44,7 +44,7 @@ $this->widget('TbGridView',
                 'name' => 'pdcm_name',
                 'editable' => array(
                     'url' => $this->createUrl('/d2person/pdcmDocumentType/editableSaver'),
-                    //'placement' => 'right',
+                    'placement' => 'right',
                 )
             ),
             array(
@@ -73,5 +73,5 @@ $this->widget('TbGridView',
         )
     )
 );
-?>
-<?php Yii::endProfile('PdcmDocumentType.view.grid'); ?>
+
+Yii::endProfile('PdcmDocumentType.view.grid');
