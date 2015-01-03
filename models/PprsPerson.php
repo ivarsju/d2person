@@ -249,9 +249,9 @@ class PprsPerson extends BasePprsPerson
             
             $command = Yii::app()->db->createCommand($sql);
             
-            $command->bindValue(':sys_ccmp_id',$sys_ccmp_id);
-            $command->bindValue(':ccuc_status',$ccuc_status);
-            $command->bindValue(':full_name',$full_name);
+            $command->bindValue(':sys_ccmp_id',$sys_ccmp_id,PDO::PARAM_INT);
+            $command->bindValue(':ccuc_status',$ccuc_status,PDO::PARAM_STR);
+            $command->bindValue(':full_name',$full_name,PDO::PARAM_STR);
             
             return $command->queryScalar();
     
