@@ -60,11 +60,11 @@ $this->widget('TbGridView',
                 'name' => 'ccmp_name',
                 'value' => '$data["ccmp_name"]',
             ),
-            array(
-                'name' => 'itemname',
-                'value' => '$data["itemname"]',
-                'filter' => $itemname_filter,
-            ),
+//            array(
+//                'name' => 'itemname',
+//                'value' => '$data["itemname"]',
+//                'filter' => $itemname_filter,
+//            ),
             array(
                 'class' => 'TbButtonColumn',
                 'buttons' => array(
