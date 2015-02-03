@@ -9,6 +9,12 @@ class PprsPerson extends BasePprsPerson
     
     public $pprs_ccmp_id;
     
+    /**
+     * additional errors
+     * @var type 
+     */
+    public $error = false;
+    
     // Add your model-specific methods here. This file will not be overriden by gtc except you force it.
     public static function model($className = __CLASS__)
     {
@@ -255,5 +261,40 @@ class PprsPerson extends BasePprsPerson
             
             return $command->queryScalar();
     
+    }
+    
+    public function sendMailToProfileMail($from_email,$from_name,$subject,$message){
+        
+        $this->error = false;
+        
+        //get profile
+        $profile = Profile::model()->findByAttributes(['person_id' => $this->pprs_id]);
+        if(!$profile){
+            $this->error = Yii::t('D2personModule.model', 'Can not found profile');
+            return false;
+        }
+        
+        //validate
+        if(empty($profile->user->email)){
+            $this->error = Yii::t('D2personModule.model', 'User don\'t have email: ')
+                    . $profile->profile->first_name . ' ' . $profile->profile->last_name ;
+            return false;
+        }
+        
+        //create message
+        $swiftMessage = Swift_Message::newInstance($subject);
+        $swiftMessage->setBody($message, 'text/html');
+        $swiftMessage->setFrom($from_email, $from_name);
+        $swiftMessage->setTo($profile->user->email, $profile->profile->first_name . ' ' . $profile->profile->last_name);
+
+        //send
+        if(!Yii::app()->emailManager->deliver($swiftMessage, 'smtp')){
+            $this->error = Yii::t('D2personModule.model', 'Can not send email to ') 
+                    . $profile->profile->first_name . ' ' . $profile->profile->last_name .' ' 
+                    . $profile->email;
+            return false;
+        }
+        
+        return $profile->profile->first_name . ' ' . $profile->profile->last_name .' ' . $profile->email;
     }
 }
