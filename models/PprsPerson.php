@@ -285,16 +285,16 @@ class PprsPerson extends BasePprsPerson
         $swiftMessage = Swift_Message::newInstance($subject);
         $swiftMessage->setBody($message, 'text/html');
         $swiftMessage->setFrom($from_email, $from_name);
-        $swiftMessage->setTo($profile->user->email, $profile->profile->first_name . ' ' . $profile->profile->last_name);
+        $swiftMessage->setTo($profile->user->email, $profile->first_name . ' ' . $profile->last_name);
 
         //send
         if(!Yii::app()->emailManager->deliver($swiftMessage, 'smtp')){
             $this->error = Yii::t('D2personModule.model', 'Can not send email to ') 
-                    . $profile->profile->first_name . ' ' . $profile->profile->last_name .' ' 
+                    . $profile->first_name . ' ' . $profile->profile->last_name .' ' 
                     . $profile->email;
             return false;
         }
         
-        return $profile->profile->first_name . ' ' . $profile->profile->last_name .' ' . $profile->email;
+        return $profile->first_name . ' ' . $profile->last_name .' ' . $profile->email;
     }
 }
