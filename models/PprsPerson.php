@@ -263,5 +263,13 @@ class PprsPerson extends BasePprsPerson
     
     }
     
+    public function getUserId(){
+        $profile = Profile::model()->findByAttributes(['person_id' => $this->pprs_id]);
+        if(!$profile){
+            return false;
+        }       
+        
+        return $profile->user_id;
+    }
 
 }

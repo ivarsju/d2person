@@ -42,50 +42,7 @@ $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
         </div>
     </div>
 </div>
-<?php
-if (isset($warning) && !empty($warning)){
-    ?>
-    <div class="alert alert-error">
-        <button data-dismiss="alert" class="close" type="button">
-            <i class="icon-remove"></i>
-        </button>
 
-        <strong>
-            <i class="icon-remove"></i>
-        </strong>
-        <?php
-        if (is_array($warning)){
-            echo implode('<br />',$warning);
-        }else{
-            echo $warning;
-        }    
-        ?>
-    </div>        
-    <?php
-}
-
-if (isset($info) && !empty($warning)){
-    ?>
-    <div class="alert alert-info">
-        <button data-dismiss="alert" class="close" type="button">
-            <i class="icon-remove"></i>
-        </button>
-
-        <strong>
-            <i class="icon-remove"></i>
-        </strong>
-        <?php
-        if (is_array($warning)){
-            echo implode('<br />',$warning);
-        }else{
-            echo $warning;
-        }    
-        ?>
-    </div>        
-    <?php
-}
-
-?>
 <div class="row">
     <div class="span5">
         <?php
