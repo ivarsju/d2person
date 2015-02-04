@@ -263,38 +263,5 @@ class PprsPerson extends BasePprsPerson
     
     }
     
-    public function sendMailToProfileMail($from_email,$from_name,$subject,$message){
-        
-        $this->error = false;
-        
-        //get profile
-        $profile = Profile::model()->findByAttributes(['person_id' => $this->pprs_id]);
-        if(!$profile){
-            $this->error = Yii::t('D2personModule.model', 'Can not found profile');
-            return false;
-        }
-        
-        //validate
-        if(empty($profile->user->email)){
-            $this->error = Yii::t('D2personModule.model', 'User don\'t have email: ')
-                    . $profile->profile->first_name . ' ' . $profile->profile->last_name ;
-            return false;
-        }
-        
-        //create message
-        $swiftMessage = Swift_Message::newInstance($subject);
-        $swiftMessage->setBody($message, 'text/html');
-        $swiftMessage->setFrom($from_email, $from_name);
-        $swiftMessage->setTo($profile->user->email, $profile->first_name . ' ' . $profile->last_name);
 
-        //send
-        if(!Yii::app()->emailManager->deliver($swiftMessage, 'smtp')){
-            $this->error = Yii::t('D2personModule.model', 'Can not send email to ') 
-                    . $profile->first_name . ' ' . $profile->last_name .' ' 
-                    . $profile->user->email;
-            return false;
-        }
-        
-        return $profile->first_name . ' ' . $profile->last_name .' ' . $profile->user->email;
-    }
 }
