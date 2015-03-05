@@ -12,11 +12,11 @@ class m141005_205510_auth_PpxtPersonXType extends CDbMigration
             INSERT INTO `AuthItem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES('D2person.PpxtPersonXType.Update','0','D2person.PpxtPersonXType module update',NULL,'N;');
             INSERT INTO `AuthItem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES('D2person.PpxtPersonXType.Delete','0','D2person.PpxtPersonXType module delete',NULL,'N;');
             
-            INSERT INTO `authitemchild` (`parent`, `child`) VALUES ('D2person.PprsPersonUpdate', 'D2person.PpxtPersonXType.Update'); 
-            INSERT INTO `authitemchild` (`parent`, `child`) VALUES ('D2person.PprsPersonUpdate', 'D2person.PpxtPersonXType.Create'); 
-            INSERT INTO `authitemchild` (`parent`, `child`) VALUES ('D2person.PprsPersonUpdate', 'D2person.PpxtPersonXType.Delete'); 
-            INSERT INTO `authitemchild` (`parent`, `child`) VALUES ('D2person.PprsPersonUpdate', 'D2person.PpxtPersonXType.*'); 
-            INSERT INTO `authitemchild` (`parent`, `child`) VALUES ('D2person.PprsPersonView', 'D2person.PpxtPersonXType.View'); 
+            INSERT INTO `AuthItemChild` (`parent`, `child`) VALUES ('D2person.PprsPersonUpdate', 'D2person.PpxtPersonXType.Update'); 
+            INSERT INTO `AuthItemChild` (`parent`, `child`) VALUES ('D2person.PprsPersonUpdate', 'D2person.PpxtPersonXType.Create'); 
+            INSERT INTO `AuthItemChild` (`parent`, `child`) VALUES ('D2person.PprsPersonUpdate', 'D2person.PpxtPersonXType.Delete'); 
+            INSERT INTO `AuthItemChild` (`parent`, `child`) VALUES ('D2person.PprsPersonUpdate', 'D2person.PpxtPersonXType.*'); 
+            INSERT INTO `AuthItemChild` (`parent`, `child`) VALUES ('D2person.PprsPersonView', 'D2person.PpxtPersonXType.View'); 
 
 
         ");
@@ -25,7 +25,7 @@ class m141005_205510_auth_PpxtPersonXType extends CDbMigration
     public function down()
     {
         $this->execute("
-            DELETE FROM `authitemchild` WHERE `child` like 'D2person.PpxtPersonXType.%';
+            DELETE FROM `AuthItemChild` WHERE `child` like 'D2person.PpxtPersonXType.%';
 
             DELETE FROM `AuthItem` WHERE `name` = 'D2person.PpxtPersonXType.*';
             DELETE FROM `AuthItem` WHERE `name` = 'D2person.PpxtPersonXType.edit';

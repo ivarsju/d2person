@@ -205,7 +205,7 @@ class PprsPerson extends BasePprsPerson
                 pprs_first_name
               ) full_name 
             FROM
-              authassignment aa 
+              AuthAssignment aa 
               INNER JOIN `profiles` p 
                 ON aa.userid = p.user_id 
               INNER JOIN pprs_person 
@@ -240,7 +240,7 @@ class PprsPerson extends BasePprsPerson
             SELECT 
               pprs_id
             FROM
-              authassignment aa 
+              AuthAssignment aa 
               INNER JOIN `profiles` p 
                 ON aa.userid = p.user_id 
               INNER JOIN pprs_person 

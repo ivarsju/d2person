@@ -12,10 +12,10 @@ class m141005_095510_auth_PpcnPersonContact extends CDbMigration
             INSERT INTO `AuthItem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES('D2person.PpcnPersonContact.Update','0','D2person.PpcnPersonContact module update',NULL,'N;');
             INSERT INTO `AuthItem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES('D2person.PpcnPersonContact.Delete','0','D2person.PpcnPersonContact module delete',NULL,'N;');
            
-            INSERT INTO `authitemchild` (`parent`, `child`) VALUES ('D2person.PprsPersonUpdate', 'D2person.PpcnPersonContact.Update'); 
-            INSERT INTO `authitemchild` (`parent`, `child`) VALUES ('D2person.PprsPersonUpdate', 'D2person.PpcnPersonContact.Create'); 
-            INSERT INTO `authitemchild` (`parent`, `child`) VALUES ('D2person.PprsPersonUpdate', 'D2person.PpcnPersonContact.Delete'); 
-            INSERT INTO `authitemchild` (`parent`, `child`) VALUES ('D2person.PprsPersonView', 'D2person.PpcnPersonContact.View'); 
+            INSERT INTO `AuthItemChild` (`parent`, `child`) VALUES ('D2person.PprsPersonUpdate', 'D2person.PpcnPersonContact.Update'); 
+            INSERT INTO `AuthItemChild` (`parent`, `child`) VALUES ('D2person.PprsPersonUpdate', 'D2person.PpcnPersonContact.Create'); 
+            INSERT INTO `AuthItemChild` (`parent`, `child`) VALUES ('D2person.PprsPersonUpdate', 'D2person.PpcnPersonContact.Delete'); 
+            INSERT INTO `AuthItemChild` (`parent`, `child`) VALUES ('D2person.PprsPersonView', 'D2person.PpcnPersonContact.View'); 
 
         ");
     }
@@ -23,7 +23,7 @@ class m141005_095510_auth_PpcnPersonContact extends CDbMigration
     public function down()
     {
         $this->execute("
-            DELETE FROM authitemchild where parent like 'D2person.PpcnPersonContact.%';
+            DELETE FROM AuthItemChild where parent like 'D2person.PpcnPersonContact.%';
 
             DELETE FROM `AuthItem` WHERE `name` = 'D2person.PpcnPersonContact.*';
             DELETE FROM `AuthItem` WHERE `name` = 'D2person.PpcnPersonContact.edit';
