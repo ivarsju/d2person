@@ -27,6 +27,36 @@ $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
         </div>
         <div class="btn-group">
             <?php
+            
+            $userId = $model->getUserId();
+            
+            /**
+             * open user account for UserAdmin Role
+             */
+            $this->widget('bootstrap.widgets.TbButton', [
+                'label' => Yii::t('DdduModule.model', 'Open user account'),
+                //'icon' => 'icon-plus',
+                'size' => 'large',
+                'type' => 'success',
+                'url' => ['/user/admin/view', 'id' => $userId],
+                'visible' => $userId && Yii::app()->user->checkAccess('UserAdmin'),
+            ]);            
+
+            /**
+             * Create user account for UserAdmin Role
+             */            
+            $this->widget('bootstrap.widgets.TbButton', [
+                'label' => Yii::t('DdduModule.model', 'Create user account'),
+                //'icon' => 'icon-plus',
+                'size' => 'large',
+                'type' => 'success',
+                'url' => ['createUserAccount', 'pprs_id' => $model->pprs_id],
+                'visible' => !$userId && Yii::app()->user->checkAccess('UserAdmin'),
+            ]);            
+            ?>
+        </div>
+        <div class="btn-group">
+            <?php
             $module_name = $this->module->id;
             if(Yii::app()->user->checkAccess("audittrail") 
                     && isset($this->module->options['audittrail']) 
@@ -42,8 +72,20 @@ $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
         </div>
     </div>
 </div>
-
+    <?php
+        /**
+         * show error messages
+         */
+        if (!empty($errors)) {
+        ?>
+    <div class="clearfix">
+        <div class="alert alert-error"><?php echo $errors ?></div>
+    </div>
+        <?php
+    }
+?>
 <div class="row">
+
     <div class="span5">
         <?php
         $this->widget(

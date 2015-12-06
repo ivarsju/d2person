@@ -272,4 +272,90 @@ class PprsPerson extends BasePprsPerson
         return $profile->user_id;
     }
 
+    public static function getAllPersonsForList(){
+        $sql = " 
+            SELECT 
+              `pprs_id`,
+              CONCAT(
+                `pprs_second_name`,
+                ' ',
+                `pprs_first_name`
+              ) itemLabel 
+            FROM
+              `pprs_person` 
+            ORDER BY pprs_second_name,
+              pprs_first_name 
+        ";
+            
+            $command = Yii::app()->db->createCommand($sql);
+            
+            return $command->queryAll();
+    
+    }    
+    
+    /**
+     * create user account from person data
+     * @return boolean|array - error
+     */
+    public function createUser(){
+        
+        $password = DbrLib::rand_string(8);
+        
+        /**
+         * create username 
+         */
+        $firstName = strtolower(iconv('UTF-8','ASCII//TRANSLIT', $this->pprs_first_name));
+        $secondName = strtolower(iconv('UTF-8','ASCII//TRANSLIT', $this->pprs_second_name));
+        $username = $firstName . substr($secondName, 0, 1);
+        $i = 1;
+        while(User::model()->findByAttributes(['username'=>$username])){
+            $i ++;
+            if($i>  strlen($secondName)){
+                $username = $firstName . DbrLib::rand_string(2);
+            }
+            $username = $firstName . substr($secondName, 0, $i);    
+        }
+        
+        /**
+         * get email from person contacts
+         */
+        $contacts = $this->ppcnPersonContacts;
+        $email = '';
+        foreach($contacts as $contact){
+            if($contact->ppcn_pcnt_type == PcntContactType::TYPE_EMAIL ){
+                $email = $contact->ppcn_value;
+            }
+        }
+        
+        /**
+         * create user record
+         */
+        $user = new User();
+        $user->username = $username;
+        $user->password = $password;
+        $user->email = $email;
+        $user->status = User::STATUS_ACTIVE;
+        
+        if(!$user->validate()){
+            return CHtml::errorSummary($user);
+        }
+        
+        $user->save();
+        
+        /**
+         * create profile record
+         */
+        $profile=new Profile;
+        $profile->user_id=$user->id;
+        $profile->first_name = $this->pprs_first_name;
+        $profile->last_name = $this->pprs_second_name;
+        $profile->sys_ccmp_id = Yii::app()->sysCompany->getActiveCompany();
+        $profile->person_id=$this->primaryKey;
+		$profile->save();  
+        
+        return true;
+        
+        
+    }
+    
 }

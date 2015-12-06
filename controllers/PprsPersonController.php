@@ -21,7 +21,13 @@ public function accessRules()
      return array(
         array(
             'allow',
-            'actions' => array('create', 'admin', 'view', 'update', 'editableSaver', 'delete','ajaxCreate'),
+            'actions' => array('createUserAccount'),
+            'roles' => array('UserAdmin'),
+        ),
+        array(
+            'allow',
+            'actions' => array('create', 'admin', 'view', 'update', 
+                'editableSaver', 'delete','ajaxCreate'),
             'roles' => array('D2person.PprsPerson.*'),
         ),
         array(
@@ -61,7 +67,13 @@ public function accessRules()
         return true;
     }
 
-    public function actionView($pprs_id, $ajax = false)
+    /**
+     * show person data
+     * @param int $pprs_id
+     * @param boolean $ajax
+     * @param string $errors html created by CHtml::errorSummary()
+     */
+    public function actionView($pprs_id, $ajax = false, $errors = false)
     {
         $model = $this->loadModel($pprs_id);
         if ($ajax) {
@@ -72,11 +84,25 @@ public function accessRules()
                         )
                     );
         } else {
-            $this->render('view', array('model' => $model,));
+            $this->render('view', array('model' => $model,'errors'=>$errors));
         }
     }
 
-    public function actionCreate()
+    /**
+     * create fro person data user account and redirect to it
+     * @param int $pprs_id
+     */
+    public function actionCreateUserAccount($pprs_id){
+        $model = $this->loadModel($pprs_id);
+        $r = $model->createUser();
+        if($r !== true){
+            $this->redirect(array('view', 'pprs_id' => $pprs_id, 'ajax'=>false, 'errors' => $r));
+        }else{
+            $this->redirect(array('/user/admin/view', 'id' => $model->getUserId()));
+        }
+    }
+
+        public function actionCreate()
     {
         $model = new PprsPerson;
         $model->scenario = $this->scenario;

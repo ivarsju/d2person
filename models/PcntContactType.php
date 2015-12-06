@@ -7,6 +7,8 @@ Yii::import('PcntContactType.*');
 class PcntContactType extends BasePcntContactType
 {
 
+    const TYPE_EMAIL = 1;
+    
     // Add your model-specific methods here. This file will not be overriden by gtc except you force it.
     public static function model($className = __CLASS__)
     {
