@@ -34,7 +34,7 @@ $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
              * open user account for UserAdmin Role
              */
             $this->widget('bootstrap.widgets.TbButton', [
-                'label' => Yii::t('DdduModule.model', 'Open user account'),
+                'label' => Yii::t('D2personModule.model', 'Open user account'),
                 //'icon' => 'icon-plus',
                 'size' => 'large',
                 'type' => 'success',
@@ -46,7 +46,7 @@ $cancel_buton = $this->widget("bootstrap.widgets.TbButton", array(
              * Create user account for UserAdmin Role
              */            
             $this->widget('bootstrap.widgets.TbButton', [
-                'label' => Yii::t('DdduModule.model', 'Create user account'),
+                'label' => Yii::t('D2personModule.model', 'Create user account'),
                 //'icon' => 'icon-plus',
                 'size' => 'large',
                 'type' => 'success',
