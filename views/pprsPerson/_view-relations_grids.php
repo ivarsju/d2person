@@ -63,6 +63,15 @@ if ((!$ajax || $ajax == 'ccuc-user-company-grid')
     // render grid view
     $can_edit_ccuc = Yii::app()->user->checkAccess("D2company.CcucUserCompany.Update");    
     $bft = (!$can_edit_ccuc)?'false':'true';
+    
+    if( Yii::app()->getModule('d2person')->ccucCompanyList == D2personModule::ALL_COMPANIES){
+        $comapniesSource = CHtml::listData(CcmpCompany::model()->findAll(array('limit' => 1000,'order'=>'ccmp_name')), 'ccmp_id', 'itemLabel');
+    }else{
+        /**
+         * actual person syscompanies
+         */
+        $comapniesSource = CHtml::listData(Yii::app()->sysCompany->getClientCompanies(), 'ccmp_id', 'ccmp_name');
+    }
     $this->widget('TbGridView',
         array(
             'id' => 'ccuc-user-company-grid',
@@ -80,10 +89,8 @@ if ((!$ajax || $ajax == 'ccuc-user-company-grid')
                 'editable' => array(
                     'type' => 'select',
                     'url' => $this->createUrl('//d2company/ccucUserCompany/editableSaver'),
-                    //'source' => CHtml::listData(CcmpCompany::model()->findAll(array('limit' => 1000,'order'=>'ccmp_name')), 'ccmp_id', 'itemLabel'),
-                    'source' => CHtml::listData(Yii::app()->sysCompany->getClientCompanies(), 'ccmp_id', 'ccmp_name'),
+                    'source' => $comapniesSource,
                     'apply' => $can_edit_ccuc,                    
-                    //'placement' => 'right',
                 )
             ),
             array(

@@ -2,7 +2,20 @@
 
 class D2personModule extends CWebModule
 {
+
+    const ALL_COMPANIES = 'A';
+    const PERSON_SYS_COMPANIES = 'PSC';
+    
+    /**
+     * user can add 
+     * A - all companies
+     * PSC - actual person sys companies
+     * @var ENUM 
+     */
+    var $ccucCompanyList = self::ALL_COMPANIES;
+    
     var $options = array();
+    
     public function init()
     {
         // this method is called when the module is being created
