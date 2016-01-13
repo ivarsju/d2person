@@ -294,6 +294,19 @@ class PprsPerson extends BasePprsPerson
     }    
     
     /**
+     * replace latvian special characters to latin characters
+     * @param string $str
+     * @return string
+     */
+    public static function translitStringToAscii($str) {
+        $LATV=array("ā","Ā","č","Č","ē","Ē","ģ","Ģ","ī","Ī","ķ","Ķ","ļ","Ļ","ņ","Ņ","š","Š","ū","Ū","ž","Ž",".",'"',"   ","-","_","/"); //Latviešu garie un mīkste burti un neatļautie simboli
+        $LATIN=array("a","A","c","C","e","E","g","G","i","I","k","K","l","L","n","N","s","S","u","U","z","Z","",""," ",""," "," "); //Latviešu mīksto un garo burtu un neatļauto simbolu aizstāēji
+        return str_replace($LATV,$LATIN,$str); //Latviešu garos un mīkstos burtus aizstāj ar latīņu burtiem
+        //$str = str_replace(array('й','ц','у','к','е','н','г','ш','щ','з','х','ъ','ф','ы','в','а','п','р','о','л','д','ж','э','я','ч','с','м','и','т','ь','б','ю','Й','Ц','У','К','Е','Н','Г','Ш','Щ','З','Х','Ъ','Ф','Ы','В','А','П','Р','О','Л','Д','Ж','Э','Я','Ч','С','М','И','Т','Ь','Б','Ю','Ā','Č','Ē','Ģ','Ī','Ķ','Ļ','Ņ','Š','Ū','Ž', 'ā','č','ē','ģ','ī','ķ','ļ','ņ','š','ū','ž'),array('A','C','E','G','I','K','L','N','S','U','Z','a','c','e','g','i','k','l','n','s','u','z','i','c','u','k','e','n','g','sh','sh','z','h','i','f','i','v','a','p','r','o','l','d','zh','e','ja','ch','s','m','i','t','','b','ju','I','C','U','K','E','N','G','SH','SH','Z','H','I','F','I','V','A','P','R','O','L','D','ZH','E','JA','CH','S','M','I','T','','B','JU','A','C','E','G','I','K','L','N','S','U','Z','a','c','e','g','i','k','l','n','s','u','z'),$str);
+	return $str;
+}
+    
+    /**
      * create user account from person data
      * @return boolean|array - error
      */
@@ -304,8 +317,8 @@ class PprsPerson extends BasePprsPerson
         /**
          * create username 
          */
-        $firstName = strtolower(iconv('UTF-8','ASCII//TRANSLIT', $this->pprs_first_name));
-        $secondName = strtolower(iconv('UTF-8','ASCII//TRANSLIT', $this->pprs_second_name));
+        $firstName = strtolower(self::translitStringToAscii($this->pprs_first_name));
+        $secondName = strtolower(self::translitStringToAscii($this->pprs_second_name));
         $username = $firstName . substr($secondName, 0, 1);
         $i = 1;
         while(User::model()->findByAttributes(['username'=>$username])){
@@ -323,7 +336,7 @@ class PprsPerson extends BasePprsPerson
         $email = '';
         foreach($contacts as $contact){
             if($contact->ppcn_pcnt_type == PcntContactType::TYPE_EMAIL ){
-                $email = $contact->ppcn_value;
+                $email = trim($contact->ppcn_value);
             }
         }
         
