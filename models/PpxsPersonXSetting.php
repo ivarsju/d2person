@@ -88,5 +88,25 @@ class PpxsPersonXSetting extends BasePpxsPersonXSetting
 
         return $this;
     }
+    
+    /**
+     * atgrie pirmo aktivas personas prasito settingu
+     * @param int $type settinga tips
+     * @return boolean
+     */
+    public static function getActivePersonSetingValue($type){
+        $personId = Yii::app()->getModule('user')->user()->profile->person_id;
+        $criteria = [
+            'ppxs_pprs_id' => $personId,
+            'ppxs_psty_id' => $type
+            ];
+        $model = PpxsPersonXSetting::model()->find($criteria);
+        if(!$model){
+            return false;
+        }
+        
+        return $model->ppxs_value;
+    }
+    
 
 }
