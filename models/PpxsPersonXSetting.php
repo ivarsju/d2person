@@ -100,7 +100,7 @@ class PpxsPersonXSetting extends BasePpxsPersonXSetting
             'ppxs_pprs_id' => $personId,
             'ppxs_psty_id' => $type
             ];
-        $model = PpxsPersonXSetting::model()->find($criteria);
+        $model = PpxsPersonXSetting::model()->findByAttributes($criteria);
         if(!$model){
             return false;
         }
